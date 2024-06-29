@@ -1,24 +1,41 @@
-# README
+# Own Palette
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## サイト概要
+### サイトテーマ
+好きな色のカテゴリで画像投稿できるSNS
+​
+### テーマを選んだ理由
+- スマートフォン利用率は年々増加しており、またSNS利用時間も増えています。時代に乗り、私自身が利用してみて気づいたことは、情報が雑多で、主観的で、感情的であることです。
+- 共感しあえることは醍醐味ですが、思いもよらない否定をされるシーンには心が痛むものもありました。
+- もしも、読む前から**直感的に**明るい話題、嫌な話題がわかれば、自分好みに情報を選択することができるのではないかと思いました。
+- 感情を色分けすることに付随して、好みの色をもつ画像を投稿し集められる場とすれば、否定が少ない前提から始められ、**アサーティブコミュニケーション**が達成できるＳＮＳとなると考えられます。
+- 主観的に感性を発信できるＳＮＳの場で、否定されるという不安から消極的になってしまうという問題を解決するために、このようなポートフォリオを作成してみようと考えました。
+​
+### ターゲットユーザ
+・10～30代をメイン層とした、ソーシャルメディアを**日常的**に使う人（※10～30代はソーシャルメディア行為率がメールよりも多い世代です。）  
+・画像、**色彩**など芸術的要素に関心がある人  
+・批判よりも**肯定**をしてほしい人  
+​
+### 主な利用シーン
+・今日の気分は何色だろう、と一日のはじまりに投稿します  
+・今週の色の変化を振り返るときに、自分のタイムラインをさかのぼってみます  
+・何か心動くシーンを見つけたら撮影し、画像と今の気持ちを投稿します  
+​
+## 設計書
+「後ほど作成予定」
+​
+## 開発環境
+- OS：Linux(CentOS)
+- 言語：HTML,CSS,JavaScript,Ruby,SQL
+- フレームワーク：Ruby on Rails
+- JSライブラリ：jQuery
+- IDE：Cloud9
+​
+## 使用素材
+「写真AC」https://www.photo-ac.com/
 
-Things you may want to cover:
+<!--## 作者-->
 
-* Ruby version
+<!--## アプリケーションの詳細な説明-->
 
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+<!--## 実装した機能-->

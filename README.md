@@ -31,6 +31,10 @@
 (後ほど作成予定)  
 ワイヤーフレーム：  
 https://drive.google.com/file/d/17hFp6WxhO70ZCxRE2WFgst8F1w9tikTq/view?usp=drive_link  
+(7/1update)  
+https://drive.google.com/file/d/1d4pvveClTGKViSPehgpm-LRKLdCrlaRI/view?usp=drive_link  
+UI flow：https://drive.google.com/file/d/1vFwcxQYwVWx7t1J6F4tzHjwKIVS6eQDq/view?usp=drive_link  
+
 
 ## 開発環境
 - OS：Linux(CentOS)

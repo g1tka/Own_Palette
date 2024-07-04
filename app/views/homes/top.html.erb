@@ -1,2 +1,51 @@
-<h1>Homes#top</h1>
-<p>Find me in app/views/homes/top.html.erb</p>
+<div class="container">
+  <div class="row">
+    <div class="col d-flex flex-row-reverse">
+      <%= link_to new_admin_session_path do %>
+        for admin
+      <% end %>
+    </div>
+  </div>
+  <div class="row d-flex justify-content-center">
+    <div>Select color you like</div>
+  </div>
+  <div class="row d-flex justify-content-center mt-3">
+    <div class="col-5">
+      <div class="color-palette">
+        <div class="color-row">
+          <%= link_to posts_path(color: 'red') do %>
+            <div class="square-big red"></div>
+          <% end %>
+          <%= link_to posts_path(color: 'orange') do %>
+            <div class="square-big orange"></div>
+          <% end %>
+          <%= link_to posts_path(color: 'yellow') do %>
+            <div class="square-big yellow"></div>
+          <% end %>
+          <%= link_to posts_path(color: 'green') do %>
+            <div class="square-big green"></div>
+          <% end %>
+        </div>
+        <div class="color-row">
+          <%= link_to posts_path(color: 'blue') do %>
+            <div class="square-big blue"></div>
+          <% end %>
+          <%= link_to posts_path(color: 'purple') do %>
+            <div class="square-big purple"></div>
+          <% end %>
+          <%= link_to posts_path(color: 'monochrome') do %>
+            <div class="square-big monochrome"></div>
+          <% end %>
+          <%= link_to posts_path(color: 'other') do %>
+            <div class="square-big other"></div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row d-flex justify-content-center mt-4">
+    <%= link_to root_path do %>
+      <%= image_tag("logo1.png", src: "/assets/images/logo1.png", width: 180, hight: 180 ) %>
+    <% end %>
+  </div>
+</div>

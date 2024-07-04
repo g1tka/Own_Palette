@@ -2,30 +2,33 @@ Rails.application.routes.draw do
   devise_for :admins, controllers: {
     sessions: 'admin/sessions'
   }
-  devise_for :users, controllers: {
+  devise_for :users, path: '/', controllers: {
     registrations: 'user/registrations',
     sessions: 'user/sessions'
   }
 
-  root :to => "homes#top"
-  get "/about" => "homes#about"
-  
+  root :to => 'homes#top'
+  get '/about' => 'homes#about'
+
   scope module: :user do
     get 'posts' => 'posts#search', as: 'posts_search'
     resources :posts do
       resource :favorites, only: [:create, :destroy]
       resources :comments, only: [:create, :destroy]
     end
-    get 'unsubscribe'
-    patch 'withdraw'
+
     resources :users, only: [:index] do
+      member do
+        get 'unsubscribe'
+        patch 'withdraw'
+      end
       get 'search' => 'relationships#search', as: :search
       resource :relationships, only: [:index, :create, :destroy]
       get 'followings' => 'relationships#followings', as: 'followings'
       get 'followers' => 'relationships#followers', as: 'followers'
     end
   end
-  
+
   namespace :admin do
     resources :posts, only: [:index, :show, :update, :destroy]
     resources :users, only: [:index, :show, :update]

@@ -1,0 +1,32 @@
+<div class="col-4">
+  <div class="color-palette">
+    <div class="color-row">
+      <%= link_to posts_path(color: 'red') do %>
+        <div class="square red"></div>
+      <% end %>
+      <%= link_to posts_path(color: 'orange') do %>
+        <div class="square orange"></div>
+      <% end %>
+      <%= link_to posts_path(color: 'yellow') do %>
+        <div class="square yellow"></div>
+      <% end %>
+      <%= link_to posts_path(color: 'green') do %>
+        <div class="square green"></div>
+      <% end %>
+    </div>
+    <div class="color-row">
+      <%= link_to posts_path(color: 'blue') do %>
+        <div class="square blue"></div>
+      <% end %>
+      <%= link_to posts_path(color: 'purple') do %>
+        <div class="square purple"></div>
+      <% end %>
+      <%= link_to posts_path(color: 'monochrome') do %>
+        <div class="square monochrome"></div>
+      <% end %>
+      <%= link_to posts_path(color: 'other') do %>
+        <div class="square other"></div>
+      <% end %>
+    </div>
+  </div>
+</div>

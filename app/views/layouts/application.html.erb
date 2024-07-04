@@ -6,11 +6,42 @@
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
+    <script src="https://kit.fontawesome.com/18d078742a.js" crossorigin="anonymous"></script>
     <%= stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
   <body>
-    <%= yield %>
+    <header>
+      <div class="header-content">
+        <ul class="d-flex list-unstyled justify-content-center">
+          <% if admin_signed_in? %>
+            <li class='mx-3'><%= link_to 'Post List', admin_posts_path %></li>
+            <li class='mx-3'><%= link_to 'User List', admin_users_path %></li>
+            <li class='mx-3'><%= link_to 'Comment List', admin_comments_path %></li>
+            <li class='mx-3'><%= link_to 'Log out', destroy_admin_session_path, method: :delete %></li>
+            <%= render 'layouts/color_palette' %>
+          <% elsif user_signed_in? %>
+            <li class='mx-3'><%= link_to 'Post', new_post_path %></li>
+            <li class='mx-3'><%= link_to 'My Page', posts_path %></li>
+            <li class='mx-3'><%= link_to 'Log out', destroy_user_session_path, method: :delete %></li>
+            <%= render 'layouts/color_palette' %>
+          <% else %>
+            <li class='mx-3'><%= link_to 'About', about_path %></li>
+            <li class='mx-3'><%= link_to 'Sign up', new_user_registration_path %></li>
+            <li class='mx-3'><%= link_to 'Log in', new_user_session_path %></li>
+            <%= render 'layouts/color_palette' %>
+          <% end %>
+        </ul>
+      </div>
+    </header>
+    <main>
+      <%= yield %>
+    </main>
+    <footer>
+      <div>
+        <span>Copyright © Infratop Inc. All Rights Reserved.</span>
+      </div>
+    </footer>
   </body>
 </html>

@@ -1,2 +1,33 @@
-<h1>Homes#about</h1>
-<p>Find me in app/views/homes/about.html.erb</p>
+<div class="contrainer">
+  <div class="row">
+    
+    <div class="col-lg-4 col-md-6 offset-lg-2">
+      <div class="flame ml-lg-5 text-center mb-4 mb-md-0">
+        <div class="image m-3">
+          <%#= image_tag post.get_image(:post_id), fallback: "no_image.jpg" %>
+          <%= image_tag("red1.jpg", src: "/assets/images/red1.png", width: 200, hight: 200 ) %>
+        </div>
+        <div class="row d-flex justify-content-end mr-1">
+          <div classs="badge bg-primary text-wrap", style="width: 12em;">
+            <!--全角２０文字折り返し対応/半角２０文字は一行で表示-->
+            user_name_long_name<%#= user.name(params[:post_id]) %>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <div class="col-lg-4 col-md-6 pr-md-5 pt-md-4">
+      <div class="about-flame">
+        <strong>About</strong><br/><br/>
+        <p>Own Paletteは好きな色のタグをつけて<br/>
+        画像を投稿・閲覧できるSNSです。<br/><br/>
+        右上のカラーパレットから<br/>
+        お好きな色をお選びください。<br/><br/>
+        投稿にはログインが必要です。</p>
+      </div>
+    </div>
+    <div class="col-12 d-md-none">
+      <div></div>
+    </div>
+  </div>
+</div>

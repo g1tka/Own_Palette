@@ -13,13 +13,14 @@
 
   <body>
     <header>
-      <div class="row header-content">
+      <div class="row header-content d-flex">
+        <!--左端：Logoの表示について-->
         <% if current_page?(root_path) %>
           <div class="col-1 mx-3">
             <div></div>
           </div>
         <% else %>
-          <div class="col-1">
+          <div class="col-1 mx-3">
             <div class="row">
               <%= link_to root_path do %>
                 <%= image_tag("logo1.png", src: "/assets/images/logo1.png", width: 100, hight: 100 ) %>
@@ -32,16 +33,14 @@
             </div>
           </div>
         <% end %>
-        <ul class="col-9 d-flex list-unstyled justify-content-center">
+        <!--中央：リンクの表示について-->
+        <ul class="col-7 d-flex list-unstyled justify-content-center">
           <% if admin_signed_in? %>
-            <div class="col-7 d-flex align-items-center justify-content-center">
+            <div class="col d-flex align-items-center justify-content-center">
               <li class='mx-3'><%= link_to 'Post List', admin_posts_path %></li>
               <li class='mx-3'><%= link_to 'User List', admin_users_path %></li>
               <li class='mx-3'><%= link_to 'Comment List', admin_comments_path %></li>
               <li class='mx-3'><%= link_to 'Log out', destroy_admin_session_path, method: :delete %></li>
-            </div>
-            <div class="col-4">
-              <%= render 'layouts/color_palette' %>
             </div>
           <% elsif user_signed_in? %>
             <div class="col d-flex align-items-center justify-content-center">
@@ -49,21 +48,26 @@
               <li class='mx-3'><%= link_to 'My Page', posts_path %></li>
               <li class='mx-3'><%= link_to 'Log out', destroy_user_session_path, method: :delete %></li>
             </div>
-            <div class="col-4">
-              <%= render 'layouts/color_palette' %>
-            </div>
           <% else %>
-            <div class="d-flex align-items-center justify-content-center">
+            <div class="col d-flex align-items-center justify-content-center">
               <li class='mx-3'><%= link_to 'About', about_path %></li>
               <li class='mx-3'><%= link_to 'Sign up', new_user_registration_path %></li>
               <li class='mx-3'><%= link_to 'Log in', new_user_session_path %></li>
             </div>
           <% end %>
         </ul>
-        <% if current_page?(root_path) %>
+        <!--右端：カラーパレットの表示について-->
+        <% unless current_page?(root_path) %>
+          <div class="col-2 mx-5">
+            <div>
+              <%= render 'layouts/color_palette' %>
+            </div>
+          </div>
         <% else %>
-          <div class="col-2">
-            <%= render 'layouts/color_palette' %>
+          <div class="col-2 mx-5">
+            <%= link_to new_admin_session_path do %>
+              for admin
+            <% end %>
           </div>
         <% end %>
       </div>

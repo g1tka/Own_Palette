@@ -1,2 +1,28 @@
-<h1>User::Users#index</h1>
-<p>Find me in app/views/user/users/index.html.erb</p>
+ユーザーページ
+・新着順/古い順
+・自分の投稿/★すべて
+・８色選択
+<div class="flame ml-lg-5 text-center mb-4 mb-md-0">
+  <div class="image m-3">
+    <%#= image_tag post.get_image(:post_id), fallback: "no_image.jpg" %>
+    <%= image_tag("red1.jpg", src: "/assets/images/red1.png", width: 200, hight: 200 ) %>
+  </div>
+  <div class="row d-flex justify-content-end mr-1">
+    <div classs="badge bg-primary text-wrap", style="width: 12em;">
+      <!--全角２０文字折り返し対応/半角２０文字は一行で表示-->
+      user_name_demo<%#= user.name(params[:post_id]) %>
+    </div>
+  </div>
+</div>
+3つまで一行に表示
+ページネーション
+
+<div>
+  Are you looking for someone? click
+  <%= link_to 'Here', user_relationships_path(current_user) %>
+</div>
+
+<div>
+  <%= link_to 'Delete', unsubscribe_user_path(current_user) %>
+  account?
+</div>

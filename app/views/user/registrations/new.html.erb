@@ -1,18 +1,29 @@
-ユーザーの新規登録ページ
-
-<%= form_with model: @user, url: new_user_registration_path, local: true do |f| %>
-  <table class="user_form">
-      <tr>
-        <th><%= f.label :name, "User name", class: "user_name" %></th>
-        <td><%= f.text_field :name, autofocus: true, :placeholder => "put name in 20 words" %></td>
-      </tr>
-      <tr>
-        <th><%= f.label :email, "email", class: "user_email" %></th>
-        <td><%= f.textfield :email, :placeholder => "put email abailable" %></td>
-      </tr>
-      <tr>
-        <th><%= f.label :password, class: "user_password" %></th>
-        <td><%= f.password_field :password, autocomplete</td>
-      </tr>
-  </table>
- <% end %>
+<p>新規登録ページ</p>
+<div class="container">
+  <div class="row justify-content-center">
+    <%= form_with model: @user, url: new_user_registration_path, local: true do |f| %>
+      <table class="user_form">
+        <tr>
+          <th><%= f.label :name, "User name" %></th>
+          <td><%= f.text_field :name, autofocus: true, :placeholder => " up to 20 characters" %></td>
+        </tr>
+        <tr>
+          <th><%= f.label :email %></th>
+          <td><%= f.text_field :email %></td>
+        </tr>
+        <tr>
+          <th><%= f.label :password %></th>
+          <td><%= f.password_field :password, autocomplete: "new-password" %></td>
+        </tr>
+        <tr>
+          <th><%= f.label :password_confirmation, "Password (確認用)"  %></th>
+          <td><%= f.password_field :password_confirmationss, autocomplete: "new-password" %></td>
+        </tr>
+      </table>
+    <% end %>
+  </div>
+</div>
+<div class="row mt-3 d-flex justify-content-center">
+  既にアカウントをお持ちの方は
+  <%= link_to 'こちら', new_user_session_path %>
+</div>

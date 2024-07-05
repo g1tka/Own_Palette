@@ -1,7 +1,7 @@
 <p>新規登録ページ</p>
 <div class="container">
   <div class="row justify-content-center">
-    <%= form_with model: @user, url: new_user_registration_path, local: true do |f| %>
+    <%= form_with model: @user, url: user_registration_path, local: true do |f| %>
       <table class="user_form">
         <tr>
           <th><%= f.label :name, "User name" %></th>
@@ -20,10 +20,13 @@
           <td><%= f.password_field :password_confirmationss, autocomplete: "new-password" %></td>
         </tr>
       </table>
+      <div class="col mt-3">
+        <%= f.submit "新規登録", class: "btn btn-success" %>
+      </div>
     <% end %>
   </div>
 </div>
-<div class="row mt-3 d-flex justify-content-center">
+<div class="row mt-5 d-flex justify-content-center">
   既にアカウントをお持ちの方は
   <%= link_to 'こちら', new_user_session_path %>
 </div>

@@ -16,6 +16,11 @@ ja:
         neutral: "中立"
         disagree: "反対"
   activerecord:
+    attributes: #属性という意味で、以下モデル名/カラム名について指定できます。
+      post:
+        image: "画像"
+        body: "本文"
+        color: "色"
     errors:
       messages:
         record_invalid: 'バリデーションに失敗しました: %{errors}'

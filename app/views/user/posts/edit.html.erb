@@ -1,2 +1,56 @@
-<h1>User::Posts#edit</h1>
-<p>Find me in app/views/user/posts/edit.html.erb</p>
+投稿編集ページ
+
+<div class="container">
+
+  <%= form_with model: @post, url: post_path(@post) , method: :patch do |f| %>
+  <%= render 'layouts/error_messages', resource: @post %>
+
+    <div class="row d-flex justify-content-center">
+      <div class="col-md-5">
+        <div class="flame ml-lg-5 text-center mb-4 mb-md-0">
+          <div class="image m-3">
+            <% if @post.image.attached? %>
+              <%= image_tag @post.image, size: "200x200" %>
+            <% end %>
+          </div>
+        </div>
+        画像を変更しますか？
+        <%= f.file_field :image, accept: "image/*" %>
+      </div>
+      
+      <div class="col-md-4 mx-3 mt-4">
+        本文
+        <%= f.text_field :body %>
+        <div class="row">
+          <%= f.radio_button :color, Post.colors.key(0) %>
+          <%= f.label :color_red, Post.colors_i18n[:red] %>
+          <%= f.radio_button :color, Post.colors.key(1) %>
+          <%= f.label :color_orange, Post.colors_i18n[:orange] %>
+          <%= f.radio_button :color, Post.colors.key(2) %>
+          <%= f.label :color_yellow, Post.colors_i18n[:yellow] %>
+          <%= f.radio_button :color, Post.colors.key(3) %>
+          <%= f.label :color_green, Post.colors_i18n[:green] %>
+          <%= f.radio_button :color, Post.colors.key(4) %>
+          <%= f.label :color_blue, Post.colors_i18n[:blue] %>
+          <%= f.radio_button :color, Post.colors.key(5) %>
+          <%= f.label :color_purple, Post.colors_i18n[:purple] %>
+          <%= f.radio_button :color, Post.colors.key(6) %>
+          <%= f.label :color_monochrome, Post.colors_i18n[:monochrome] %>
+          <%= f.radio_button :color, Post.colors.key(7) %>
+          <%= f.label :color_other, Post.colors_i18n[:other] %>
+        </div>
+        <div class="row">
+          <%= f.radio_button :is_open, "true" %>
+          <%= f.label :is_open_true, "公開" %>
+          <%= f.radio_button :is_open, "false" %>
+          <%= f.label :is_open_false, "非公開" %>
+        </div>
+        <div class="row">
+          <%= f.submit "更新する" %>
+        </div>
+      </div>
+    </div>
+    
+  <% end %>
+
+</div>

@@ -5,7 +5,7 @@
     <%= form_with model: @post, url:"/posts" do |f| %>
     <%= render 'layouts/error_messages', resource: @post %>
     <div class="col">
-      <%= f.file_field :image, accept: "iamge/*" %>
+      <%= f.file_field :image, accept: "image/*" %>
     </div>
     <div class="col">
       本文

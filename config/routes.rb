@@ -11,8 +11,10 @@ Rails.application.routes.draw do
   get '/about' => 'homes#about'
 
   scope module: :user do
-    get 'posts' => 'posts#search', as: 'posts_search'
     resources :posts do
+      collection do
+        get 'search', to: 'posts#search', as: 'search'
+      end
       resource :favorites, only: [:create, :destroy]
       resources :comments, only: [:create, :destroy]
     end
@@ -22,7 +24,7 @@ Rails.application.routes.draw do
         get 'unsubscribe'
         patch 'withdraw'
       end
-      get 'search' => 'relationships#search', as: :search
+      get 'relationships/search' => 'relationships#search', as: :search_relationships
       resources :relationships, only: [:index, :create, :destroy]
       get 'followings' => 'relationships#followings', as: 'followings'
       get 'followers' => 'relationships#followers', as: 'followers'

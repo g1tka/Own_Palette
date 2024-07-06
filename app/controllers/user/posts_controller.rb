@@ -21,7 +21,30 @@ class User::PostsController < ApplicationController
   end
 
   def index
-    @posts = Post.all
+    if params[:color].present?
+      @posts = Post.where(color: params[:color])
+      # if params[:color] == "0"
+      #   @posts = Post.where(color: "red")
+      # elsif params[:color] == "1"
+      #   @posts = Post.where(color: "orange")
+      # elsif params[:color] == "2"
+      #   @posts = Post.where(color: "yellow")
+      # elsif params[:color] == "3"
+      #   @posts = Post.where(color: "green")
+      # elsif params[:color] == "4"
+      #   @posts = Post.where(color: "blue")
+      # elsif params[:color] == "5"
+      #   @posts = Post.where(color: "purple")
+      # elsif params[:color] == "6"
+      #   @posts = Post.where(color: "monochrome")
+      # elsif params[:color] == "7"
+      #   @posts = Post.where(color: "other")
+      # else
+      #   @posts = Post.all
+      # end
+    else
+      @posts = Post.all
+    end
   end
 
   def edit

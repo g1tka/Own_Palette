@@ -4,13 +4,12 @@
     <div class="col-lg-4 col-md-6 offset-lg-2">
       <div class="flame ml-lg-5 text-center mb-4 mb-md-0">
         <div class="image m-3">
-          <%#= image_tag post.get_image(:post_id), fallback: "no_image.jpg" %>
           <%= image_tag("red1.jpg", src: "/assets/images/red1.png", width: 200, hight: 200 ) %>
         </div>
         <div class="row d-flex justify-content-end mr-1">
           <div classs="badge bg-primary text-wrap", style="width: 12em;">
             <!--全角２０文字折り返し対応/半角２０文字は一行で表示-->
-            user_name_demo<%#= user.name(params[:post_id]) %>
+            user_name_demo
           </div>
         </div>
       </div>

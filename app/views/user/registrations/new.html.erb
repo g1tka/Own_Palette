@@ -8,20 +8,25 @@
           <td><%= f.text_field :name, autofocus: true, :placeholder => " up to 20 characters" %></td>
         </tr>
         <tr>
-          <th><%= f.label :email %></th>
+          <th><%= f.label :email, "Email" %></th>
           <td><%= f.text_field :email %></td>
         </tr>
         <tr>
-          <th><%= f.label :password %></th>
-          <td><%= f.password_field :password, autocomplete: "new-password" %></td>
+          <th><%= f.label :password, "Password" %></th>
+          <td><%= f.password_field :password, autocomplete: "new-password", :placeholder => " minimum 6 characters" %></td>
         </tr>
         <tr>
           <th><%= f.label :password_confirmation, "Password Confirmation"  %></th>
-          <td><%= f.password_field :password_confirmationss, autocomplete: "new-password" %></td>
+          <td><%= f.password_field :password_confirmation, autocomplete: "new-password" %></td>
         </tr>
       </table>
       <div class="col mt-3">
         <%= f.submit "Sign in", class: "btn btn-success" %>
+      </div>
+    <% end %>
+    <% if @user.errors.any? %>
+      <div class="col mt-3 mx-5">
+        <%= render 'layouts/error_messages', resource: @user %>
       </div>
     <% end %>
   </div>

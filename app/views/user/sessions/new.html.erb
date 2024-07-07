@@ -1,5 +1,8 @@
 <p>ログインページ</p>
 <div class="container">
+  <div>
+  <%= flash[:danger] %>
+  </div>
   <div class="row justify-content-center">
     <%= form_with model: @user, url: user_session_path, local: true do |f| %>
       <table class="user_form">

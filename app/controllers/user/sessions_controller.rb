@@ -27,9 +27,9 @@ class User::SessionsController < Devise::SessionsController
     # [userのログインフォームに入力したemailの値]を用いて一致するemailカラムを持つuserを１件特定する。
     user = User.find_by(email: params[:user][:email])
     # もしuser=nilがtrueなら（存在しなければ）retuen（user_stateメソッド終了！）。falseなら次の行へ進む。
-    retuen if user.nil?
+    return if user.nil?
     # [userのログインフォームに入力したpasswordの値]と先ほど特定したuserのpasswordが一致しないのであれば、retuen。trueなら次の行へ進む。
-    retuen unless user.valid_password?(params[:user][:password])
+    return unless user.valid_password?(params[:user][:password])
     # ここでようやくis_activeがtrueかfalseかを条件分岐する。falseのときに実行したいことを
     unless user.is_active
       flash[:danger] = '退会済のアカウントです。新規登録をお願いします。'

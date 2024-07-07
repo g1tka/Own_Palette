@@ -1,28 +1,32 @@
 投稿一覧ページ
 <div class="container">
   <div class="row">
-    <% @posts.each do |post| %>
-    
-      <div class="col-md-4 mb-4">
-        <%= link_to post_path(post) do %>
-          <div class="flame ml-lg-5 text-center mb-4 mb-md-0">
-            <div class="image m-3">
-              <%= image_tag post.image, size: "200x200" %>
-            </div>
-            <div class="row d-flex justify-content-end mr-1">
-              <div classs="badge bg-primary text-wrap", style="width: 12em;">
-                <%= link_to user_path(post.user) do %>
-                  <%= post.user.name %>
-                <% end %>
+    <% if @posts.any? %>
+      <% @posts.each do |post| %>
+        <div class="col-md-4 mb-4">
+          <%= link_to post_path(post) do %>
+            <div class="flame ml-lg-5 text-center mb-4 mb-md-0">
+              <div class="image m-3">
+                <%= image_tag post.image, size: "200x200" %>
+              </div>
+              <div class="row d-flex justify-content-end mr-1">
+                <div classs="badge bg-primary text-wrap", style="width: 12em;">
+                  <%= link_to user_path(post.user) do %>
+                    <%= post.user.name %>
+                  <% end %>
+                </div>
               </div>
             </div>
-          </div>
-          <div class="row ml-lg-5 text-center m-3 mb-md-0 pl-4">
-            <%= post.body %>
-          </div>
-        <% end %>
+            <div class="row ml-lg-5 text-center m-3 mb-md-0 pl-4">
+              <%= post.body %>
+            </div>
+          <% end %>
+        </div>
+      <% end %>
+    <% else %>
+      <div class="col my-5">
+        投稿はまだありません。
       </div>
-      
     <% end %>
   </div>
 </div>

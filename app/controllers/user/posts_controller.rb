@@ -22,7 +22,10 @@ class User::PostsController < ApplicationController
 
   def index
     if params[:color].present?
-      @posts = Post.where(color: params[:color])
+      if params[:color] == "7"
+        @posts = Post.all
+      else
+        @posts = Post.where(color: params[:color])
       # if params[:color] == "0"
       #   @posts = Post.where(color: "red")
       # elsif params[:color] == "1"
@@ -41,8 +44,8 @@ class User::PostsController < ApplicationController
       #   @posts = Post.where(color: "other")
       # else
       #   @posts = Post.all
-      # end
-    else
+      end
+    else # 予期せぬ値が来た時のため記述
       @posts = Post.all
     end
   end

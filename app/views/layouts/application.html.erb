@@ -45,7 +45,7 @@
           <% elsif user_signed_in? %>
             <div class="col d-flex align-items-center justify-content-center">
               <li class='mx-3'><%= link_to 'Post', new_post_path %></li>
-              <li class='mx-3'><%= link_to 'My Page', users_path %></li>
+              <li class='mx-3'><%= link_to 'My Page', user_path(current_user) %></li>
               <li class='mx-3'><%= link_to 'Log out', destroy_user_session_path, method: :delete %></li>
             </div>
           <% else %>

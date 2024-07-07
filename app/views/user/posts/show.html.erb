@@ -9,7 +9,7 @@
         </div>
         <div class="row d-flex justify-content-end mr-1">
           <div classs="badge bg-primary text-wrap", style="width: 12em;">
-            <%= link_to users_path do %>
+            <%= link_to user_path(@post.user) do %>
               <%= @post.user.name %>
             <% end %>
           </div>
@@ -25,7 +25,7 @@
         <!--コメント用-->
       </div>
     </div>
-    <% if @post.user == current_user %></if>
+    <% if @post.user == current_user %>
       <div class="row mt-3">
         <div class="col">
           <%= link_to '編集する', edit_post_path(@post), class:"btn btn-success"%>

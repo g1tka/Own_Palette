@@ -2,7 +2,7 @@
 
 <div class="container">
 
-  <%= form_with model: @post, url: post_path(@post) , method: :patch do |f| %>
+  <%= form_with model: @post, url: post_path(@post), method: :patch do |f| %>
   <%= render 'layouts/error_messages', resource: @post %>
 
     <div class="row d-flex justify-content-center">

@@ -1,4 +1,4 @@
-投稿一覧ページ
+ユーザーページ
 <div class="container">
   <div class="row">
     <% @posts.each do |post| %>
@@ -26,3 +26,21 @@
     <% end %>
   </div>
 </div>
+・新着順/古い順
+・自分の投稿/★すべて
+・８色選択
+ページネーション
+<% if @user == current_user %>
+  <div class="row mt-3">
+    <%= link_to 'Edit', edit_user_path(current_user) %>
+    &nbsp;profile?
+  </div>
+  <div class="row mt-3">
+    Are you looking for someone? click&nbsp;
+    <%= link_to 'Here', user_relationships_path(current_user) %>
+  </div>
+  <div class="row mt-3">
+    <%= link_to 'Delete', unsubscribe_user_path(current_user) %>
+    &nbsp;account?
+  </div>
+<% end %>

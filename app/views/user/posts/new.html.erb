@@ -29,7 +29,7 @@
         <%= f.label :color_other, Post.colors_i18n[:other] %>
       </div>
       <div class="row">
-        <%= f.radio_button :is_open, "true" %>
+        <%= f.radio_button :is_open, "true", checked: true %>
         <%= f.label :is_open_true, "公開" %>
         <%= f.radio_button :is_open, "false" %>
         <%= f.label :is_open_false, "非公開" %>

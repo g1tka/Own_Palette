@@ -17,8 +17,11 @@ class User::UsersController < ApplicationController
     end
   end
 
-  def unsubscribe
-    
+  def withdraw
+    @user = current_user
+    @user.update(is_active: false)
+    reset_session
+    redirect_to new_user_registration_path
   end
   
   private

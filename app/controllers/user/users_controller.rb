@@ -1,4 +1,7 @@
 class User::UsersController < ApplicationController
+  before_action :authenticate_user!, except: [:show]
+  before_action :check_authorization, only: [:edit, :update]
+  
   def show
     @user = User.find(params[:id])
     @posts = @user.posts
@@ -28,5 +31,12 @@ class User::UsersController < ApplicationController
   
   def user_params
     params.require(:user).permit(:name, :email, :password, :password_confirmation)
+  end
+  
+  def check_authorization
+    @user = User.find(params[:id])
+    unless @user == current_user
+      redirect_to user_path(current_user)
+    end
   end
 end

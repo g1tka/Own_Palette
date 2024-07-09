@@ -1,11 +1,11 @@
 投稿一覧ページ
-<div class="container post-index">
-  <div class="row post-index mx-md-1 px-md-1">
+<div class="container">
+  <div class="row">
     <% if @posts.any? %>
       <% @posts.each do |post| %>
-        <div class="col-md-6 col-lg mb-4">
+        <div class="col-md-6 col-lg-4 col-xl-3 mb-4">
           <%= link_to post_path(post) do %>
-            <div class="flame text-center mb-4 mb-md-0">
+            <div class="flame mb-4 mb-md-0">
               <div class="image m-3">
                 <%= image_tag post.image, size: "200x200" %>
               </div>

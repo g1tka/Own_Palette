@@ -44,32 +44,6 @@
     <%= link_to 'Here', user_relationships_path(current_user) %>
   </div>
   
-  <div class="row mt-4">
-    <button type="button" class="btn btn-sm btn-danger" data-toggle='modal' data-target="#unsubscribeConfirm">
-      Delete account?
-    </button>
-  </div>
   
-  <div class="modal fade" id="unsubscribeConfirm" tabindex="-1" role="dialog" aria-labelledby="unsubscribeConfirmTitle" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="unsubscribeConfirm">退会確認</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        退会後は同じユーザー名、メールアドレスでログインすることができなくなります！<br/>
-        本当に、退会しますか？
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">やめる</button>
-        <%= link_to withdraw_user_path(current_user), method: :patch do %>
-          <button type="button" class="btn btn-danger">退会する</button>
-        <% end %>
-      </div>
-    </div>
-  </div>
 </div>
 <% end %>

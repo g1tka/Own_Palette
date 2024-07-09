@@ -1,41 +1,53 @@
 新規投稿ページ
 
 <div class="container">
-  <div class="row">
+  <div class="row justify-content-center mt-3">
     <%= form_with model: @post, url:"/posts" do |f| %>
     <%= render 'layouts/error_messages', resource: @post %>
-    <div class="col">
+    <div class="col mt-3">
       <%= f.file_field :image, accept: "image/*" %>
     </div>
-    <div class="col">
-      本文
-      <%= f.text_field :body %>
-      <div class="row">
-        <%= f.radio_button :color, Post.colors.key(0) %>
-        <%= f.label :color_red, Post.colors_i18n[:red] %>
-        <%= f.radio_button :color, Post.colors.key(1) %>
-        <%= f.label :color_orange, Post.colors_i18n[:orange] %>
-        <%= f.radio_button :color, Post.colors.key(2) %>
-        <%= f.label :color_yellow, Post.colors_i18n[:yellow] %>
-        <%= f.radio_button :color, Post.colors.key(3) %>
-        <%= f.label :color_green, Post.colors_i18n[:green] %>
-        <%= f.radio_button :color, Post.colors.key(4) %>
-        <%= f.label :color_blue, Post.colors_i18n[:blue] %>
-        <%= f.radio_button :color, Post.colors.key(5) %>
-        <%= f.label :color_purple, Post.colors_i18n[:purple] %>
-        <%= f.radio_button :color, Post.colors.key(6) %>
-        <%= f.label :color_monochrome, Post.colors_i18n[:monochrome] %>
-        <%= f.radio_button :color, Post.colors.key(7) %>
-        <%= f.label :color_other, Post.colors_i18n[:other] %>
+    <div class="col mt-3">
+      <div class="row mt-3">
+        <div class="col pl-4 pt-3">
+          <%= f.label :post_body, "本文"%>
+        </div>
+        <div class="col">
+          <%= f.text_area :body, rows: 2, cols: 30 %>
+        </div>
       </div>
-      <div class="row">
-        <%= f.radio_button :is_open, "true", checked: true %>
-        <%= f.label :is_open_true, "公開" %>
-        <%= f.radio_button :is_open, "false" %>
-        <%= f.label :is_open_false, "非公開" %>
+      <div class="row mt-2">
+        <div class="col">
+          <%= f.radio_button :color, Post.colors.key(0) %>
+          <%= f.label :color_red, Post.colors_i18n[:red] %>
+          <%= f.radio_button :color, Post.colors.key(1) %>
+          <%= f.label :color_orange, Post.colors_i18n[:orange] %>
+          <%= f.radio_button :color, Post.colors.key(2) %>
+          <%= f.label :color_yellow, Post.colors_i18n[:yellow] %>
+          <%= f.radio_button :color, Post.colors.key(3) %>
+          <%= f.label :color_green, Post.colors_i18n[:green] %>
+          <%= f.radio_button :color, Post.colors.key(4) %>
+          <%= f.label :color_blue, Post.colors_i18n[:blue] %>
+          <%= f.radio_button :color, Post.colors.key(5) %>
+          <%= f.label :color_purple, Post.colors_i18n[:purple] %>
+          <%= f.radio_button :color, Post.colors.key(6) %>
+          <%= f.label :color_monochrome, Post.colors_i18n[:monochrome] %>
+          <%= f.radio_button :color, Post.colors.key(7) %>
+          <%= f.label :color_other, Post.colors_i18n[:other] %>
+        </div>
       </div>
-      <div class="row">
-        <%= f.submit "投稿する" %>
+      <div class="row mt-2">
+        <div class="col">
+          <%= f.radio_button :is_open, "true", checked: true %>
+          <%= f.label :is_open_true, "公開" %>
+          <%= f.radio_button :is_open, "false" %>
+          <%= f.label :is_open_false, "非公開" %>
+        </div>
+      </div>
+      <div class="row mt-3 justify-content-center">
+        <div class="">
+          <%= f.submit "投稿する", class: "btn btn-secondary" %>
+        </div>
       </div>
     </div>
     <% end %>

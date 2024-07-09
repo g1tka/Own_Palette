@@ -13,7 +13,7 @@
 
   <body>
     <header>
-      <div class="row header-content d-flex">
+      <div class="row header-content">
         <!--左端：Logoの表示について-->
         <% if current_page?(root_path) %>
           <div class="col-1 mx-3">
@@ -34,7 +34,7 @@
           </div>
         <% end %>
         <!--中央：リンクの表示について-->
-        <ul class="col-7 d-flex list-unstyled justify-content-center">
+        <ul class="col-sm-7 col-xs-10 d-flex list-unstyled justify-content-center">
           <% if admin_signed_in? %>
             <div class="col d-flex align-items-center justify-content-center">
               <li class='mx-3'><%= link_to 'Post List', admin_posts_path %></li>
@@ -58,13 +58,13 @@
         </ul>
         <!--右端：カラーパレットの表示について-->
         <% unless current_page?(root_path) %>
-          <div class="col-2 mx-5">
-            <div>
+          <div class="col-md-2 col-sm-12">
+            <div class="row justify-content-center">
               <%= render 'layouts/color_palette' %>
             </div>
           </div>
         <% else %>
-          <div class="col-2 mx-5">
+          <div class="col-md-2 col-sm-12 mx-5">
             <%= link_to new_admin_session_path do %>
               for admin
             <% end %>

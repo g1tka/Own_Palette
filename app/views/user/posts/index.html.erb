@@ -1,11 +1,11 @@
 投稿一覧ページ
-<div class="container">
-  <div class="row">
+<div class="container post-index">
+  <div class="row post-index mx-md-1 px-md-1">
     <% if @posts.any? %>
       <% @posts.each do |post| %>
-        <div class="col-md-4 mb-4">
+        <div class="col-md-6 col-lg mb-4">
           <%= link_to post_path(post) do %>
-            <div class="flame ml-lg-5 text-center mb-4 mb-md-0">
+            <div class="flame text-center mb-4 mb-md-0">
               <div class="image m-3">
                 <%= image_tag post.image, size: "200x200" %>
               </div>
@@ -17,9 +17,11 @@
                 </div>
               </div>
             </div>
-            <div class="row ml-lg-5 text-center m-3 mb-md-0 pl-4">
-              <%= post.body %>
-            </div>
+            
+              <div class="col m-3 pl-md-4">
+                <%= post.body %>
+              </div>
+           
           <% end %>
         </div>
       <% end %>

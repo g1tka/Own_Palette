@@ -1,6 +1,6 @@
 class User::UsersController < ApplicationController
   before_action :authenticate_user!, except: [:show]
-  before_action :check_authorization, only: [:update]
+  before_action :check_authorization, only: [:edit, :update]
   
   def show
     @user = User.find(params[:id])
@@ -8,11 +8,7 @@ class User::UsersController < ApplicationController
   end
   
   def edit
-    # check_authorizationと
-    @user = User.find(params[:id])
-    unless @user == current_user
-      redirect_to user_path(current_user)
-    end
+    # check_authorization
   end
   
   def update

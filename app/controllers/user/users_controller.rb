@@ -8,11 +8,11 @@ class User::UsersController < ApplicationController
   end
   
   def edit
-    @user = current_user
+    # check_authorization
   end
   
   def update
-    @user = current_user
+    # check_authorization
     if @user.update(user_params)
       redirect_to user_path(@user)
     else

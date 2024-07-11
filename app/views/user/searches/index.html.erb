@@ -1,0 +1,64 @@
+<div class="container">
+  <div class="row mt-3 justify-content-start ml-3">
+    <div class="col-md-6">
+      <div class="row">
+        <%= form_with url: search_path, local: true, method: :get do |f| %>
+          <%= f.text_field :word %>
+          <%= f.select :category, options_for_select([['Post'],['User']]) %>
+          <%= f.submit "Search", class: "btn btn-sm btn-warning mb-1" %>
+        <% end %>
+      </div>
+      <div class="row mt-3">
+        <div class="col">
+          <% if @category == "Post" %>
+            <% if @posts.any? %>
+              <div>Posts search for "<%= @word %>"</div>
+              <table class="table mt-3">
+                <thead class="table-warning">
+                  <tr>
+                    <th>image</th>
+                    <th>body</th>
+                    <th>creator</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <% @posts.each do |post| %>
+                    <tr>
+                      <td><%= image_tag post.get_image, width: 50, height: 50 %></td>
+                      <td><%= post.body %></td>
+                      <td><%= post.user.name %></td>
+                    </tr>
+                  <% end %>
+                </tbody>
+              </table>
+            <% else %>
+              該当する投稿はありません。
+            <% end %>
+          <% else %>
+            <% if @users.any? %>
+              <div>Users search for "<%= @word %>"</div>
+              <table class="table mt-3">
+                <thead class="table-success">
+                  <tr>
+                    <th>name</th>
+                    <th>投稿数</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <% @users.each do |user| %>
+                    <tr>
+                      <td><%= user.name %></td>
+                      <td><%= user.posts.count %></td>
+                    </tr>
+                  <% end %>
+                </tbody>
+              </table>
+            <% else %>
+              該当するユーザーはいません。
+            <% end %>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
+  namespace :user do
+    get 'searches/search'
+  end
   devise_for :admins, controllers: {
     sessions: 'admin/sessions'
   }
@@ -11,6 +14,9 @@ Rails.application.routes.draw do
   get '/about' => 'homes#about'
 
   scope module: :user do
+    get '/search' => 'searches#index'
+    get '/search' => "searches#search"
+    
     resources :posts do
       collection do
         get 'search', to: 'posts#search', as: 'search'
@@ -18,7 +24,7 @@ Rails.application.routes.draw do
       resource :favorites, only: [:create, :destroy]
       resources :comments, only: [:create, :destroy]
     end
-
+    
     resources :users, only: [:show, :edit, :update] do
       member do
         get 'unsubscribe'

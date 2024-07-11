@@ -57,6 +57,7 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 gem 'devise'
 gem 'enum_help'
 gem 'kaminari'
+gem 'image_processing', '~> 1.2'
 # 本番環境でMySQLを使用するための設定。
 gem 'dotenv-rails'
 group :production do

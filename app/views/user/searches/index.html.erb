@@ -24,15 +24,29 @@
                 <tbody>
                   <% @posts.each do |post| %>
                     <tr>
-                      <td><%= image_tag post.get_image, width: 50, height: 50 %></td>
-                      <td><%= post.body %></td>
-                      <td><%= post.user.name %></td>
+                      <td>
+                        <%= link_to post_path(post) do %>
+                          <%= image_tag post.get_image, width: 50, height: 50 %>
+                        <% end %>
+                        </td>
+                      <td>
+                        <%= link_to post_path(post) do %>
+                          <%= post.body %>
+                        <% end %>
+                      </td>
+                      <td>
+                        <%= link_to user_path(post.user_id) do %>
+                          <%= post.user.name %>
+                        <% end %>
+                      </td>
                     </tr>
                   <% end %>
                 </tbody>
               </table>
             <% else %>
-              該当する投稿はありません。
+              <% if params[:word].present? %>
+                該当する投稿はありません。
+              <% end %>
             <% end %>
           <% else %>
             <% if @users.any? %>
@@ -47,14 +61,20 @@
                 <tbody>
                   <% @users.each do |user| %>
                     <tr>
-                      <td><%= user.name %></td>
+                      <td>
+                        <%= link_to user_path(user) do %>
+                          <%= user.name %>
+                        <% end %>
+                        </td>
                       <td><%= user.posts.count %></td>
                     </tr>
                   <% end %>
                 </tbody>
               </table>
             <% else %>
-              該当するユーザーはいません。
+              <% if params[:word].present? %>
+                該当するユーザーはいません。
+              <% end %>
             <% end %>
           <% end %>
         </div>

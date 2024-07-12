@@ -21,12 +21,22 @@ ja:
         image: "画像"
         body: "本文"
         color: "色"
+      comment:
+        body: "本文"
+        stance: "賛成・反対"
     errors:
       messages:
         record_invalid: 'バリデーションに失敗しました: %{errors}'
         restrict_dependent_destroy:
           has_one: "%{record}が存在しているので削除できません"
           has_many: "%{record}が存在しているので削除できません"
+      models:
+        comment:
+          attributes:
+            body:
+              blank: "を入力してください"
+            stance:
+              blank: "を選択してください"
   date:
     abbr_day_names:
     - 日

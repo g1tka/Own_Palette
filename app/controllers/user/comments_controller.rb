@@ -5,7 +5,7 @@ class User::CommentsController < ApplicationController
     if @comment.save
       redirect_back(fallback_location: post_path(params[:post_id]))
     else
-      Rails.logger.error @comment.errors.full_messages.inspect
+      flash[:alert] = @comment.errors.full_messages.join(",")
       redirect_back(fallback_location: post_path(params[:post_id]))
     end
   end

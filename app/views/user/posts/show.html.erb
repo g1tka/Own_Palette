@@ -2,7 +2,10 @@
 <div class="container">
   <div class="row d-flex justify-content-center">
     <% if @post.is_open || @post.user == current_user %>
+    
       <%= link_to post_path(@post) do %>
+      
+        <!--画面左側の要素-->
         <div class="col-md-6">
           <div class="flame ml-lg-5 text-center mb-4 mb-md-0">
             <div class="image m-3">
@@ -18,19 +21,21 @@
           </div>
         </div>
         
-        <!--右側の要素-->
+        <!--画面右側の要素-->
         <div class="col-md-6 mt-4">
           <div class="row mb-3">
             <%= @post.body %>
           </div>
       <% end %>
+      
     <% else %>
-      <div class="col-md-6">
-        <div class="row mt-5">
-        <!--URLを入力して表示しようとした場合-->
-        この投稿は非公開です。
-        </div>
+        <div class="col-md-6">
+          <div class="row mt-5">
+            <!--URLを入力して表示しようとした場合-->
+            この投稿は非公開です。
+          </div>
     <% end %>
+    
         <% if @comments.any? %>
           <% @comments.each do |comment| %>
             <% comment_stance = case comment.stance
@@ -41,42 +46,46 @@
                                 when 'disagree'
                                   "comment-disagree"
                                 end %>
-            <div class="row mt-2">
-              <div class="col">
-                <div class="<%= comment_stance %>">
-                <%= comment.body %>
-                </div>
+          <div class="row mt-2">
+            <div class="col">
+              <div class="<%= comment_stance %>">
+              <%= comment.body %>
               </div>
-              <% if @post.user == current_user %>
-                <div class="col mb-2">
-                  <%= link_to '削除', post_comment_path(@post, comment), method: :delete, class:"btn btn-sm btn-danger" %>
-                </div>
-              <% end %>
             </div>
-          <% end %>
-        <% else %>
-          まだコメントがありません。
+            <% if @post.user == current_user %>
+              <div class="col mb-2">
+                <%= link_to '削除', post_comment_path(@post, comment), method: :delete, class:"btn btn-sm btn-danger" %>
+              </div>
+            <% end %>
+          </div>
         <% end %>
+      <% else %>
+        まだコメントがありません。
+      <% end %>
 
-        <div class="row">
-          <%= form_with(model:[@post, @comment], method: :post) do |f| %>
-            <%= render 'layouts/error_messages', resource: @comment %>
-            <div class="row">
-              <%= f.text_area :body %>
+          <div class="row">
+            <%= form_with(model:[@post, @comment], method: :post) do |f| %>
+              <div class="row">
+                <%= f.text_area :body %>
+              </div>
+              <div class="row">
+                <%= f.radio_button :stance, :agree, id: 'stance_agree' %>
+                <%= f.label :stance_agree, Comment.stances_i18n[:agree] %>
+                <%= f.radio_button :stance, :neutral, id: 'stance_neutral' %>
+                <%= f.label :stance_neutral, Comment.stances_i18n[:neutral] %>
+                <%= f.radio_button :stance, :disagree, id: 'stance_disagree' %>
+                <%= f.label :stance_disagree, Comment.stances_i18n[:disagree] %>
+                <%= f.hidden_field :post_id, value: @post.id %>
+              </div>
+              <%= f.submit 'コメントする' %>
+            <% end %>
+          </div>
+          <div class="row justify-content-center">
+            <div class="col">
+              <%= flash[:alert] %>
             </div>
-            <div class="row">
-              <%= f.radio_button :stance, :agree, id: 'stance_agree' %>
-              <%= f.label :stance_agree, Comment.stances_i18n[:agree] %>
-              <%= f.radio_button :stance, :neutral, id: 'stance_neutral' %>
-              <%= f.label :stance_neutral, Comment.stances_i18n[:neutral] %>
-              <%= f.radio_button :stance, :disagree, id: 'stance_disagree' %>
-              <%= f.label :stance_disagree, Comment.stances_i18n[:disagree] %>
-              <%= f.hidden_field :post_id, value: @post.id %>
-            </div>
-            <%= f.submit 'コメントする' %>
-          <% end %>
+          </div>
         </div>
-      </div>
     
     <% if @post.user == current_user %>
       <div class="row mt-3">
@@ -88,5 +97,6 @@
         </div>
       </div>
     <% end %>
+    
   </div>
 </div>

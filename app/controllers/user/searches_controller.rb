@@ -6,14 +6,14 @@ class User::SearchesController < ApplicationController
     @word = params[:word]
     if @category == 'Post'
       if @word.present?
-        @posts = Post.where("body LIKE?", "%#{@word}%")
+        @posts = Post.where(is_open: true).where("body LIKE?", "%#{@word}%")
       else
         @posts = []
         # =nil ではなく[]を使用。要素は無いが空の配列としてオブジェクトが存在。
       end
     else #@category == 'User'
       if @word.present?
-        @users = User.where("name LIKE?", "%#{@word}%")
+        @users = User.where(is_active: true).where("name LIKE?", "%#{@word}%")
       else
         @users = []
       end

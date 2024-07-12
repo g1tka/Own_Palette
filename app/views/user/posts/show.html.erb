@@ -23,15 +23,28 @@
           </div>
       <% end %>
     <% else %>
-      <div class="col mt-5">
+      <div class="col-md-6 col-sm-12">
+        <div class="row mt-5">
         <!--URLを入力して表示しようとした場合-->
         この投稿は非公開です。
-      </div>
-    <% end %>
-          <div class="row">
-            <!--コメント用-->
-          </div>
         </div>
+    <% end %>
+        <div class="row">
+          <% @post.comments.each do |comment| %>
+            <%= comment.body %>
+            <% if @post.user == current_user %>
+              <%= link_to '削除', post_comment_path, method: :destroy, class:"btn btn-danger" %>
+            <% end %>
+          <% end %>
+        </div>
+        <div class="row">
+          <%= form_with (model:[@post, @comment], method: :post) do |f| %>
+            <%= f.text_area :body %>
+            <%= f.hidden_field :post_id, value: @post.id %>
+            <%= f.submit 'コメントする' %>
+          <% end %>
+        </div>
+      </div>
     
     <% if @post.user == current_user %>
       <div class="row mt-3">

@@ -4,9 +4,13 @@ class User::CommentsController < ApplicationController
     @comment = current_user.comments.new(comment_params)
     if @comment.save
       redirect_back(fallback_location: post_path(params[:post_id]))
+      # format.html { redirect_to @comment.post }
+      # format.js
     else
       flash[:alert] = @comment.errors.full_messages.join(",")
       redirect_back(fallback_location: post_path(params[:post_id]))
+      # format.html { redirect_to @comment.post, alert: @comment.errors.full_messages.jpin(",") }
+      # format.js
     end
   end
   

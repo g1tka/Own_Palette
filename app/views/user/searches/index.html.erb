@@ -1,6 +1,6 @@
 <div class="container">
   <div class="row mt-3 justify-content-start ml-3">
-    <div class="col-md-6">
+    <div class="col-md-7">
       <div class="row">
         <%= form_with url: search_path, local: true, method: :get do |f| %>
           <%= f.text_field :word %>
@@ -19,6 +19,7 @@
                     <th>image</th>
                     <th>body</th>
                     <th>creator</th>
+                    <th>comments</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -37,6 +38,11 @@
                       <td>
                         <%= link_to user_path(post.user_id) do %>
                           <%= post.user.name %>
+                        <% end %>
+                      </td>
+                      <td>
+                        <%= link_to post_path(post) do %>
+                          コメント数：<%= post.comments.count %>
                         <% end %>
                       </td>
                     </tr>

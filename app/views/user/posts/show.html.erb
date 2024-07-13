@@ -47,12 +47,12 @@
                                   "comment-disagree"
                                 end %>
           <div class="row mt-2">
-            <div class="col">
+            <div class="col-md-9 mb-2">
               <div class="<%= comment_stance %>">
               <%= comment.body %>
               </div>
             </div>
-            <% if @post.user == current_user %>
+            <% if comment.user == current_user %>
               <div class="col mb-2">
                 <%= link_to '削除', post_comment_path(@post, comment), method: :delete, class:"btn btn-sm btn-danger" %>
               </div>
@@ -65,7 +65,7 @@
         </div>
       <% end %>
 
-          <div class="col">
+          <div class="col mt-3">
             <% if user_signed_in? %>
               <%= form_with(model:[@post, @comment], method: :post) do |f| %>
                 <div class="row justify-content-center">

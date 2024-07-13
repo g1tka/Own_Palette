@@ -6,7 +6,7 @@
       <%= link_to post_path(@post) do %>
       
         <!--画面左側の要素-->
-        <div class="col-md-6">
+        <div class="col-lg-4">
           <div class="flame ml-lg-5 text-center mb-4 mb-md-0">
             <div class="image m-3">
               <%= image_tag @post.image, size: "200x200" %>
@@ -21,21 +21,21 @@
           </div>
         </div>
         
-        <!--画面右側の要素-->
-        <div class="col-md-6 mt-4">
+        <!--画面中央の要素-->
+        <div class="col-lg-6 mt-4">
           <div class="col mb-3">
             <%= @post.body %>
           </div>
       <% end %>
       
     <% else %>
-        <div class="col-md-6">
+        <div class="col-lg-6">
           <div class="row mt-5">
             <!--URLを入力して表示しようとした場合-->
             この投稿は非公開です。
           </div>
     <% end %>
-    
+        
         <% if @comments.any? %>
           <% @comments.each do |comment| %>
             <% comment_stance = case comment.stance
@@ -111,5 +111,26 @@
       </div>
     <% end %>
     
+    <!--画面右側の要素-->
+    <div class="col-lg-2">
+      <%= form_with(model:[@post, @comment], url: filter_post_comments_path(@post), method: :post, id: "filter-form" ) do |f| %>
+      <div class="col">
+        <%= f.radio_button :stance, :agree, id: 'stance_agree', checked: true %>
+        <%= f.label :stance_agree, Comment.stances_i18n[:agree] %><br/>
+        <%= f.radio_button :stance, :neutral, id: 'stance_neutral' %>
+        <%= f.label :stance_neutral, Comment.stances_i18n[:neutral] %><br/>
+        <%= f.radio_button :stance, :disagree, id: 'stance_disagree' %>
+        <%= f.label :stance_disagree, Comment.stances_i18n[:disagree] %><br/>
+        <%= f.hidden_field :post_id, value: @post.id %>
+      </div>
+      <div class="col mb-2 p-0 mt-0">
+        <%= link_to "◎ Clear", post_path(@post), class: "btn btn-sm btn-link" %>
+      </div>
+      <button type="submit" class="btn btn-sm btn-outline-warning">
+        <i class="fa-solid fa-filter"></i>
+        filter
+      </button>
+    </div>
+    <% end %>
   </div>
 </div>

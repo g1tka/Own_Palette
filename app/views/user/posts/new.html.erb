@@ -2,7 +2,7 @@
 
 <div class="container">
   <div class="row justify-content-center mt-3">
-    <%= form_with model: @post, url:"/posts" do |f| %>
+    <%= form_with model: @post, url: posts_path do |f| %>
     <%= render 'layouts/error_messages', resource: @post %>
     <div class="col mt-3">
       <%= f.file_field :image, accept: "image/*" %>

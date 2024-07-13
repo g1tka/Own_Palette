@@ -4,7 +4,6 @@ class User::CommentsController < ApplicationController
     @comment = current_user.comments.new(comment_params)
     if @comment.save
       redirect_back(fallback_location: post_path(params[:post_id]))
-
     else
       flash[:alert] = @comment.errors.full_messages.join(" / ")
       redirect_back(fallback_location: post_path(params[:post_id]))

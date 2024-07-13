@@ -23,7 +23,7 @@
         
         <!--画面右側の要素-->
         <div class="col-md-6 mt-4">
-          <div class="row mb-3">
+          <div class="col mb-3">
             <%= @post.body %>
           </div>
       <% end %>
@@ -60,30 +60,43 @@
           </div>
         <% end %>
       <% else %>
-        まだコメントがありません。
+        <div class="col my-5">
+          まだコメントがありません。
+        </div>
       <% end %>
 
-          <div class="row">
-            <%= form_with(model:[@post, @comment], method: :post) do |f| %>
-              <div class="row">
-                <%= f.text_area :body %>
-              </div>
-              <div class="row">
-                <%= f.radio_button :stance, :agree, id: 'stance_agree' %>
-                <%= f.label :stance_agree, Comment.stances_i18n[:agree] %>
-                <%= f.radio_button :stance, :neutral, id: 'stance_neutral' %>
-                <%= f.label :stance_neutral, Comment.stances_i18n[:neutral] %>
-                <%= f.radio_button :stance, :disagree, id: 'stance_disagree' %>
-                <%= f.label :stance_disagree, Comment.stances_i18n[:disagree] %>
-                <%= f.hidden_field :post_id, value: @post.id %>
-              </div>
-              <%= f.submit 'コメントする' %>
-            <% end %>
-          </div>
-          <div class="row justify-content-center">
-            <div class="col">
-              <%= flash[:alert] %>
+          <div class="col">
+            <% if user_signed_in? %>
+              <%= form_with(model:[@post, @comment], method: :post) do |f| %>
+                <div class="row justify-content-center">
+                  <div class="comment_box">
+                    <%= f.text_area :body, class: "form-control", rows: 3, style: "width: 20em;" %>
+                  </div>
+                </div>
+                <div class="col">
+                  <%= f.radio_button :stance, :agree, id: 'stance_agree' %>
+                  <%= f.label :stance_agree, Comment.stances_i18n[:agree] %>
+                  <%= f.radio_button :stance, :neutral, id: 'stance_neutral' %>
+                  <%= f.label :stance_neutral, Comment.stances_i18n[:neutral] %>
+                  <%= f.radio_button :stance, :disagree, id: 'stance_disagree' %>
+                  <%= f.label :stance_disagree, Comment.stances_i18n[:disagree] %>
+                  <%= f.hidden_field :post_id, value: @post.id %>
+                </div>
+                <%= f.submit 'コメントする', class: "btn btn-sm btn-info" %>
+              <% end %>
             </div>
+            <div class="row justify-content-center">
+              <div class="col">
+                <%= flash[:alert] %>
+              </div>
+            <% else %>
+              <div class="col mt-4">
+                <br/><br/><br/>
+                コメントを残すには
+                <%= link_to "ログイン", user_session_path %>
+                してください。
+              </div>
+            <% end %>
           </div>
         </div>
     

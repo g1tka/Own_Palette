@@ -1,2 +1,50 @@
-<h1>Admin::Comments#index</h1>
-<p>Find me in app/views/admin/comments/index.html.erb</p>
+コメント一覧
+<div class="container">
+  <!--投稿を１つ表示-->
+  <% @posts.each do |post| %>
+    <div class="row mt-3 justify-content-start">
+      <div class="col-1">
+        <%= link_to admin_post_path(post) do %>
+          <%= image_tag post.get_image, width: 50, height: 50 %>
+        <% end %>
+      </div>
+      <div class="col-8 offset-1">
+        <%= link_to admin_post_path(post) do %>
+          本文：<%= post.body %>
+        <% end %>
+      </div>
+    </div>
+    <!--各投稿に対するコメント一覧-->
+    <% comments_for_post = post.comments %>
+    <% if comments_for_post.any? %>
+      <% comments_for_post.each do |comment| %>
+        <div class="row mt-2">
+          <div class="col-8">
+            <%= link_to admin_post_path(comment.post) do %>
+              <%= comment.body %>
+            <% end %>
+          </div>
+          <div class="col-2">
+            <% case comment.stance %>
+              <% when 'agree' %>
+                <span class='text-success'><%= comment.stance_i18n %></span>
+              <% when 'neutral' %>
+                <span class='text-neutral'><%= comment.stance_i18n %></span>
+              <% when 'disagree' %>
+                <span class='text-danger'><%= comment.stance_i18n %></span>
+              <% end %>
+          </div>
+          <div class="col-2">
+            <%= link_to admin_comment_path(comment), method: :delete, data: {confirm: "削除してよろしいですか？"}, class: "btn btn-sm btn-danger" do %>
+              削除
+            <% end %>
+          </div>
+        </div>
+      <% end %>
+    <% else %>
+      コメントがありません。
+    <% end %>
+    <hr><!--投稿１つに対するまとまり終わり-->
+  <% end %>
+
+</div>

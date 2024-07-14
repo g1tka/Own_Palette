@@ -25,7 +25,7 @@ Post.find_or_create_by!(body: "あかいトマトはとってもおいしそう�
 end
 
 Post.find_or_create_by!(body: "きいろいパインは常夏を感じます。") do |post|
-  post.image = ActiveStorage::Blob.create_and_upload!(io: File.open("#{Rails.root}/db/fixtures/sample-post2.png"), filename:"sample-post1.png")
+  post.image = ActiveStorage::Blob.create_and_upload!(io: File.open("#{Rails.root}/db/fixtures/sample-post2.png"), filename:"sample-post2.png")
   post.color = "yellow"
   post.is_open = "true"
   post.user = bee

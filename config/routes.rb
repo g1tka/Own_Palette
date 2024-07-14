@@ -42,9 +42,16 @@ Rails.application.routes.draw do
   end
 
   namespace :admin do
-    resources :posts, only: [:index, :show, :update, :destroy]
-    resources :users, only: [:index, :show, :update]
-    patch 'users/:user_id/ban' => 'users#ban', as: 'user_ban'
+    resources :posts, only: [:index, :show, :update, :destroy] do
+      member do
+        patch 'toggle_status'
+      end
+    end
+    resources :users, only: [:index, :show, :update] do
+      member do
+        patch 'user_ban'
+      end
+    end
     resources :comments, only: [:index, :update, :destroy]
   end
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html

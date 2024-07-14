@@ -1,0 +1,17 @@
+var userId = <%= @user.id %>;
+var statusCell = document.getElementById("user-status-" + userId);
+var isOpen = <%= @user.is_active %>;
+
+if (<%= @user.is_active %>) {
+  statusCell.innerHTML = `
+    <%= link_to user_ban_admin_user_path(@user), method: :patch, remote: true, class: 'user-ban-link', data: { user_id: @user.id } do %>
+      <span class="text-secondary">退会済み</span>
+    <% end %>
+  `;
+  } else {
+  statusCell.innerHTML = `
+    <%= link_to user_ban_admin_user_path(@user), method: :patch, remote: true, class: 'user-ban-link', data: { user_id: @user.id } do %>
+      <span class="text-success">有効</span>
+    <% end %>
+  `;
+}

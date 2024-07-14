@@ -23,12 +23,12 @@
           <div class="col-1 mx-3">
             <div class="row">
               <%= link_to root_path do %>
-                <%= image_tag("logo1.png", src: "/assets/images/logo1.png", width: 100, hight: 100 ) %>
+                <%= image_tag("logo.png", src: "/assets/images/logo.png", width: 100, hight: 100 ) %>
               <% end %>
             </div>
             <div class="row">
               <% if admin_signed_in? %>
-                管理者としてログイン中
+                <%= image_tag("admininfo.png", src: "/assets/images/admininfo.png", width: 100, hight: 100 ) %>
               <% end %>
             </div>
           </div>

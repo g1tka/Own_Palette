@@ -17,7 +17,12 @@
         <!--左端：Logoの表示について-->
         <% if current_page?(root_path) %>
           <div class="col-1 mx-3">
-            <div></div>
+            <div class="row"></div>
+            <div class="row">
+              <% if admin_signed_in? %>
+                <%= image_tag("admininfo.png", src: "/assets/images/admininfo.png", width: 100, hight: 100 ) %>
+              <% end %>
+            </div>
           </div>
         <% else %>
           <div class="col-1 mx-3">
@@ -65,11 +70,15 @@
             </div>
           </div>
         <% else %>
-          <div class="col-md-2 col-sm-12 mx-5">
-            <%= link_to new_admin_session_path do %>
-              for admin
-            <% end %>
-          </div>
+          <% if user_signed_in?%>
+            <div class="col-md-2 col-sm-12 mx-5"></div>
+          <% else %>
+            <div class="col-md-2 col-sm-12 mx-5">
+              <%= link_to new_admin_session_path do %>
+                for admin
+              <% end %>
+            </div>
+          <% end %>
         <% end %>
       </div>
     </header>
@@ -79,6 +88,7 @@
     <footer>
       <div>
         <p class="notice"><%= notice %></p>
+        <p><strong class="alert"><%= alert %></strong></p>
         <span>Copyright © Infratop Inc. All Rights Reserved.</span>
       </div>
     </footer>

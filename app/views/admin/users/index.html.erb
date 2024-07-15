@@ -5,7 +5,7 @@
       <tr>
         <th>名前</th>
         <th>投稿数</th>
-        <th>投稿</th>
+        <th>投稿（最大10枚表示）</th>
         <th class="pb-1">
           会員ステータス
           <button type="button" class="btn btn-link pb-2 px-0" data-toggle='modal' data-target="#userStatusInfomation">
@@ -25,7 +25,7 @@
           <td class="td_vertical_align_middle"><%= user.posts.count %></td>
           <td>
             <% if user.posts.any? %>
-              <% user.posts.each do |post| %>
+              <% user.posts.limit(10).each do |post| %>
                 <%= link_to admin_post_path(post) do %>
                   <%= image_tag post.get_image, width: 50, height: 50 %>
                 <% end %>

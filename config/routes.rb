@@ -1,7 +1,5 @@
 Rails.application.routes.draw do
-  namespace :user do
-    get 'searches/search'
-  end
+
   devise_for :admins, controllers: {
     sessions: 'admin/sessions'
   }

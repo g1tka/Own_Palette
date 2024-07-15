@@ -1,2 +1,71 @@
-<h1>Admin::Users#index</h1>
-<p>Find me in app/views/admin/users/index.html.erb</p>
+ユーザー一覧ページ
+<% if @users.any? %>
+  <table class="table mt-3">
+    <thead class="table-success">
+      <tr>
+        <th>名前</th>
+        <th>投稿数</th>
+        <th>投稿（最大10枚表示）</th>
+        <th class="pb-1">
+          会員ステータス
+          <button type="button" class="btn btn-link pb-2 px-0" data-toggle='modal' data-target="#userStatusInfomation">
+            <i class="fa-solid fa-circle-info"></i>
+          </button>
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @users.each do |user| %>
+        <tr>
+          <td class="td_vertical_align_middle">
+            <%= link_to admin_user_path(user) do %>
+              <%= user.name %>
+            <% end %>
+            </td>
+          <td class="td_vertical_align_middle"><%= user.posts.count %></td>
+          <td>
+            <% if user.posts.any? %>
+              <% user.posts.limit(10).each do |post| %>
+                <%= link_to admin_post_path(post) do %>
+                  <%= image_tag post.get_image, width: 50, height: 50 %>
+                <% end %>
+              <% end %>
+            <% else %>
+              投稿無し
+            <% end %>
+          </td>
+          <td id="user-status-<%= user.id %>", class="td_vertical_align_middle">
+            <%= link_to user_ban_admin_user_path(user), method: :patch, remote: true, class: 'user-ban-link', data: { user_id: user.id } do %>
+              <% if user.is_active %>
+                <span class="text-success">有効</span>
+              <% else %>
+                <span class="text-secondary">退会済み</span>
+              <% end %>
+            <% end %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% else %>
+  <% if params[:word].present? %>
+    ユーザーはいません。
+  <% end %>
+<% end %>
+
+<div class="modal" id="userStatusInfomation" tabindex="-1" role="dialog" aria-labelledby="userStatusInfomationTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header pl-5">
+        <h5 class="modal-title" id="userStatusInfomation">会員ステータスについて</h5>
+      </div>
+      <div class="modal-body">
+        有効/退会済みを変更できます。<br/>
+        文字をクリックしてください。<br/>
+      </div>
+      <div class="mordal-footer mb-3">
+        <%= link_to 'OK', admin_users_path, class:"btn btn-success px-5" %>
+      </div>
+    </div>
+  </div>
+</div>

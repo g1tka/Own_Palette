@@ -7,6 +7,10 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 puts "seedの実行を開始"
 
+admin = Admin.find_or_create_by!(email: "admin@test.com") do |admin|
+  admin.password = "adminpassword"
+end
+
 apple = User.find_or_create_by!(email: "apple@example.com") do |user|
   user.name = "apple"
   user.password = "password"

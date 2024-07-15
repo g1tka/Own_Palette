@@ -1,7 +1,5 @@
 Rails.application.routes.draw do
-  namespace :user do
-    get 'searches/search'
-  end
+
   devise_for :admins, controllers: {
     sessions: 'admin/sessions'
   }
@@ -42,9 +40,17 @@ Rails.application.routes.draw do
   end
 
   namespace :admin do
-    resources :posts, only: [:index, :show, :update, :destroy]
-    resources :users, only: [:index, :show, :update]
-    patch 'users/:user_id/ban' => 'users#ban', as: 'user_ban'
+    resources :posts, only: [:index, :show, :update, :destroy] do
+      member do
+        patch 'toggle_status'
+        delete 'comments/:comment_id', to: 'comments#destroy_comment', as: :destroy_comment
+      end
+    end
+    resources :users, only: [:index, :show, :update] do
+      member do
+        patch 'user_ban'
+      end
+    end
     resources :comments, only: [:index, :update, :destroy]
   end
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html

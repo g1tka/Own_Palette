@@ -1,2 +1,79 @@
-<h1>Admin::Posts#index</h1>
-<p>Find me in app/views/admin/posts/index.html.erb</p>
+投稿一覧ページ
+<% if @posts.any? %>
+  <table class="table mt-3">
+    <thead class="table-warning">
+      <tr>
+        <th>画像</th>
+        <th>本文</th>
+        <th>ユーザー名</th>
+        <th>コメント数</th>
+        <th class="pb-1">
+          公開ステータス
+          <button type="button" class="btn btn-link pb-2 px-0" data-toggle='modal' data-target="#statusInfomation">
+            <i class="fa-solid fa-circle-info"></i>
+          </button>
+        </th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @posts.each do |post| %>
+        <tr>
+          <td>
+            <%= link_to admin_post_path(post) do %>
+              <%= image_tag post.get_image, width: 50, height: 50 %>
+            <% end %>
+            </td>
+          <td class="td_vertical_align_middle">
+            <%= link_to admin_post_path(post) do %>
+              <%= post.body %>
+            <% end %>
+          </td>
+          <td class="td_vertical_align_middle">
+            <%= link_to admin_user_path(post.user_id) do %>
+              <%= post.user.name %>
+            <% end %>
+          </td>
+          <td class="td_vertical_align_middle">
+            <%= link_to admin_post_path(post) do %>
+              <%= post.comments.count %>
+            <% end %>
+          </td>
+          <td id="post-status-<%= post.id %>", class="td_vertical_align_middle">
+            <%= link_to toggle_status_admin_post_path(post), method: :patch, remote: true, class: 'toggle-status-link', data: { post_id: post.id } do %>
+              <% if post.is_open %>
+                <span class="text-success">公開</span>
+              <% else %>
+                <span class="text-secondary">非公開</span>
+              <% end %>
+            <% end %>
+          </td>
+          <td class="td_vertical_align_middle">
+            <%= link_to admin_post_path(post), method: :delete, data: {confirm: "完全に削除しますか？"}, class: "btn btn-sm btn-danger" do %>
+              削除
+            <% end %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% else %>
+  投稿はありません。
+<% end %>
+
+<div class="modal" id="statusInfomation" tabindex="-1" role="dialog" aria-labelledby="statusInfomationTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header pl-5">
+        <h5 class="modal-title" id="statusInfomation">公開ステータスについて</h5>
+      </div>
+      <div class="modal-body">
+        公開/非公開を変更できます。<br/>
+        文字をクリックしてください。<br/>
+      </div>
+      <div class="mordal-footer mb-3">
+        <%= link_to 'OK', admin_posts_path, class:"btn btn-success px-5" %>
+      </div>
+    </div>
+  </div>
+</div>

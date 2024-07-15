@@ -2,7 +2,6 @@
 <div class="container">
   <div class="row d-flex justify-content-center">
     <% if @post.is_open || @post.user == current_user %>
-    
       <%= link_to post_path(@post) do %>
       
         <!--画面左側の要素-->
@@ -19,9 +18,47 @@
               </div>
             </div>
           </div>
+          <% if @post.user == current_user %>
+            <div class="row mx-auto justify-content-center">
+              <div class="px-3 mt-2">
+                <%= link_to '編集する', edit_post_path(@post), class:"btn btn-success"%>
+              </div>
+              <div class="px-3 mt-2">
+                <%= link_to '削除する', @post, method: :delete, data: {confirm: "本当に、削除しますか？"}, class: "btn btn-danger"%>
+              </div>
+            </div>
+          <% end %>
+          <div class="row mt-3 justify-content-center">
+            <%= form_with(model:[@post, @comment], url: filter_post_comments_path(@post), method: :post, id: "filter-form", class: "row justify-content-center" ) do |f| %>
+            <div class="col-3 px-0">
+              <%= f.radio_button :stance, :agree, id: 'stance_agree', checked: true %>
+              <%= f.label :stance_agree, Comment.stances_i18n[:agree] %>
+            </div>
+            <div class="col-3 px-0">
+              <%= f.radio_button :stance, :neutral, id: 'stance_neutral' %>
+              <%= f.label :stance_neutral, Comment.stances_i18n[:neutral] %>
+            </div>
+            <div class="col-3 px-0">
+              <%= f.radio_button :stance, :disagree, id: 'stance_disagree' %>
+              <%= f.label :stance_disagree, Comment.stances_i18n[:disagree] %>
+            </div>
+            <div>
+              <%= f.hidden_field :post_id, value: @post.id %>
+            </div>
+            <div class="col-3">
+              <%= link_to "Clear", post_path(@post)%>
+            </div>
+          </div>
+          <div class="row justify-content-center">
+            <button type="submit" class="btn btn-sm btn-outline-warning">
+              <i class="fa-solid fa-filter"></i>
+              filter
+            </button>
+            <% end %>
+          </div>
         </div>
         
-        <!--画面中央の要素-->
+        <!--画面右側の要素-->
         <div class="col-lg-6 mt-4">
           <div class="col mb-3">
             <%= @post.body %>
@@ -47,9 +84,9 @@
                                   "comment-disagree"
                                 end %>
           <div class="row mt-2">
-            <div class="col-md-9 mb-2">
+            <div class="col-md-9 mb-2 offset-1">
               <div class="<%= comment_stance %>">
-              <%= comment.body %>
+                <%= comment.body %>
               </div>
             </div>
             <% if comment.user == current_user %>
@@ -84,7 +121,7 @@
                 </div>
                 <%= f.submit 'コメントする', class: "btn btn-sm btn-info" %>
               <% end %>
-            </div>
+
             <div class="row justify-content-center">
               <div class="col">
                 <%= flash[:alert] %>
@@ -97,40 +134,7 @@
                 してください。
               </div>
             <% end %>
-          </div>
+            </div>
         </div>
-    
-    <% if @post.user == current_user %>
-      <div class="row mt-3">
-        <div class="col">
-          <%= link_to '編集する', edit_post_path(@post), class:"btn btn-success"%>
-        </div>
-        <div class="col">
-          <%= link_to '削除する', @post, method: :delete, data: {confirm: "本当に、削除しますか？"}, class: "btn btn-danger"%>
-        </div>
-      </div>
-    <% end %>
-    
-    <!--画面右側の要素-->
-    <div class="col-lg-2">
-      <%= form_with(model:[@post, @comment], url: filter_post_comments_path(@post), method: :post, id: "filter-form" ) do |f| %>
-      <div class="col">
-        <%= f.radio_button :stance, :agree, id: 'stance_agree', checked: true %>
-        <%= f.label :stance_agree, Comment.stances_i18n[:agree] %><br/>
-        <%= f.radio_button :stance, :neutral, id: 'stance_neutral' %>
-        <%= f.label :stance_neutral, Comment.stances_i18n[:neutral] %><br/>
-        <%= f.radio_button :stance, :disagree, id: 'stance_disagree' %>
-        <%= f.label :stance_disagree, Comment.stances_i18n[:disagree] %><br/>
-        <%= f.hidden_field :post_id, value: @post.id %>
-      </div>
-      <div class="col mb-2 p-0 mt-0">
-        <%= link_to "◎ Clear", post_path(@post), class: "btn btn-sm btn-link" %>
-      </div>
-      <button type="submit" class="btn btn-sm btn-outline-warning">
-        <i class="fa-solid fa-filter"></i>
-        filter
-      </button>
-    </div>
-    <% end %>
   </div>
 </div>

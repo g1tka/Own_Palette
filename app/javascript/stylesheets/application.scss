@@ -114,3 +114,8 @@ footer {
 .comment-box {
   display: block;
 }
+
+// Bootstrapではtableにおいて上寄せがdefaultなため
+.td_vertical_align_middle.td_vertical_align_middle {
+  vertical-align: middle;
+}

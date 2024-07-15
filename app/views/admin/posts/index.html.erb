@@ -48,7 +48,7 @@
               <% end %>
             <% end %>
           </td>
-          <td>
+          <td class="td_vertical_align_middle">
             <%= link_to admin_post_path(post), method: :delete, data: {confirm: "完全に削除しますか？"}, class: "btn btn-sm btn-danger" do %>
               削除
             <% end %>
@@ -69,11 +69,10 @@
       </div>
       <div class="modal-body">
         公開/非公開を変更できます。<br/>
-        最新の情報を確認するためには<br/>
-        リロードを行ってください。
+        文字をクリックしてください。<br/>
       </div>
       <div class="mordal-footer mb-3">
-        <%= link_to 'リロード', admin_posts_path, class:"btn btn-sm btn-success" %>
+        <%= link_to 'OK', admin_posts_path, class:"btn btn-success px-5" %>
       </div>
     </div>
   </div>

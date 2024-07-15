@@ -29,13 +29,13 @@
               <% when 'agree' %>
                 <span class='text-success'><%= comment.stance_i18n %></span>
               <% when 'neutral' %>
-                <span class='text-neutral'><%= comment.stance_i18n %></span>
+                <span class='text-secondary'><%= comment.stance_i18n %></span>
               <% when 'disagree' %>
                 <span class='text-danger'><%= comment.stance_i18n %></span>
               <% end %>
           </div>
           <div class="col-2">
-            <%= link_to admin_comment_path(comment), method: :delete, data: {confirm: "削除してよろしいですか？"}, class: "btn btn-sm btn-danger" do %>
+            <%= link_to admin_comment_path(comment), method: :delete, remote: true, class: "btn btn-sm btn-danger", onclick: "return false;" do %>
               削除
             <% end %>
           </div>
@@ -44,7 +44,7 @@
     <% else %>
       コメントがありません。
     <% end %>
-    <hr class="mb-5" style="border-top: 2px dashed #ccc;"><!--投稿１つに対するまとまり終わり-->
+    <hr class="mb-5" style="border-top: 2px dashed #ccc;">
   <% end %>
-
+  <!--投稿１つに対するまとまり終わり-->
 </div>

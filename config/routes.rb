@@ -45,6 +45,7 @@ Rails.application.routes.draw do
     resources :posts, only: [:index, :show, :update, :destroy] do
       member do
         patch 'toggle_status'
+        delete 'comments/:comment_id', to: 'comments#destroy_comment', as: :destroy_comment
       end
     end
     resources :users, only: [:index, :show, :update] do

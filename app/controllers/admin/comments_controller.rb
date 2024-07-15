@@ -4,7 +4,10 @@ class Admin::CommentsController < ApplicationController
   end
   
   def destroy
-    @comment = Comment.find_by(id: params[:id])
+    # showページ用
+    @post = Post.all
+    # index, showページ用
+    @comment = Comment.find_by(params[:id])
     @comment.destroy
     redirect_to admin_comments_path
   end

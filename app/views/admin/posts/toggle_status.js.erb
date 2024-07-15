@@ -6,13 +6,13 @@ var isOpen = <%= @post.is_open %>;
 if (<%= @post.is_open %>) {
   statusCell.innerHTML = `
     <%= link_to toggle_status_admin_post_path(@post), method: :patch, remote: true, data: { turbolinks: false }, class: 'toggle-status-link', data: { post_id: @post.id } do %>
-      <span class="text-secondary">非公開</span>
+      <span class="text-success">公開</span>
     <% end %>
   `;
 } else {
   statusCell.innerHTML = `
     <%= link_to toggle_status_admin_post_path(@post), method: :patch, remote: true, data: { turbolinks: false }, class: 'toggle-status-link', data: { post_id: @post.id } do %>
-      <span class="text-success">公開</span>
+      <span class="text-secondary">非公開</span>
     <% end %>
   `;
 }

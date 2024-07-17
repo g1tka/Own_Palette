@@ -13,6 +13,7 @@ class User::UsersController < ApplicationController
     when "favorites"
       @posts = current_user.favorite_posts
     when "all"
+      # params[:id]のユーザー（current_user）が投稿したpost。もしくは、current_userがいいねしたpost_idから特定したPost。を@postとする。
       @posts = Post.where(user: @user).or(Post.where(id: current_user.favorite_posts.pluck(:id)))
     else
       @posts = @user.posts

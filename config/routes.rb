@@ -14,7 +14,6 @@ Rails.application.routes.draw do
   scope module: :user do
     get '/search' => 'searches#index'
     get '/search' => 'searches#search'
-    get '/favorites' => 'favorites#index'
     
     resources :posts do
       collection do

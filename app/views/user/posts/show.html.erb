@@ -17,17 +17,9 @@
                 <% end %>
               </div>
               <div class="mr-3">
-                <% if @post.favorited_by?(current_user) %>
-                  <%= link_to post_favorites_path(@post), method: :delete do %>
-                    <i class="fa-solid fa-heart", style="color: red;"></i>
-                    <%= @post.favorites.count %> いいね&ensp;
-                  <% end %>
-                <% else %>
-                  <%= link_to post_favorites_path(@post), method: :post do %>
-                    <i class="fa-regular fa-heart"></i>
-                    <%= @post.favorites.count %> いいね&ensp;
-                  <% end %>
-                <% end %>
+                <span id="favorite_btn_<%= @post.id %>">
+                  <%= render "user/favorites/favorite", post: @post %>
+                </span>
               </div>
             </div>
           </div>

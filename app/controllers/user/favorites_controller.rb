@@ -2,9 +2,11 @@ class User::FavoritesController < ApplicationController
   
   def create
     post = Post.find(params[:post_id])
-    favorite = current_user.favorites.new(post_id: post.id)
-    favorite.save
-    redirect_to request.referer
+    if current_user.present?
+      favorite = current_user.favorites.new(post_id: post.id)
+      favorite.save
+      redirect_to request.referer
+    end
   end
   
   def destroy

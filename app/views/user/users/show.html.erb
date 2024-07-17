@@ -1,6 +1,16 @@
 ユーザーページ(<%= @user.name %>さん)
 <div class="container">
-  
+  <div class="row">
+    <%= link_to user_path(current_user, filter: "owm"), class: "btn btn-sm btn-link mx-2" do %>
+      自分の投稿
+    <% end %>
+    <%= link_to user_path(current_user, filter: "favorites"), class: "btn btn-sm btn-link mx-2" do %>
+      いいねした投稿
+    <% end %>
+    <%= link_to user_path(current_user, filter: "all"), class: "btn btn-sm btn-link mx-2" do %>
+      すべてのコレクション
+    <% end %>
+  </div>
   <div class="row">
     <% if @posts.any? %>
       <% @posts.each do |post| %>

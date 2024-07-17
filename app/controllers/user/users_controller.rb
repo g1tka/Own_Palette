@@ -4,7 +4,19 @@ class User::UsersController < ApplicationController
   
   def show
     @user = User.find(params[:id])
-    @posts = @user.posts
+    # 自分の投稿を表示する状態がdefault
+    @filter = params[:filter] || "own"
+    
+    case @filter
+    when "own"
+      @posts = @user.posts
+    when "favorites"
+      @posts = current_user.favorite_posts
+    when "all"
+      @posts = Post.where(user: @user).or(Post.where(id: current_user.favorite_posts.pluck(:id)))
+    else
+      @posts = @user.posts
+    end
   end
   
   def edit

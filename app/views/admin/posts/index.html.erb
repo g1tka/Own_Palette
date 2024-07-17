@@ -7,6 +7,7 @@
         <th>本文</th>
         <th>ユーザー名</th>
         <th>コメント数</th>
+        <th>いいね数</th>
         <th class="pb-1">
           公開ステータス
           <button type="button" class="btn btn-link pb-2 px-0" data-toggle='modal' data-target="#statusInfomation">
@@ -35,9 +36,10 @@
             <% end %>
           </td>
           <td class="td_vertical_align_middle">
-            <%= link_to admin_post_path(post) do %>
-              <%= post.comments.count %>
-            <% end %>
+            <%= post.comments.count %>
+          </td>
+          <td class="td_vertical_align_middle">
+            <%= post.favorites.count %>
           </td>
           <td id="post-status-<%= post.id %>", class="td_vertical_align_middle">
             <%= link_to toggle_status_admin_post_path(post), method: :patch, remote: true, class: 'toggle-status-link', data: { post_id: post.id } do %>

@@ -1,6 +1,7 @@
 class Post < ApplicationRecord
   belongs_to :user
   has_many :favorites, dependent: :destroy
+  has_many :favorited_by, through: :favorites, source: :user
   has_many :comments, dependent: :destroy
   has_one_attached :image
 
@@ -18,9 +19,9 @@ class Post < ApplicationRecord
     image.variant(resize_to_fill: [200, 200]).processed
   end
 
-  # いいねされているかどうかを確認するメソッドを定義。
+  # いいねされているかどうかを確認するメソッドを定義。ログインしていないときは影響しない。
   def favorited_by?(user)
-    favorites.where(user_id: user.id).exists?
+    user.present? && favorites.where(user_id: user.id).exists?
   end
 
   private

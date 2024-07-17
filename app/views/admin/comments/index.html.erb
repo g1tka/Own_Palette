@@ -13,6 +13,9 @@
           本文：<%= post.body %>
         <% end %>
       </div>
+      <div class="col-2">
+        いいね数：<%= post.favorites.count %>
+      </div>
     </div>
     <!--各投稿に対するコメント一覧-->
     <% comments_for_post = post.comments %>

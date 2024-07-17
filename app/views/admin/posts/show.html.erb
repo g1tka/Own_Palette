@@ -13,6 +13,10 @@
               <%= @post.user.name %>
             <% end %>
           </div>
+        <div class="mr-4">
+          <i class="fa-regular fa-heart"></i>
+          <%= @post.favorites.count %> いいね
+        </div>
         </div>
       </div>
       <div id="post-status-<%= @post.id %>", class="td_vertical_align_middle mt-3">

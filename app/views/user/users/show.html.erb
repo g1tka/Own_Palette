@@ -18,7 +18,19 @@
                     <% end %>
                   </div>
                   <div class="mr-2">
-                    コメント数：<%= post.comments.count %>
+                    <% if post.favorited_by?(current_user) %>
+                      <%= link_to post_favorites_path(post), method: :delete do %>
+                        <i class="fa-solid fa-heart", style="color: red;"></i>
+                        <%= post.favorites.count %> いいね&ensp;
+                      <% end %>
+                    <% else %>
+                      <%= link_to post_favorites_path(post), method: :post do %>
+                        <i class="fa-regular fa-heart"></i>
+                        <%= post.favorites.count %> いいね&ensp;
+                      <% end %>
+                    <% end %>
+                      <i class="fa-regular fa-comment"></i>
+                      <%= post.comments.count %> コメント
                   </div>
                 </div>
               </div>
@@ -43,10 +55,11 @@
       &nbsp;profile?
     </div>
     <div class="row mt-3 ml-3">
-      Are you looking for someone? click&nbsp;
-      <%= link_to 'Here', user_relationships_path(current_user) %>
+      <strong>
+        View your 
+        <%= link_to 'favorite list', favorites_path(current_user) %>
+      </strong>
     </div>
   <% end %>
   
- 
 </div>

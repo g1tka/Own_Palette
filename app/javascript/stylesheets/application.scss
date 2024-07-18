@@ -51,6 +51,7 @@ footer {
   overflow: hidden;
   border-radius: 10px;
   box-shadow: 0px 0px 20px 10px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .square-big {
@@ -63,6 +64,17 @@ footer {
   overflow: hidden;
   border-radius: 30px;
   box-shadow: 0px 0px 20px 10px rgba(0, 0, 0, 0.2);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.square:hover {
+  transform: scale(1.1);
+  box-shadow: 0px 0px 25px 10px rgba(0, 0, 0, 0.2);
+}
+
+.square-big:hover {
+  transform: scale(1.1);
+  box-shadow: 0px 0px 30px 10px rgba(0, 0, 0, 0.4);
 }
 
 .red { background-color: #e74c3c; }

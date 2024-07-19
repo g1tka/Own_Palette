@@ -33,7 +33,11 @@ Rails.application.routes.draw do
         patch 'withdraw'
       end
       get 'relationships/search' => 'relationships#search', as: :search_relationships
-      resource :relationships, only: [:create, :destroy]
+      resource :relationships, only: [:create, :destroy] do
+        member do
+          get 'index'
+        end
+      end
       get 'followings' => 'relationships#followings', as: 'followings'
       get 'followers' => 'relationships#followers', as: 'followers'
     end

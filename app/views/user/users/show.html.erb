@@ -5,7 +5,7 @@
     </div>
     <div class="col-2 my-auto">
       <% if @user == current_user %>
-        <%= link_to "フォロワー", user_relationships_path(@user) %>
+        <%= link_to "フォロワー", user_relationships_index_path(@user) %>
       <% else %>
         フォロワー数
       <% end %>
@@ -18,7 +18,7 @@
           <%= render "user/relationships/follow", user: @user %>
         </span>
       <% else %>
-        <%= link_to "フォロー", user_relationships_path(@user) %>
+        <%= link_to "フォロー", user_relationships_index_path(@user) %>
         ：<%= @user.followings.count %>人
       <% end %>
     </div>
@@ -26,6 +26,10 @@
 
   <% if @user == current_user %>
     <div class="row justify-content-start ml-3 mb-4 mt-3">
+      <%= link_to user_path(@user, filter: "timeline"), class: "btn btn-sm btn-outline-success mx-2" do %>
+        <i class="fa-regular fa-clock"></i>
+        タイムライン
+      <% end %>
       <%= link_to user_path(@user, filter: "owm"), class: "btn btn-sm btn-outline-secondary mx-2" do %>
         <i class="fa-solid fa-image-portrait"></i>
         自分の投稿

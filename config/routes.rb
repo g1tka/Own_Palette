@@ -32,12 +32,8 @@ Rails.application.routes.draw do
         get 'unsubscribe'
         patch 'withdraw'
       end
-      get 'relationships/search' => 'relationships#search', as: :search_relationships
-      resource :relationships, only: [:create, :destroy] do
-        member do
-          get 'index'
-        end
-      end
+      get 'relationships/index' => 'relationships#index'
+      resource :relationships, only: [:create, :destroy]
       get 'followings' => 'relationships#followings', as: 'followings'
       get 'followers' => 'relationships#followers', as: 'followers'
     end

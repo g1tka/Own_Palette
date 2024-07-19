@@ -1,48 +1,82 @@
-ユーザーページ(<%= @user.name %>さん)
 <div class="container">
-  <div class="row justify-content-start ml-3 mb-4 mt-3">
-    <%= link_to user_path(@user, filter: "owm"), class: "btn btn-sm btn-outline-secondary mx-2" do %>
-      <i class="fa-solid fa-image-portrait"></i>
-      自分の投稿
-    <% end %>
-    <%= link_to user_path(@user, filter: "favorites"), class: "btn btn-sm btn-outline-secondary mx-2" do %>
-      <i class="fa-solid fa-hand-holding-heart"></i>
-      いいねした投稿
-    <% end %>
-    <%= link_to user_path(@user, filter: "all"), class: "btn btn-sm btn-outline-secondary mx-2" do %>
-      <i class="fa-regular fa-images"></i>
-      すべてのコレクション
-    <% end %>
+  <div class="row justify-content-start mb-3">
+    <div class="col-4 my-auto">
+      ユーザーページ(<%= @user.name %>さん)
+    </div>
+    <div class="col-2 my-auto">
+      <% if @user == current_user %>
+        <%= link_to "フォロワー", user_relationships_index_path(@user) %>
+      <% else %>
+        フォロワー数
+      <% end %>
+      ：<span id="follow_count"><%= @user.followers.count %></span>人
+    </div>
+    <div class="col-2">
+      <!--ログインしているユーザー　が　現在のページで扱っているユーザーではない場合(のみ)-->
+      <% if current_user != @user %>
+        <span id="follow_btn_<%= @user.id %>">
+          <%= render "user/relationships/follow", user: @user %>
+        </span>
+      <% else %>
+        <%= link_to "フォロー", user_relationships_index_path(@user) %>
+        ：<%= @user.followings.count %>人
+      <% end %>
+    </div>
   </div>
+
+  <% if @user == current_user %>
+    <div class="row justify-content-start ml-3 mb-4 mt-3">
+      <%= link_to user_path(@user, filter: "timeline"), class: "btn btn-sm btn-outline-success mx-2" do %>
+        <i class="fa-regular fa-clock"></i>
+        タイムライン
+      <% end %>
+      <%= link_to user_path(@user, filter: "owm"), class: "btn btn-sm btn-outline-secondary mx-2" do %>
+        <i class="fa-solid fa-image-portrait"></i>
+        自分の投稿
+      <% end %>
+      <%= link_to user_path(@user, filter: "favorites"), class: "btn btn-sm btn-outline-secondary mx-2" do %>
+        <i class="fa-solid fa-hand-holding-heart"></i>
+        いいねした投稿
+      <% end %>
+      <%= link_to user_path(@user, filter: "all"), class: "btn btn-sm btn-outline-secondary mx-2" do %>
+        <i class="fa-regular fa-images"></i>
+        すべてのコレクション
+      <% end %>
+    </div>
+  <% end %>
   <div class="row">
     <% if @posts.any? %>
       <% @posts.each do |post| %>
         <% if post.is_open || post.user == current_user %>
-          <div class="col-md-4 mb-4">
-            <%= link_to post_path(post) do %>
-              <div class="flame ml-lg-5 text-center mb-4 mb-md-0">
-                <div class="image m-3">
+          <div class="col-md-6 col-lg-4 col-xl-3 mb-4">
+            <div class="flame mb-4 mb-md-0">
+              <div class="image m-3">
+                <%= link_to post_path(post) do %>
                   <%= image_tag post.image, size: "200x200" %>
-                </div>
-                <div class="row d-flex justify-content-end mr-1">
-                  <div classs="badge bg-primary text-wrap", style="width: 12em;">
+                <% end %>
+              </div>
+              <div class="row d-flex justify-content-end mr-1">
+                <div classs="badge bg-primary text-wrap", style="width: 12em;">
+                  <% if post.user == current_user %>
+                    <%= post.user.name %>
+                  <% else %>
                     <%= link_to user_path(post.user) do %>
                       <%= post.user.name %>
                     <% end %>
-                  </div>
-                  <div class="mr-2 mt-1">
-                    <span id="favorite_btn_<%= post.id %>">
-                      <%= render "user/favorites/favorite", post: post %>
-                    </span>
-                    <i class="fa-regular fa-comment"></i>
-                    <%= post.comments.count %> コメント
-                  </div>
+                  <% end %>
+                </div>
+                <div class="mr-2">
+                  <span id="favorite_btn_<%= post.id %>">
+                    <%= render "user/favorites/favorite", post: post %>
+                  </span>
+                  <i class="fa-regular fa-comment"></i>
+                  <%= post.comments.count %> コメント
                 </div>
               </div>
-              <div class="text-center m-3">
-                <%= post.body %>
-              </div>
-            <% end %>
+            </div>
+            <div class="text-center m-3">
+              <%= post.body %>
+            </div>
           </div>
         <% end %>
       <% end %>

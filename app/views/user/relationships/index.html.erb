@@ -1,2 +1,41 @@
-<h1>User::Relationships#index</h1>
-<p>Find me in app/views/user/relationships/index.html.erb</p>
+フォロワー一覧・フォロー一覧ページ
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-5 my-2 py-3 px-4 mr-3 follow-box">
+      <div class="border-bottom">
+        <%= @user.name %>さんのフォロー一覧
+      </div>
+      <% if @user.followings.exists? %>
+        <% @user.followings.each do |following| %>
+          <div class="mt-3">
+            <%= link_to user_path(following) do %>
+              <%= following.name %>
+            <% end %>
+          </div>
+        <% end %>
+      <% else %>
+        <div class="mt-3">
+          フォローしているユーザーはいません。
+        </div>
+      <% end %>
+    </div>
+    <div class="col-5 my-2 py-3 px-4 ml-3 follow-box">
+      <div class="border-bottom">
+        フォロワー一覧
+      </div>
+      <% if @user.followers.exists? %>
+        <% @user.followers.each do |follower| %>
+          <div class="mt-3">
+            <%= link_to user_path(follower) do %>
+              <%= follower.name %>
+            <% end %>
+          </div>
+        <% end %>
+      <% else %>
+        <div class="mt-3">
+          あなたをフォローしているユーザーはいません。
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>

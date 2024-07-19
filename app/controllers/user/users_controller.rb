@@ -8,6 +8,8 @@ class User::UsersController < ApplicationController
     @filter = params[:filter] || "own"
     
     case @filter
+    when "timeline"
+      @posts = Post.where(user_id: @user.followings).order(created_at: :desc)
     when "own"
       @posts = @user.posts
     when "favorites"

@@ -1,8 +1,8 @@
 <!--ログインしているユーザー　が　現在のページで扱っているユーザーではない場合(のみ)-->
 <% if current_user != user %>
   <% if current_user.following?(user) %>
-    <%= link_to "フォロー解除", user_relationships_path(user.id), method: :delete, class: "btn btn-info" %>
+    <%= link_to "フォロー解除", user_relationships_path(user.id), method: :delete, remote: true, class: "btn btn-info" %>
   <% else %>
-    <% link_to "フォロー", user_relationships_path(user.id), method: :post, class: "btn btn-success" %>
+    <%= link_to "フォロー", user_relationships_path(user.id), method: :post, remote: true, class: "btn btn-outline-info" %>
   <% end %>
 <% end %>

@@ -1,21 +1,16 @@
 <div class="container">
-  <div class="row justify-content-start">
+  <div class="row justify-content-start mb-3">
     <div class="col-4 my-auto">
       ユーザーページ(<%= @user.name %>さん)
     </div>
     <div class="col-2 my-auto">
       フォロワー数
-      ：<%= @user.followers.count %>人
+      ：<span id="follow_count"><%= @user.followers.count %></span>人
     </div>
     <div class="col-2">
-      <!--ログインしているユーザー　が　現在のページで扱っているユーザーではない場合(のみ)-->
-      <% if current_user != @user %>
-        <% if current_user.following?(@user) %>
-          <%= link_to "フォロー解除", user_relationship_path(@user.id), method: :delete, class: "btn btn-info" %>
-        <% else %>
-          <%= link_to "フォロー", user_relationships_path(@user.id), method: :post, class: "btn btn-outline-info" %>
-        <% end %>
-      <% end %>
+      <span id="follow_btn_<%= @user.id %>">
+        <%= render "user/relationships/follow", user: @user %>
+      </span>
     </div>
   </div>
 

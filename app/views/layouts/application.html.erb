@@ -39,7 +39,7 @@
           </div>
         <% end %>
         <!--中央：リンクの表示について-->
-        <ul class="col-sm-7 col-xs-10 d-flex list-unstyled justify-content-center">
+        <ul class="col-sm-7 col-xs-10 d-flex list-unstyled justify-content-center my-auto">
           <% if admin_signed_in? %>
             <div class="col d-flex align-items-center justify-content-center">
               <li class='mx-3'><%= link_to 'Post List', admin_posts_path %></li>
@@ -74,9 +74,10 @@
             <div class="col-md-2 col-sm-12 mx-5"></div>
           <% else %>
             <div class="col-md-2 col-sm-12 mx-5">
-              <%= link_to new_admin_session_path do %>
-                for admin
-              <% end %>
+              for admin
+              <button type="button" class="btn btn-link pb-2 px-0" data-toggle='modal' data-target="#foradminInfomation">
+                <i class="fa-solid fa-circle-info"></i>
+              </button>
             </div>
           <% end %>
         <% end %>
@@ -104,3 +105,21 @@
     </footer>
   </body>
 </html>
+
+<div class="modal" id="foradminInfomation" tabindex="-1" role="dialog" aria-labelledby="foradminInfomationTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header pl-5">
+        <h5 class="modal-title" id="foradminInfomation">adminログインについて</h5>
+      </div>
+      <div class="modal-body mb-3 px-4">
+        <h4><strong>機能要件変更</strong></h4>
+        セキュリティ面を配慮し、以下のように変更されました。<br/>
+        ・ユーザー側の画面とは別に、管理者自身のログイン画面および管理者機能がある<br/>
+        ・予めデータベースに登録したID/パスワードをもとにログインが可能である<br/></br>
+        admin画面も見ていただける方は<br/>
+        /admins/sign_inよりゲストアドミンでログインしてください。<br/>
+      </div>
+    </div>
+  </div>
+</div>

@@ -11,6 +11,11 @@ admin = Admin.find_or_create_by!(email: "admin@test.com") do |admin|
   admin.password = "adminpassword"
 end
 
+guestadmin = Admin.find_or_create_by!(id: "2") do |admin|
+  admin.email = "admin_guest@example.com"
+  admin.password = "guestpassword"
+end
+
 apple = User.find_or_create_by!(email: "apple@example.com") do |user|
   user.name = "apple"
   user.password = "password"

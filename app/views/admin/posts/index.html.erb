@@ -24,7 +24,7 @@
             <%= link_to admin_post_path(post) do %>
               <%= image_tag post.get_image, width: 50, height: 50 %>
             <% end %>
-            </td>
+          </td>
           <td class="td_vertical_align_middle">
             <%= link_to admin_post_path(post) do %>
               <%= post.body %>
@@ -42,7 +42,15 @@
             <%= post.favorites.count %>
           </td>
           <td id="post-status-<%= post.id %>", class="td_vertical_align_middle">
-            <%= link_to toggle_status_admin_post_path(post), method: :patch, remote: true, class: 'toggle-status-link', data: { post_id: post.id } do %>
+            <% unless current_admin == Admin.find(2) %>
+              <%= link_to toggle_status_admin_post_path(post), method: :patch, remote: true, class: 'toggle-status-link', data: { post_id: post.id } do %>
+                <% if post.is_open %>
+                  <span class="text-success">公開</span>
+                <% else %>
+                  <span class="text-secondary">非公開</span>
+                <% end %>
+              <% end %>
+            <% else %>
               <% if post.is_open %>
                 <span class="text-success">公開</span>
               <% else %>
@@ -51,8 +59,12 @@
             <% end %>
           </td>
           <td class="td_vertical_align_middle">
-            <%= link_to admin_post_path(post), method: :delete, data: {confirm: "完全に削除しますか？"}, class: "btn btn-sm btn-danger" do %>
-              削除
+            <% unless current_admin == Admin.find(2) %>
+              <%= link_to admin_post_path(post), method: :delete, data: {confirm: "完全に削除しますか？"}, class: "btn btn-sm btn-danger" do %>
+                削除
+              <% end %>
+            <% else %>
+              <div class="btn btn-sm btn-danger">削除</div>
             <% end %>
           </td>
         </tr>

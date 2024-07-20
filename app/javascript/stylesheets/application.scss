@@ -95,8 +95,9 @@ footer {
 .flame {
   width: 250px;
   height: 300px;
-  background-color: white;
-  border: 4px solid black;
+  background-color: #f8f8ff;
+  border: 4px solid #f8f8ff;
+  box-shadow: 3px 3px 3px #777;
 }
 
 @media (max-width: 992px) {
@@ -105,6 +106,10 @@ footer {
     margin-left: auto;
     margin-right: auto;
   }
+}
+
+.top-logo {
+  filter: drop-shadow(15px 15px 10px rgba(0, 128, 0, 0.5));
 }
 
 .user_form th{

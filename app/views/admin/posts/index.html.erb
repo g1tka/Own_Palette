@@ -42,7 +42,7 @@
             <%= post.favorites.count %>
           </td>
           <td id="post-status-<%= post.id %>", class="td_vertical_align_middle">
-            <% unless current_admin == Admin.find(2) %>
+            <% unless is_guest_admin? %>
               <%= link_to toggle_status_admin_post_path(post), method: :patch, remote: true, class: 'toggle-status-link', data: { post_id: post.id } do %>
                 <% if post.is_open %>
                   <span class="text-success">公開</span>
@@ -59,7 +59,7 @@
             <% end %>
           </td>
           <td class="td_vertical_align_middle">
-            <% unless current_admin == Admin.find(2) %>
+            <% unless is_guest_admin? %>
               <%= link_to admin_post_path(post), method: :delete, data: {confirm: "完全に削除しますか？"}, class: "btn btn-sm btn-danger" do %>
                 削除
               <% end %>

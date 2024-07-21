@@ -31,11 +31,13 @@
                 <% end %>
               <% end %>
             <% else %>
-              投稿無し
+              <div class="py-2">
+                投稿はありません。
+              </div>
             <% end %>
           </td>
           <td id="user-status-<%= user.id %>", class="td_vertical_align_middle">
-            <% unless current_admin == Admin.find(2) %>
+            <% unless is_guest_admin? %>
               <%= link_to user_ban_admin_user_path(user), method: :patch, remote: true, class: 'user-ban-link', data: { user_id: user.id } do %>
                 <% if user.is_active %>
                   <span class="text-success">有効</span>

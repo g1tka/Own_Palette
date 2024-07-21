@@ -5,7 +5,7 @@
     <div class="col-lg-4">
       <div class="flame ml-lg-5 text-center mb-4 mb-md-0">
         <div class="image m-3">
-          <%= image_tag @post.image, size: "200x200" %>
+          <%= image_tag @post.image.variant(resize_to_fill: [200, 200]).processed, size: "200x200" %>
         </div>
         <div class="row d-flex justify-content-end mr-1">
           <div classs="badge bg-primary text-wrap", style="width: 12em;">
@@ -20,7 +20,7 @@
         </div>
       </div>
       <div id="post-status-<%= @post.id %>", class="td_vertical_align_middle mt-3">
-        <% unless current_admin == Admin.find(2) %>
+        <% unless is_guest_admin? %>
           <%= link_to toggle_status_admin_post_path(@post), method: :patch, remote: true, class: 'toggle-status-link', data: { post_id: @post.id } do %>
             <% if @post.is_open %>
               <span class="text-success">公開</span>
@@ -37,7 +37,7 @@
         <% end %>
       </div>
       <div class="td_vertical_align_middle mt-2">
-        <% unless current_admin == Admin.find(2) %>
+        <% unless is_guest_admin? %>
           <%= link_to admin_post_path(@post), method: :delete, data: {confirm: "完全に削除しますか？"}, class: "btn btn-sm btn-danger" do %>
             投稿削除
           <% end %>

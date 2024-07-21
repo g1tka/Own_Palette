@@ -8,7 +8,7 @@
             <%= link_to post_path(post) do %>
               <div class="flame mb-4 mb-md-0">
                 <div class="image m-3">
-                  <%= image_tag post.image, size: "200x200" %>
+                  <%= image_tag post.image.variant(resize_to_fill: [200, 200]).processed, size: "200x200" %>
                 </div>
                 <div class="row d-flex justify-content-end mr-1">
                   <div classs="badge bg-primary text-wrap", style="width: 12em;">

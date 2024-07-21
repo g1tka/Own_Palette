@@ -102,10 +102,12 @@
 
   
   <% if @user == current_user %>
-    <div class="row mt-3 ml-3">
-      <%= link_to 'Edit', edit_user_registration_path %>
-      &nbsp;profile?
-    </div>
+    <% unless @user.guest_user? %>
+      <div class="row mt-3 ml-3">
+        <%= link_to 'Edit', edit_user_registration_path %>
+        &nbsp;profile?
+      </div>
+    <% end %>
   <% end %>
   
 </div>

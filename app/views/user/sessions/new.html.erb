@@ -27,8 +27,15 @@
     <% end %>
     <p class="alert"><%= alert %></p>
   </div>
-</div>
-<div class="row mt-5 d-flex justify-content-center">
-  まだアカウントをお持ちでない方は
-  <%= link_to 'こちら', new_user_registration_path %>
+      </div>
+  <div class="row justify-content-center mt-3">
+    <div class="col mr-4">
+      <%= link_to "ゲストログイン（閲覧用）",users_guest_sign_in_path, class: "btn btn-sm btn-info mb-3 sign_in", method: :post %>
+    </div>
+  </div>
+
+  <div class="row mt-5 d-flex justify-content-center">
+    まだアカウントをお持ちでない方は
+    <%= link_to 'こちら', new_user_registration_path %>
+  </div>
 </div>

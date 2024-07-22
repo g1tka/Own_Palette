@@ -29,12 +29,12 @@ class User::PostsController < ApplicationController
   def index
     if params[:color].present?
       if params[:color] == "7"
-        @posts = Post.all
+        @posts = Post.all.page(params[:page]).per(12)
       else
-        @posts = Post.where(color: params[:color])
+        @posts = Post.where(color: params[:color]).page(params[:page]).per(12)
       end
     else # 予期せぬ値が来た時のため記述
-      @posts = Post.all
+      @posts = Post.all.page(params[:page]).per(12)
     end
     
     case params[:sort_by]

@@ -145,3 +145,19 @@ footer {
   border-top: solid 5px #5d627b;
   box-shadow: 0 3px 5px rgba(0, 0, 0, 0.22);
 }
+// ページネーション全体
+.pagination>li>a {
+  border: none;
+  color: #696969;
+}
+
+// 表示しているページ番号
+.pagination>.active>a {
+  background: #93c9ff;
+  border-radius: 15px;
+}
+
+// ホバー時
+.pagination>li>a:hover {
+  border-radius: 15px;
+}

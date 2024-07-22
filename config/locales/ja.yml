@@ -37,6 +37,13 @@ ja:
               blank: "を入力してください"
             stance:
               blank: "を選択してください"
+  views:
+    pagination:
+      first: "&laquo; 最初"
+      last: "最後 &raquo;"
+      previous: "&lsaquo; 前"
+      next: "次 &rsaquo;"
+      truncate: "..."
   date:
     abbr_day_names:
     - 日

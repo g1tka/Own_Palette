@@ -10,6 +10,7 @@
           &nbsp;|&nbsp;<%= link_to "コメント数順", posts_path(sort_by: 'comments') %>
         </div>
       </div>
+      
       <div class="row">
         <% @posts.each do |post| %>
           <% if post.is_open %>
@@ -50,6 +51,11 @@
         <% end %>
       </div>
       
+      <div class="col-12">
+        <div class="col-5 pt-3 ml-md-5 mx-auto">
+          <%= paginate @posts %>
+        </div>
+      </div>
     <% else %>
       <div class="col my-5">
         投稿はまだありません。

@@ -43,13 +43,13 @@ class User::PostsController < ApplicationController
     when 'oldest'
       @posts = @posts.order(created_at: :asc)
     when 'favorites'
-      @posts = @posts.sort_by { |post| -post.favorites.count }
+      @posts = @posts.left_outer_joins(:favorites).group(:id).order('COUNT(favorites.id) DESC')
     when 'comments'
-      @posts = @posts.sort_by { |post| -post.comments.count }
+      @posts = @posts.left_outer_joins(:comments).group(:id).order('COUNT(comments.id) DESC')
     else
       @posts = @posts.order(created_at: :desc)
     end
-    
+    # .joinsのみではいいね、コメント数が０のものを取得できないため、left_outer_joins/左外部結合 を使用。
   end
 
   def edit

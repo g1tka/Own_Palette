@@ -32,28 +32,24 @@ class User::PostsController < ApplicationController
         @posts = Post.all
       else
         @posts = Post.where(color: params[:color])
-      # if params[:color] == "0"
-      #   @posts = Post.where(color: "red")
-      # elsif params[:color] == "1"
-      #   @posts = Post.where(color: "orange")
-      # elsif params[:color] == "2"
-      #   @posts = Post.where(color: "yellow")
-      # elsif params[:color] == "3"
-      #   @posts = Post.where(color: "green")
-      # elsif params[:color] == "4"
-      #   @posts = Post.where(color: "blue")
-      # elsif params[:color] == "5"
-      #   @posts = Post.where(color: "purple")
-      # elsif params[:color] == "6"
-      #   @posts = Post.where(color: "monochrome")
-      # elsif params[:color] == "7"
-      #   @posts = Post.where(color: "other")
-      # else
-      #   @posts = Post.all
       end
     else # 予期せぬ値が来た時のため記述
       @posts = Post.all
     end
+    
+    case params[:sort_by]
+    when 'newest'
+      @posts = @posts.order(created_at: :desc)
+    when 'oldest'
+      @posts = @posts.order(created_at: :asc)
+    when 'favorites'
+      @posts = @posts.sort_by { |post| -post.favorites.count }
+    when 'comments'
+      @posts = @posts.sort_by { |post| -post.comments.count }
+    else
+      @posts = @posts.order(created_at: :desc)
+    end
+    
   end
 
   def edit

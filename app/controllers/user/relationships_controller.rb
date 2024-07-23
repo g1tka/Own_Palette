@@ -7,8 +7,12 @@ class User::RelationshipsController < ApplicationController
   
   def create
     @user = User.find(params[:user_id])
-    current_user.follow(@user)
-    # redirect_to request.referer
+    unless current_user.blocking?(@user)
+      current_user.follow(@user)
+      # redirect_to request.referer
+    else
+      redirect_to user_path(@user), notice: "フォローするにはブロックの解除が必要です。"
+    end
   end
   
   def destroy

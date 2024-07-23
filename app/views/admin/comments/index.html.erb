@@ -1,5 +1,6 @@
 コメント一覧
 <div class="container">
+
   <!--投稿を１つ表示-->
   <% @posts.each do |post| %>
     <div class="row mt-3 justify-content-start border-bottom pb-1 align-items-end">
@@ -18,9 +19,8 @@
       </div>
     </div>
     <!--各投稿に対するコメント一覧-->
-    <% comments_for_post = post.comments %>
-    <% if comments_for_post.any? %>
-      <% comments_for_post.each do |comment| %>
+    <% if post.comments.any? %>
+      <% post.comments.each do |comment| %>
         <div class="row mt-2">
           <div class="col-8">
             <%= link_to admin_post_path(comment.post) do %>

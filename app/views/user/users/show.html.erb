@@ -3,7 +3,7 @@
     <div class="col-4 my-auto">
       ユーザーページ(<%= @user.name %>さん)
     </div>
-    <div class="col-2 my-auto">
+    <div class="col-3 my-auto">
       <% if user_signed_in? %>
         <% if @user == current_user %>
           <%= link_to "フォロワー", user_relationships_index_path(@user) %>
@@ -24,7 +24,7 @@
               <%= render "user/relationships/follow", user: @user %>
             </span>&emsp;
             <span id="block_btn_<%= @user.id %>">
-              <%= render "user/relationships/block", user: @user %>
+              <%= render "user/blocks/block", user: @user %>
             </span>
           </div>
         <% else %>

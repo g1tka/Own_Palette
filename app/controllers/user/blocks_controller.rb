@@ -4,13 +4,14 @@ class User::BlocksController < ApplicationController
   def create
     @user = User.find(params[:user_id])
     current_user.block(@user)
-    # redirect_to request.referer
+    if current_user.following?(@user)
+      current_user.unfollow(@user)
+    end
   end
   
   def destroy
     @user = User.find(params[:user_id])
     current_user.unblock(@user)
-    # redirect_to request.referer
   end
   
   def blockings

@@ -3,7 +3,7 @@
     <div class="col-4 my-auto">
       ユーザーページ(<%= @user.name %>さん)
     </div>
-    <div class="col-2 my-auto">
+    <div class="col-3 my-auto">
       <% if user_signed_in? %>
         <% if @user == current_user %>
           <%= link_to "フォロワー", user_relationships_index_path(@user) %>
@@ -15,13 +15,18 @@
         フォロワー数：<span id="follow_count"><%= @user.followers.count %></span>人
       <% end %>
     </div>
-    <div class="col-2">
+    <div class="col-5">
       <% if user_signed_in? %>
         <!--ログインしているユーザー　が　現在のページで扱っているユーザーではない場合(のみ)-->
         <% if current_user != @user %>
-          <span id="follow_btn_<%= @user.id %>">
-            <%= render "user/relationships/follow", user: @user %>
-          </span>
+          <div class="row">
+            <span id="follow_btn_<%= @user.id %>">
+              <%= render "user/relationships/follow", user: @user %>
+            </span>&emsp;
+            <span id="block_btn_<%= @user.id %>">
+              <%= render "user/blocks/block", user: @user %>
+            </span>
+          </div>
         <% else %>
           <%= link_to "フォロー", user_relationships_index_path(@user) %>
           ：<%= @user.followings.count %>人

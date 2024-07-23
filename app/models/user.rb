@@ -48,4 +48,26 @@ class User < ApplicationRecord
   def guest_user?
     email == GUEST_USER_EMAIL
   end
+  
+  # 自分がブロックされる（被ブロック）側の関係性
+  has_many :reverse_of_blocks, class_name: "Block", foreign_key: "blocked_id", dependent: :destroy
+  # 被ブロック関係を通じて参照→自分をブロックしている人
+  has_many :blockers, through: :reverse_of_blocks, source: :blocker
+  # 自分がブロックする（与ブロック）側の関係性
+  has_many :blocks, class_name: "Block", foreign_key: "blocker_id", dependent: :destroy
+  # 与ブロック関係を通じて参照→自分がブロックしている人
+  has_many :blockings, through: :blocks, source: :blocked
+  
+  def block(user)
+    blocks.create(blocked_id: user.id)
+  end
+
+  def unblock(user)
+    blocks.find_by(blocked_id: user.id)&.destroy
+    # &の存在によりnil.destroyとなった場合実行しない。
+  end
+
+  def blocking?(user)
+    blockings.include?(user)
+  end
 end

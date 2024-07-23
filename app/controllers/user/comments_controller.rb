@@ -1,11 +1,17 @@
 class User::CommentsController < ApplicationController
 
   def create
-    @comment = current_user.comments.new(comment_params)
-    if @comment.save
-      redirect_back(fallback_location: post_path(params[:post_id]))
+    @post = Post.find(params[:post_id])
+    unless @post.user.blocking?(current_user)
+      @comment = current_user.comments.new(comment_params)
+      if @comment.save
+        redirect_back(fallback_location: post_path(params[:post_id]))
+      else
+        flash[:alert] = @comment.errors.full_messages.join(" / ")
+        redirect_back(fallback_location: post_path(params[:post_id]))
+      end
     else
-      flash[:alert] = @comment.errors.full_messages.join(" / ")
+      flash[:error] = "この投稿にはコメントできなくなりました。"
       redirect_back(fallback_location: post_path(params[:post_id]))
     end
   end

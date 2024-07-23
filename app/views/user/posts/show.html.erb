@@ -69,9 +69,9 @@
         </div>
         
         <!--画面右側の要素-->
-        <div class="col-lg-6 mt-4">
+        <div class="col-lg-8 mt-4">
           <div class="col mb-3">
-            <%= @post.body %>
+            本文：<%= @post.body %>
           </div>
       <% end %>
       
@@ -94,13 +94,19 @@
                                   "comment-disagree"
                                 end %>
           <div class="row mt-2">
-            <div class="col-md-9 mb-2 offset-1">
+            <div class="col-md-6 mb-2 offset-1">
               <div class="<%= comment_stance %>">
                 <%= comment.body %>
               </div>
             </div>
+            <div class="col-3 mx-0 px-0">
+              by 
+              <%= link_to user_path(comment.user) do %>
+                <%= comment.user.name %>
+              <% end %>
+            </div>
             <% if comment.user == current_user %>
-              <div class="col mb-2">
+              <div class="col-2 mb-2 mx-0 px-0">
                 <%= link_to '削除', post_comment_path(@post, comment), method: :delete, class:"btn btn-sm btn-danger" %>
               </div>
             <% end %>
@@ -111,6 +117,8 @@
           まだコメントがありません。
         </div>
       <% end %>
+      
+      <p class="error mt-3"><%= flash[:error] %></p>
 
           <div class="col mt-3">
             <% if user_signed_in? %>

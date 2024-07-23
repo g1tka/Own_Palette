@@ -39,6 +39,10 @@ Rails.application.routes.draw do
       resource :relationships, only: [:create, :destroy]
       get 'followings' => 'relationships#followings', as: 'followings'
       get 'followers' => 'relationships#followers', as: 'followers'
+      post 'blocks/:user_id' => 'relationships#create_block', as: 'create_block'
+      delete 'blocks/:user_id' => 'relationships#destroy_block', as: 'destroy_block'
+      get 'blockings' => 'relationships#blockings', as: 'blockings'
+      get 'blockers' => 'relationships#blockers', as: 'blockers'
     end
   end
 

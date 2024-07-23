@@ -1,9 +1,27 @@
-フォロワー一覧・フォロー一覧ページ
+<%= @user.name %>さんのフォロー/フォロワー一覧ページ
 <div class="container">
   <div class="row justify-content-center">
-    <div class="col-5 my-2 py-3 px-4 mr-3 follow-box">
+    <div class="col-lg-4 col-md-8 col-xs-12 my-2 py-3 px-4 mx-2 follow-box">
       <div class="border-bottom">
-        <%= @user.name %>さんのフォロー一覧
+        フォロワー一覧
+      </div>
+      <% if @user.followers.exists? %>
+        <% @user.followers.each do |follower| %>
+          <div class="mt-3">
+            <%= link_to user_path(follower) do %>
+              <%= follower.name %>
+            <% end %>
+          </div>
+        <% end %>
+      <% else %>
+        <div class="mt-3">
+          フォロワーはいません。
+        </div>
+      <% end %>
+    </div>
+    <div class="col-lg-4 col-md-8 col-xs-12 my-2 py-3 px-4 mx-2 follow-box">
+      <div class="border-bottom">
+        フォロー一覧
       </div>
       <% if @user.followings.exists? %>
         <% @user.followings.each do |following| %>
@@ -19,21 +37,21 @@
         </div>
       <% end %>
     </div>
-    <div class="col-5 my-2 py-3 px-4 ml-3 follow-box">
+    <div class="col-lg-3 col-md-8 col-xs-12 my-2 py-3 px-4 mx-2 block-box">
       <div class="border-bottom">
-        フォロワー一覧
+        ブロック一覧
       </div>
-      <% if @user.followers.exists? %>
-        <% @user.followers.each do |follower| %>
+      <% if @user.blockings.exists? %>
+        <% @user.blockings.each do |blocking| %>
           <div class="mt-3">
-            <%= link_to user_path(follower) do %>
-              <%= follower.name %>
+            <%= link_to user_path(blocking) do %>
+              <%= blocking.name %>
             <% end %>
           </div>
         <% end %>
       <% else %>
         <div class="mt-3">
-          あなたをフォローしているユーザーはいません。
+          ブロックしているユーザーはいません。
         </div>
       <% end %>
     </div>

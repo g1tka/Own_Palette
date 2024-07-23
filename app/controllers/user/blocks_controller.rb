@@ -1,30 +1,25 @@
-class User::RelationshipsController < ApplicationController
+class User::BlocksController < ApplicationController
   before_action :authenticate_user!
-  
-  def index
-    @user = User.find(params[:user_id])
-  end
   
   def create
     @user = User.find(params[:user_id])
-    current_user.follow(@user)
+    current_user.block(@user)
     # redirect_to request.referer
   end
   
   def destroy
     @user = User.find(params[:user_id])
-    current_user.unfollow(@user)
+    current_user.unblock(@user)
     # redirect_to request.referer
   end
   
-  def followings
+  def blockings
     user = User.find(params[:user_id])
-    @users = user.followings
+    @users = user.blockings
   end
   
-  def followers
+  def blockers
     user = User.find(params[:user_id])
-    @users = user.followers
+    @users = user.blockers
   end
-  
 end

@@ -37,6 +37,12 @@ class User::PostsController < ApplicationController
       @posts = Post.all.page(params[:page]).per(12)
     end
     
+    if user_signed_in?
+      blocked_user_ids = current_user.blockings.pluck(:id)
+      # ブロックしているユーザーIDsを　　　　取得しない
+      @posts = @posts.where.not(user_id: blocked_user_ids)
+    end
+    
     case params[:sort_by]
     when 'newest'
       @posts = @posts.order(created_at: :desc)

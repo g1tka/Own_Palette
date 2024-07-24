@@ -40,3 +40,4 @@ yarn-debug.log*
 .yarn-integrity
 # 本番環境で必要な設定。セキュリティ面安全のためignore
 /.env
+/ng_words.txt

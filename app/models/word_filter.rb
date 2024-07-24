@@ -26,10 +26,4 @@ module WordFilter
     
     normalized_text
   end
-  
-  def normalize_word(word)
-    normalized_word = Unicode.nfkc(word)
-    normalized_word = Unicode::Normalize.transliterate(normalized_word)
-    normalized_word.downcase
-  end
 end

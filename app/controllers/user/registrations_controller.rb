@@ -4,16 +4,30 @@ class User::RegistrationsController < Devise::RegistrationsController
   # before_action :configure_sign_up_params, only: [:create]
   # before_action :configure_account_update_params, only: [:update]
   before_action :configure_permitted_parameters, if: :devise_controller?
-  
+  include WordFilter
   # GET /resource/sign_up
   # def new
   #   super
   # end
 
   # POST /resource
-  # def create
-  #   super
-  # end
+  def create
+    ng_words = load_ng_words("#{Rails.root}/ng_words.txt")
+    
+    # ユーザー名を大文字から小文字に変換してNGワードのチェックを行う
+    downcased_name = params[:user][:name].downcase
+    filtered_name = filter_ng_words(downcased_name, ng_words)
+
+    # フィルター後の名前が変わっているかチェック
+    if filtered_name != downcased_name
+      flash[:alert] = "別の名前を使用してください。"
+      redirect_to new_user_registration_path
+      return
+    end
+    # NGワードが含まれていない場合は、元のユーザー名（大文字の場合はそのまま）で通常処理を実行
+    params[:user][:name] = user_name
+    super
+  end
 
   # GET /resource/edit
   # def edit

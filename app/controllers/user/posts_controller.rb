@@ -1,6 +1,8 @@
 class User::PostsController < ApplicationController
   before_action :authenticate_user!, except: [:show, :index]
   before_action :is_matching_login_user, only: [:edit, :update]
+  
+  include WordFilter
 
   def new
     @post = Post.new
@@ -8,6 +10,10 @@ class User::PostsController < ApplicationController
   
   def create
     @post = Post.new(post_params)
+    ng_words = load_ng_words("#{Rails.root}/ng_words.txt")
+    normalized_ng_words = ng_words.map { |word| normalize_word(word) }
+    ng_words.concat(normalized_ng_words).uniq!
+    @post.body = filter_ng_words(params[:post][:body], ng_words)
     @post.user_id = current_user.id
     if @post.save
       redirect_to post_path(@post)

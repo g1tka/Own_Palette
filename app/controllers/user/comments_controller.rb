@@ -6,7 +6,7 @@ class User::CommentsController < ApplicationController
     unless @post.user.blocking?(current_user)
       ng_words = load_ng_words("#{Rails.root}/ng_words.txt")
       @comment = current_user.comments.new(comment_params)
-      @comment.body = filter_ng_words(params[:comment][:body], ng_words)
+      @comment.body = filter_ng_words(params[:comment][:body].downcase, ng_words)
       if @comment.save
         redirect_back(fallback_location: post_path(params[:post_id]))
       else

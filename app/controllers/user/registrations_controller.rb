@@ -24,7 +24,7 @@ class User::RegistrationsController < Devise::RegistrationsController
       redirect_to new_user_registration_path
       return
     end
-    # NGワードが含まれていない場合は、元のユーザー名（大文字の場合はそのまま）に通常処理を実行
+    # NGワードが含まれていない場合は、元のユーザー名（大文字の場合はそのまま）に戻し、通常処理を実行
     params[:user][:name] = params[:user][:name]
     super
   end

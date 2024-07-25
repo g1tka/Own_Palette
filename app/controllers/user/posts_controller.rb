@@ -11,9 +11,7 @@ class User::PostsController < ApplicationController
   def create
     @post = Post.new(post_params)
     ng_words = load_ng_words("#{Rails.root}/ng_words.txt")
-    normalized_ng_words = ng_words.map { |word| normalize_word(word) }
-    ng_words.concat(normalized_ng_words).uniq!
-    @post.body = filter_ng_words(params[:post][:body], ng_words)
+    @post.body = filter_ng_words(params[:post][:body].downcase, ng_words)
     @post.user_id = current_user.id
     if @post.save
       redirect_to post_path(@post)
@@ -35,12 +33,12 @@ class User::PostsController < ApplicationController
   def index
     if params[:color].present?
       if params[:color] == "7"
-        @posts = Post.all.page(params[:page]).per(12)
+        @posts = Post.all
       else
-        @posts = Post.where(color: params[:color]).page(params[:page]).per(12)
+        @posts = Post.where(color: params[:color])
       end
     else # 予期せぬ値が来た時のため記述
-      @posts = Post.all.page(params[:page]).per(12)
+      @posts = Post.all
     end
     
     if user_signed_in?
@@ -62,6 +60,9 @@ class User::PostsController < ApplicationController
       @posts = @posts.order(created_at: :desc)
     end
     # .joinsのみではいいね、コメント数が０のものを取得できないため、left_outer_joins/左外部結合 を使用。
+    # 最後に@postsに対してページネーションを実行。
+    # １ページあたりの表示数は、config/initializers/kaminari_config.rbに設定していたが、変更容易のためこちらへ。
+    @posts = @posts.page(params[:page]).per(12)
   end
 
   def edit

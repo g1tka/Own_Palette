@@ -22,6 +22,7 @@ class User < ApplicationRecord
 
   validates :name, length: { minimum: 1, maximum: 20 }, uniqueness: true
   # emailはdeviseで作成時点でuniqueness: trueとなっているため設定しない。
+  validate :check_consecutive_characters
   
   def follow(user)
     relationships.create(followed_id: user.id)
@@ -69,5 +70,13 @@ class User < ApplicationRecord
 
   def blocking?(user)
     blockings.include?(user)
+  end
+  
+  private
+
+  def check_consecutive_characters
+    if name =~ /(.)\1{4,}/
+      errors.add(:name, "に同じ文字が5文字以上連続して使用されています。")
+    end
   end
 end

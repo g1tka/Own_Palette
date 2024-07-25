@@ -75,4 +75,6 @@ Rails.application.configure do
   # config.action_cable.disable_request_forgery_protection = true
   # config.hosts << "99604c37f28b4e06a881b4b86a8f0257.vfs.cloud9.ap-northeast-1.amazonaws.com"
   config.hosts.clear
+  # 開発環境において、投稿連続時にも手順通り保存するように。
+  config.active_job.queue_adapter = :inline
 end

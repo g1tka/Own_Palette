@@ -10,6 +10,8 @@ class Post < ApplicationRecord
   validates :body, presence: true, length: { maximum: 100 }
   validates :color, presence: true
   validate :image_type
+  
+  validate :check_consecutive_characters
 
   def get_image
     unless image.attached?
@@ -31,6 +33,12 @@ class Post < ApplicationRecord
       errors.add(:image, 'をアップロードしてください')
     elsif !image.blob.content_type.in?(%('image/jpeg image/png'))
       errors.add(:image, 'はJPEGまたはPNG形式を選択してアップロードしてください')
+    end
+  end
+  
+  def check_consecutive_characters
+    if body =~ /(.)\1{3,}/
+      errors.add(:body, "に同じ文字が4文字以上連続して使用されています。")
     end
   end
 end

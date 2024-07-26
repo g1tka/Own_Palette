@@ -1,0 +1,97 @@
+<div class="row header-content">
+  <!--左端：Logoの表示について-->
+  <% if current_page?(root_path) %>
+    <div class="col-1 mx-3">
+      <div class="row"></div>
+      <div class="row">
+        <% if admin_signed_in? %>
+          <%= image_tag("admininfo.png", src: "/assets/images/admininfo.png", width: 100, hight: 100 ) %>
+        <% end %>
+      </div>
+    </div>
+  <% else %>
+    <div class="col-1 mx-3">
+      <div class="row">
+        <%= link_to root_path do %>
+          <%= image_tag("logo.png", src: "/assets/images/logo.png", width: 100, hight: 100 ) %>
+        <% end %>
+      </div>
+      <div class="row">
+        <% if admin_signed_in? %>
+          <%= image_tag("admininfo.png", src: "/assets/images/admininfo.png", width: 100, hight: 100 ) %>
+        <% end %>
+      </div>
+    </div>
+  <% end %>
+  <!--中央：リンクの表示について-->
+  <ul class="col-sm-7 col-xs-10 d-flex list-unstyled justify-content-center my-auto">
+    <% if admin_signed_in? %>
+      <div class="col d-flex align-items-center justify-content-center">
+        <li class='mx-3'><%= link_to 'Post List', admin_posts_path %></li>
+        <li class='mx-3'><%= link_to 'User List', admin_users_path %></li>
+        <li class='mx-3'><%= link_to 'Comment List', admin_comments_path %></li>
+        <li class='mx-3'><%= link_to 'Log out', destroy_admin_session_path, method: :delete %></li>
+      </div>
+    <% elsif user_signed_in? %>
+      <div class="col d-flex align-items-center justify-content-center">
+        <li class='mx-3'><%= link_to 'About', about_path %></li>
+        <li class='mx-3'><%= link_to 'Post', new_post_path %></li>
+        <li class='mx-3'><%= link_to 'My Page', user_path(current_user) %></li>
+        <li class='mx-3'><%= link_to 'Log out', destroy_user_session_path, method: :delete %></li>
+      </div>
+    <% else %>
+      <div class="col d-flex align-items-center justify-content-center">
+        <li class='mx-3'><%= link_to 'About', about_path %></li>
+        <li class='mx-3'><%= link_to 'Sign up', new_user_registration_path %></li>
+        <li class='mx-3'><%= link_to 'Log in', new_user_session_path %></li>
+      </div>
+    <% end %>
+  </ul>
+  <!--右端：カラーパレットの表示について-->
+  <% unless current_page?(root_path) %>
+    <div class="col-md-2 col-sm-12">
+      <div class="row justify-content-center">
+        <%= render 'layouts/color_palette' %>
+      </div>
+    </div>
+  <% else %>
+    <% if user_signed_in?%>
+      <div class="col-md-2 col-sm-12 mx-5"></div>
+    <% else %>
+      <div class="col-md-2 col-sm-12 mx-5 my-auto">
+        for admin
+        <button type="button" class="btn btn-link pb-2 px-0" data-toggle='modal' data-target="#foradminInfomation">
+          <i class="fa-solid fa-circle-info"></i>
+        </button>
+      </div>
+    <% end %>
+  <% end %>
+</div>
+<!--要件：ログイン時のみheader下部に検索フォームを表示-->
+<% if user_signed_in? %>
+  <div class="row mt-2 ml-4 mb-1">
+    <%= form_with url: search_path, local: true, method: :get do |f| %>
+      <%= f.text_field :word %>
+      <%= f.select :category, options_for_select([['Post'],['User']]) %>
+      <%= f.submit "Search", class: "btn btn-sm btn-warning mb-1" %>
+    <% end %>
+  </div>
+<% end %>
+
+<div class="modal" id="foradminInfomation" tabindex="-1" role="dialog" aria-labelledby="foradminInfomationTitle" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header pl-5">
+        <h5 class="modal-title" id="foradminInfomation">adminログインについて</h5>
+      </div>
+      <div class="modal-body mb-3 px-4">
+        <h4><strong>機能要件変更</strong></h4>
+        セキュリティ面を配慮し、以下のように変更されました。<br/>
+        ・ユーザー側の画面とは別に、管理者自身のログイン画面および管理者機能がある<br/>
+        ・予めデータベースに登録したID/パスワードをもとにログインが可能である<br/></br>
+        admin画面も見ていただける方は<br/>
+        /admins/sign_in よりゲストアドミンでログインしてください。<br/>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,49 @@
+<div>
+  <div class="row">
+    <p class="notice"><%= notice %></p>
+    <p><strong class="alert"><%= alert %></strong></p>
+  </div>
+  <div class="row my-2 justify-content-center">
+    <a href="#" data-toggle="modal" data-target="#TermInfomation">
+      利用規約
+    </a>&emsp;&emsp;
+    <a href="#" data-toggle="modal" data-target="#PrivacyInfomation">
+      プライバシーポリシー
+    </a>
+  </div>
+  <div class="row justify-content-end">
+    <span>Copyright © Infratop Inc. All Rights Reserved.</span>
+  </div>
+</div>
+
+<div class="modal fade" id="TermInfomation" tabindex="-1" role="dialog" aria-labelledby="TermInfomationTitle" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header pl-5">
+        <h5 class="modal-title" id="TermInfomation"><strong>利用規約</strong></h5>
+      </div>
+      <div class="modal-body mb-3 px-4">
+        <%= render "layouts/term" %>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-success mr-4" data-dismiss="modal">同意する</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="PrivacyInfomation" tabindex="-1" role="dialog" aria-labelledby="PrivacyInfomationTitle" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header pl-5">
+        <h5 class="modal-title" id="PrivacyInfomation"><strong>プライバシーポリシー</strong></h5>
+      </div>
+      <div class="modal-body mb-3 px-4">
+        <%= render "layouts/privacy" %>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-success mr-4" data-dismiss="modal">同意する</button>
+      </div>
+    </div>
+  </div>
+</div>

@@ -14,11 +14,11 @@
         </tr>
         <tr>
           <th><%= f.label :email %></th>
-          <td><%= f.text_field :email, autofocus: true %></td>
+          <td><%= f.text_field :email, size: 30, autofocus: true %></td>
         </tr>
         <tr>
           <th><%= f.label :password %></th>
-          <td><%= f.password_field :password, autocomplete: "new-password" %></td>
+          <td><%= f.password_field :password, size: 30, autocomplete: "new-password" %></td>
         </tr>
       </table>
       <div class="col mt-3">
@@ -30,7 +30,8 @@
       </div>
   <div class="row justify-content-center mt-3">
     <div class="col mr-4">
-      <%= link_to "ゲストログイン（閲覧用）",users_guest_sign_in_path, class: "btn btn-sm btn-info mb-3 sign_in", method: :post %>
+      <i class="fa-solid fa-check"></i>
+      <%= link_to "ゲストログイン（閲覧用）",users_guest_sign_in_path, class: "btn btn-link mb-3 sign_in pt-4", method: :post %>
     </div>
   </div>
 

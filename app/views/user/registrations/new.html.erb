@@ -7,15 +7,15 @@
           <%= f.label :name, "User name" %>
         </div>
         <div class="col-sm-5">
-          <%= f.text_field :name, autofocus: true, size: 30, :placeholder => " 1 ｶﾗ 20 文字" %></td>
+          <%= f.text_field :name, autofocus: true, size: 25, :placeholder => " 1 ｶﾗ 20 文字" %></td>
         </div>
       </div>
       <div class="row mt-2">
-          <div class="col-sm-5">
-            <%= f.label :email, "Email" %>
-          </div>
-          <div class="col-sm-5">
-            <%= f.text_field :email, size: 30 %>
+        <div class="col-sm-5">
+          <%= f.label :email, "Email" %>
+        </div>
+        <div class="col-sm-5">
+          <%= f.text_field :email, size: 25 %>
         </div>
       </div>
       <div class="row mt-2">
@@ -23,7 +23,7 @@
           <%= f.label :password, "Password" %>
         </div>
         <div class="col-sm-5">
-          <%= f.password_field :password, autocomplete: "new-password", size: 30, :placeholder => " 6 文字 以上" %>
+          <%= f.password_field :password, autocomplete: "new-password", size: 25, :placeholder => " 6 文字 以上" %>
         </div>
       </div>
       <div class="row mt-2">
@@ -31,7 +31,7 @@
           <%= f.label :password_confirmation, "Password Confirmation"  %>
         </div>
         <div class="col-sm-5">
-          <%= f.password_field :password_confirmation, size: 30, autocomplete: "new-password" %>
+          <%= f.password_field :password_confirmation, size: 25, autocomplete: "new-password" %>
         </div>
       </div>
       <div class="col mt-3">
@@ -44,8 +44,12 @@
       </div>
     <% end %>
   </div>
-</div>
-<div class="row mt-5 d-flex justify-content-center">
-  既にアカウントをお持ちの方は
-  <%= link_to 'こちら', new_user_session_path %>
+  
+  <div class="row mt-5 d-flex justify-content-center">
+    <div class="col">
+      既にアカウントをお持ちの方は
+      <%= link_to 'こちら', new_user_session_path %>
+    </div>
+  </div>
+  <br/><br/>
 </div>

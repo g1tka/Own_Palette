@@ -83,12 +83,30 @@ footer {
   box-shadow: 0px 0px 30px 10px rgba(0, 0, 0, 0.4);
 }
 
-.red { background-color: #e74c3c; }
-.orange { background-color: #e67e22; }
-.yellow { background-color: #f1c40f; }
-.green { background-color: #2ecc71; }
-.blue { background-color: #3498db; }
-.purple { background-color: #9b59b6; }
+.red {
+  background-color: #e74c3c; 
+  background-image: linear-gradient(135deg, #e74c3c, #e3958d);
+}
+.orange {
+  background-color: #e67e22;
+  background-image: linear-gradient(135deg, #e67e22, #e0ae82);
+}
+.yellow {
+  background-color: #f1c40f;
+  background-image: linear-gradient(135deg, #f1c40f, #edd677);
+}
+.green {
+  background-color: #2ecc71;
+  background-image: linear-gradient(135deg, #2ecc71, #70c494);
+}
+.blue {
+  background-color: #3498db;
+  background-image: linear-gradient(135deg, #3498db, #7eb4d9);
+}
+.purple {
+  background-color: #9b59b6;
+  background-image: linear-gradient(135deg, #9b59b6, #a384b0);
+}
 .monochrome {
   background-color: #333;
   background-image: linear-gradient(135deg, #333, #ccc);

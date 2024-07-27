@@ -1,37 +1,37 @@
 <p>ログインページ</p>
 <div class="container">
-  <div>
+  <div class="row mt-3">
     <!--"退会済のアカウントです。新規登録をお願いします。"from sessions controller-->
-    <%= flash[:danger] %>
+    <p><%= flash[:danger] %></p>
   </div>
+  
   <div class="row justify-content-center">
     <%= form_with model: @user, url: user_session_path, local: true do |f| %>
-      <table class="user_form">
-        <tr>
-          <!--emailとPWでログインできるという要件のため名前でのログインは実装しない-->
-          <th><%#= f.label :name, "User name" %></th>
-          <td><%#= f.text_field :name, autofocus: true %></td>
-        </tr>
-        <tr>
-          <th><%= f.label :email %></th>
-          <td><%= f.text_field :email, size: 30, autofocus: true %></td>
-        </tr>
-        <tr>
-          <th><%= f.label :password %></th>
-          <td><%= f.password_field :password, size: 30, autocomplete: "new-password" %></td>
-        </tr>
-      </table>
+      <div class="row mt-2">
+        <!--emailとPWでログインできるという要件のため名前でのログインは実装しない-->
+        <div class="col-sm-5"><%#= f.label :name, "User name" %><div>
+        <div class="col-sm-5"><%#= f.text_field :name, autofocus: true %></div>
+      </div>
+      <div class="row mt-2">
+        <div class="col-sm-5"><%= f.label :email %></div>
+        <div class="col-sm-5"><%= f.text_field :email, size: 30, autofocus: true %></div>
+      </div>
+      <div class="row mt-2">
+        <div class="col-sm-5"><%= f.label :password %></div>
+        <div class="col-sm-5"><%= f.password_field :password, size: 30, autocomplete: "new-password" %></div>
+      </div>
       <div class="col mt-3">
         <%= f.submit "Log in", class: "btn btn-success" %>
       </div>
     <% end %>
     <p class="alert"><%= alert %></p>
-  </div>
-      </div>
+ 
   <div class="row justify-content-center mt-3">
-    <div class="col mr-4">
-      <i class="fa-solid fa-check"></i>
-      <%= link_to "ゲストログイン（閲覧用）",users_guest_sign_in_path, class: "btn btn-link mb-3 sign_in pt-4", method: :post %>
+    <div class="col">
+      <%= link_to users_guest_sign_in_path, class: "btn btn-link mb-3 sign_in", method: :post do %>
+        <i class="fa-solid fa-check"></i>
+        ゲストログイン（閲覧用）
+      <% end %>
     </div>
   </div>
 

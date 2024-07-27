@@ -2,24 +2,38 @@
 <div class="container">
   <div class="row justify-content-center">
     <%= form_with model: @user, url: user_registration_path, local: true do |f| %>
-      <table class="user_form">
-        <tr>
-          <th><%= f.label :name, "User name" %></th>
-          <td><%= f.text_field :name, autofocus: true, size: 30, :placeholder => " 1 to 20 characters" %></td>
-        </tr>
-        <tr>
-          <th><%= f.label :email, "Email" %></th>
-          <td><%= f.text_field :email, size: 30 %></td>
-        </tr>
-        <tr>
-          <th><%= f.label :password, "Password" %></th>
-          <td><%= f.password_field :password, autocomplete: "new-password", size: 30, :placeholder => " minimum 6 characters" %></td>
-        </tr>
-        <tr>
-          <th><%= f.label :password_confirmation, "Password Confirmation"  %></th>
-          <td><%= f.password_field :password_confirmation, size: 30, autocomplete: "new-password" %></td>
-        </tr>
-      </table>
+      <div class="row mt-2">
+        <div class="col-sm-5">
+          <%= f.label :name, "User name" %>
+        </div>
+        <div class="col-sm-5">
+          <%= f.text_field :name, autofocus: true, size: 30, :placeholder => " 1 ~ 20 文字" %></td>
+        </div>
+      </div>
+      <div class="row mt-2">
+          <div class="col-sm-5">
+            <%= f.label :email, "Email" %>
+          </div>
+          <div class="col-sm-5">
+            <%= f.text_field :email, size: 30 %>
+        </div>
+      </div>
+      <div class="row mt-2">
+        <div class="col-sm-5">
+          <%= f.label :password, "Password" %>
+        </div>
+        <div class="col-sm-5">
+          <%= f.password_field :password, autocomplete: "new-password", size: 30, :placeholder => " 6 文字 以上" %>
+        </div>
+      </div>
+      <div class="row mt-2">
+        <div class="col-sm-5">
+          <%= f.label :password_confirmation, "Password Confirmation"  %>
+        </div>
+        <div class="col-sm-5">
+          <%= f.password_field :password_confirmation, size: 30, autocomplete: "new-password" %>
+        </div>
+      </div>
       <div class="col mt-3">
         <%= f.submit "Sign in", class: "btn btn-success" %>
       </div>

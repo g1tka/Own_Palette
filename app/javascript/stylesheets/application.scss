@@ -115,6 +115,10 @@ footer {
     #edd368 120deg 180deg, #4fd688 180deg 240deg, #53a5db 240deg 300deg, #9b59b6 300deg 360deg);
 }
 
+.no-underline:hover {
+  text-decoration: none;
+}
+
 .flame {
   width: 250px;
   height: 300px;

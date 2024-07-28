@@ -45,3 +45,5 @@ https://docs.google.com/spreadsheets/d/143rrTYQL3zW7wuEdRWgOTbdPCHr4fUCcSHdAanyx
 - JSライブラリ：jQuery
 - IDE：Cloud9
 
+## イメージ
+![Own_Palette_top](https://github.com/user-attachments/assets/9adcb535-f0a8-4809-a4f3-c7b70df2fe38)

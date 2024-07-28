@@ -42,6 +42,14 @@ group :development do
   gem 'listen', '~> 3.3'
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
+  # Rubocop用
+  gem 'rubocop', require: false
+  gem 'rubocop-performance', require: false
+  gem 'rubocop-rails', require: false
+  gem 'rubocop-minitest', require: false
+  gem 'rubocop-packaging', require: false
+  gem 'rubocop-rspec'
+  gem 'rubocop-md'
 end
 
 group :test do

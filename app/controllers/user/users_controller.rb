@@ -2,12 +2,12 @@ class User::UsersController < ApplicationController
   before_action :authenticate_user!, except: [:show]
   before_action :check_authorization, only: [:edit, :update]
   before_action :ensure_guest_user, only: [:edit]
-  
+
   def show
     @user = User.find(params[:id])
     # 自分の投稿を表示する状態がdefault
     @filter = params[:filter] || "own"
-    
+
     case @filter
     when "timeline"
       @posts = Post.where(user_id: @user.followings).order(created_at: :desc)
@@ -22,11 +22,11 @@ class User::UsersController < ApplicationController
       @posts = @user.posts
     end
   end
-  
+
   def edit
     # check_authorization
   end
-  
+
   def update
     # check_authorization
     if @user.update(user_params)
@@ -42,25 +42,23 @@ class User::UsersController < ApplicationController
     reset_session
     redirect_to new_user_registration_path
   end
-  
+
   private
-  
   def user_params
     params.require(:user).permit(:name, :email, :password, :password_confirmation)
   end
-  
+
   def check_authorization
     @user = User.find(params[:id])
     unless @user == current_user
       redirect_to user_path(current_user)
     end
   end
-  
+
   def ensure_guest_user
     @user = User.find(params[:id])
     if @user.guest_user?
-      redirect_to user_path(current_user) , notice: "ゲストユーザーはプロフィール編集画面へ遷移できません。"
+      redirect_to user_path(current_user), notice: "ゲストユーザーはプロフィール編集画面へ遷移できません。"
     end
   end
-  
 end

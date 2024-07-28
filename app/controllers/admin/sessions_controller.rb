@@ -28,7 +28,7 @@ class Admin::SessionsController < Devise::SessionsController
   def after_sign_in_path_for(resource)
     admin_posts_path
   end
-  
+
   def redirect_user
     if user_signed_in?
       redirect_to root_path, alert: "You are already signed in as a user!"

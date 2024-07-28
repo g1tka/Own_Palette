@@ -7,7 +7,7 @@ class Admin::UsersController < ApplicationController
     @user = User.find(params[:id])
     # 有効←→退会済み
     @user.update(is_active: !@user.is_active)
-    
+
     respond_to do |format|
       format.js
     end

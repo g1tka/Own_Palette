@@ -27,14 +27,14 @@ bee = User.find_or_create_by!(email: "bee@example.com") do |user|
 end
 
 Post.find_or_create_by!(body: "あかいトマトはとってもおいしそうです。") do |post|
-  post.image = ActiveStorage::Blob.create_and_upload!(io: File.open("#{Rails.root}/db/fixtures/sample-post1.jpg"), filename:"sample-post1.jpg")
+  post.image = ActiveStorage::Blob.create_and_upload!(io: File.open("#{Rails.root}/db/fixtures/sample-post1.jpg"), filename: "sample-post1.jpg")
   post.color = "red"
   post.is_open = "true"
   post.user = apple
 end
 
 Post.find_or_create_by!(body: "きいろいパインは常夏を感じます。") do |post|
-  post.image = ActiveStorage::Blob.create_and_upload!(io: File.open("#{Rails.root}/db/fixtures/sample-post2.png"), filename:"sample-post2.png")
+  post.image = ActiveStorage::Blob.create_and_upload!(io: File.open("#{Rails.root}/db/fixtures/sample-post2.png"), filename: "sample-post2.png")
   post.color = "yellow"
   post.is_open = "true"
   post.user = bee

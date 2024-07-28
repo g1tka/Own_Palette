@@ -10,7 +10,6 @@ class Comment < ApplicationRecord
   validate :check_consecutive_characters
 
   private
-
   def check_consecutive_characters
     if body =~ /(.)\1{4,}/
       errors.add(:body, "に同じ文字が5文字以上連続して使用されています。")

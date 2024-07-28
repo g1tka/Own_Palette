@@ -1,13 +1,13 @@
 class User::PostsController < ApplicationController
   before_action :authenticate_user!, except: [:show, :index]
   before_action :is_matching_login_user, only: [:edit, :update]
-  
+
   include WordFilter
 
   def new
     @post = Post.new
   end
-  
+
   def create
     @post = Post.new(post_params)
     ng_words = load_ng_words("#{Rails.root}/ng_words.txt")
@@ -40,22 +40,22 @@ class User::PostsController < ApplicationController
     else # 予期せぬ値が来た時のため記述
       @posts = Post.all
     end
-    
+
     if user_signed_in?
       blocked_user_ids = current_user.blockings.pluck(:id)
       # ブロックしているユーザーIDsを　　　　取得しない
       @posts = @posts.where.not(user_id: blocked_user_ids)
     end
-    
+
     case params[:sort_by]
-    when 'newest'
+    when "newest"
       @posts = @posts.order(created_at: :desc)
-    when 'oldest'
+    when "oldest"
       @posts = @posts.order(created_at: :asc)
-    when 'favorites'
-      @posts = @posts.left_outer_joins(:favorites).group(:id).order('COUNT(favorites.id) DESC')
-    when 'comments'
-      @posts = @posts.left_outer_joins(:comments).group(:id).order('COUNT(comments.id) DESC')
+    when "favorites"
+      @posts = @posts.left_outer_joins(:favorites).group(:id).order("COUNT(favorites.id) DESC")
+    when "comments"
+      @posts = @posts.left_outer_joins(:comments).group(:id).order("COUNT(comments.id) DESC")
     else
       @posts = @posts.order(created_at: :desc)
     end
@@ -68,7 +68,7 @@ class User::PostsController < ApplicationController
   def edit
     # :is_matching_login_user
   end
-  
+
   def update
     # :is_matching_login_user
     @post.user_id = current_user.id
@@ -78,22 +78,22 @@ class User::PostsController < ApplicationController
       render :edit
     end
   end
-  
+
   def destroy
     @post = Post.find(params[:id])
     @post.destroy
     redirect_to posts_path
   end
-  
+
   private
-  def post_params
-    params.require(:post).permit(:user_id, :image, :body, :color, :is_open)
-  end
-  
-  def is_matching_login_user
-    @post = Post.find(params[:id])
-    unless @post.user == current_user
-      redirect_to posts_path
+    def post_params
+      params.require(:post).permit(:user_id, :image, :body, :color, :is_open)
     end
-  end
+
+    def is_matching_login_user
+      @post = Post.find(params[:id])
+      unless @post.user == current_user
+        redirect_to posts_path
+      end
+    end
 end

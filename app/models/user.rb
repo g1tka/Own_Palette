@@ -9,7 +9,7 @@ class User < ApplicationRecord
   has_many :favorites, dependent: :destroy
   has_many :favorite_posts, through: :favorites, source: :post
   has_many :comments, dependent: :destroy
-  
+
   # 自分がフォローされる（被フォロー）側の関係性
   has_many :reverse_of_relationships, class_name: "Relationship", foreign_key: "followed_id", dependent: :destroy
   # 被フォロー関係を通じて参照→自分をフォローしている人
@@ -23,7 +23,7 @@ class User < ApplicationRecord
   validates :name, length: { minimum: 1, maximum: 20 }, uniqueness: true
   # emailはdeviseで作成時点でuniqueness: trueとなっているため設定しない。
   validate :check_consecutive_characters
-  
+
   def follow(user)
     relationships.create(followed_id: user.id)
   end
@@ -35,7 +35,7 @@ class User < ApplicationRecord
   def following?(user)
     followings.include?(user)
   end
-  
+
   GUEST_USER_EMAIL = "guest@example.com"
 
   def self.guest
@@ -44,12 +44,12 @@ class User < ApplicationRecord
       user.name = "guestuser"
     end
   end
-  
+
   # if @user.email == "guest@example.com"をmethod化
   def guest_user?
     email == GUEST_USER_EMAIL
   end
-  
+
   # 自分がブロックされる（被ブロック）側の関係性
   has_many :reverse_of_blocks, class_name: "Block", foreign_key: "blocked_id", dependent: :destroy
   # 被ブロック関係を通じて参照→自分をブロックしている人
@@ -58,7 +58,7 @@ class User < ApplicationRecord
   has_many :blocks, class_name: "Block", foreign_key: "blocker_id", dependent: :destroy
   # 与ブロック関係を通じて参照→自分がブロックしている人
   has_many :blockings, through: :blocks, source: :blocked
-  
+
   def block(user)
     blocks.create(blocked_id: user.id)
   end
@@ -71,12 +71,12 @@ class User < ApplicationRecord
   def blocking?(user)
     blockings.include?(user)
   end
-  
+
   private
 
-  def check_consecutive_characters
-    if name =~ /(.)\1{4,}/
-      errors.add(:name, "に同じ文字が5文字以上連続して使用されています。")
+    def check_consecutive_characters
+      if name.match?(/(.)\1{4,}/)
+        errors.add(:name, "に同じ文字が5文字以上連続して使用されています。")
+      end
     end
-  end
 end

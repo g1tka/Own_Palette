@@ -13,7 +13,7 @@ class User::RegistrationsController < Devise::RegistrationsController
   # POST /resource
   def create
     ng_words = load_ng_words("#{Rails.root}/ng_words.txt")
-    
+
     # ユーザー名を大文字から小文字に変換してNGワードのチェックを行う
     downcased_name = params[:user][:name].downcase
     filtered_name = filter_ng_words(downcased_name, ng_words)
@@ -54,10 +54,9 @@ class User::RegistrationsController < Devise::RegistrationsController
   # end
 
   protected
-
-  def configure_permitted_parameters
-    devise_parameter_sanitizer.permit(:sign_up, keys: [:name])
-  end
+    def configure_permitted_parameters
+      devise_parameter_sanitizer.permit(:sign_up, keys: [:name])
+    end
   # If you have extra params to permit, append them to the sanitizer.
   # def configure_sign_up_params
   #   devise_parameter_sanitizer.permit(:sign_up, keys: [:attribute])
@@ -77,5 +76,4 @@ class User::RegistrationsController < Devise::RegistrationsController
   # def after_inactive_sign_up_path_for(resource)
   #   super(resource)
   # end
-
 end

@@ -62,6 +62,7 @@ GEM
       zeitwerk (~> 2.3)
     addressable (2.8.7)
       public_suffix (>= 2.0.2, < 7.0)
+    ast (2.4.2)
     bcrypt (3.1.20)
     bindex (0.8.1)
     bootsnap (1.18.3)
@@ -104,6 +105,7 @@ GEM
     jbuilder (2.12.0)
       actionview (>= 5.0.0)
       activesupport (>= 5.0.0)
+    json (2.7.2)
     kaminari (1.2.2)
       activesupport (>= 4.1.0)
       kaminari-actionview (= 1.2.2)
@@ -116,6 +118,7 @@ GEM
       activerecord
       kaminari-core (= 1.2.2)
     kaminari-core (1.2.2)
+    language_server-protocol (3.17.0.3)
     listen (3.9.0)
       rb-fsevent (~> 0.10, >= 0.10.3)
       rb-inotify (~> 0.9, >= 0.9.10)
@@ -149,6 +152,10 @@ GEM
     nokogiri (1.16.6-x86_64-linux)
       racc (~> 1.4)
     orm_adapter (0.5.0)
+    parallel (1.25.1)
+    parser (3.3.4.0)
+      ast (~> 2.4.1)
+      racc
     public_suffix (6.0.1)
     puma (3.12.6)
     racc (1.8.0)
@@ -185,6 +192,7 @@ GEM
       method_source
       rake (>= 12.2)
       thor (~> 1.0)
+    rainbow (3.1.1)
     rake (13.2.1)
     rb-fsevent (0.11.2)
     rb-inotify (0.11.1)
@@ -195,6 +203,37 @@ GEM
       railties (>= 5.2)
     rexml (3.3.2)
       strscan
+    rubocop (1.65.0)
+      json (~> 2.3)
+      language_server-protocol (>= 3.17.0)
+      parallel (~> 1.10)
+      parser (>= 3.3.0.2)
+      rainbow (>= 2.2.2, < 4.0)
+      regexp_parser (>= 2.4, < 3.0)
+      rexml (>= 3.2.5, < 4.0)
+      rubocop-ast (>= 1.31.1, < 2.0)
+      ruby-progressbar (~> 1.7)
+      unicode-display_width (>= 2.4.0, < 3.0)
+    rubocop-ast (1.31.3)
+      parser (>= 3.3.1.0)
+    rubocop-md (1.2.2)
+      rubocop (>= 1.0)
+    rubocop-minitest (0.35.1)
+      rubocop (>= 1.61, < 2.0)
+      rubocop-ast (>= 1.31.1, < 2.0)
+    rubocop-packaging (0.5.2)
+      rubocop (>= 1.33, < 2.0)
+    rubocop-performance (1.21.1)
+      rubocop (>= 1.48.1, < 2.0)
+      rubocop-ast (>= 1.31.1, < 2.0)
+    rubocop-rails (2.25.1)
+      activesupport (>= 4.2.0)
+      rack (>= 1.1)
+      rubocop (>= 1.33.0, < 2.0)
+      rubocop-ast (>= 1.31.1, < 2.0)
+    rubocop-rspec (3.0.3)
+      rubocop (~> 1.61)
+    ruby-progressbar (1.13.0)
     ruby-vips (2.2.2)
       ffi (~> 1.12)
       logger
@@ -233,6 +272,7 @@ GEM
     tzinfo (2.0.6)
       concurrent-ruby (~> 1.0)
     unicode (0.4.4.5)
+    unicode-display_width (2.5.0)
     warden (1.2.9)
       rack (>= 2.0.9)
     web-console (4.2.1)
@@ -277,6 +317,13 @@ DEPENDENCIES
   net-smtp
   puma (~> 3.11)
   rails (~> 6.1.7, >= 6.1.7.8)
+  rubocop
+  rubocop-md
+  rubocop-minitest
+  rubocop-packaging
+  rubocop-performance
+  rubocop-rails
+  rubocop-rspec
   sass-rails (>= 6)
   selenium-webdriver (>= 4.0.0.rc1)
   spring

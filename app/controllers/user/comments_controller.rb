@@ -18,13 +18,13 @@ class User::CommentsController < ApplicationController
       redirect_back(fallback_location: post_path(params[:post_id]))
     end
   end
-  
+
   def destroy
     @comment = Comment.find_by(id: params[:id], post_id: params[:post_id])
     @comment.destroy
     redirect_to post_path(params[:post_id])
   end
-  
+
   def filter
     @post = Post.find(params[:post_id])
     @comment = Comment.new

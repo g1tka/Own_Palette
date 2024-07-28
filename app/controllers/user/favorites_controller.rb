@@ -1,6 +1,6 @@
 class User::FavoritesController < ApplicationController
   before_action :authenticate_user!
-  
+
   def create
     @post = Post.find(params[:post_id])
     if current_user.present?
@@ -9,7 +9,7 @@ class User::FavoritesController < ApplicationController
       # redirect_to request.referer
     end
   end
-  
+
   def destroy
     @post = Post.find(params[:post_id])
     favorite = @post.favorites.find_by(user_id: current_user.id)

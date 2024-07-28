@@ -44,21 +44,21 @@ class User::UsersController < ApplicationController
   end
 
   private
-  def user_params
-    params.require(:user).permit(:name, :email, :password, :password_confirmation)
-  end
-
-  def check_authorization
-    @user = User.find(params[:id])
-    unless @user == current_user
-      redirect_to user_path(current_user)
+    def user_params
+      params.require(:user).permit(:name, :email, :password, :password_confirmation)
     end
-  end
 
-  def ensure_guest_user
-    @user = User.find(params[:id])
-    if @user.guest_user?
-      redirect_to user_path(current_user), notice: "ゲストユーザーはプロフィール編集画面へ遷移できません。"
+    def check_authorization
+      @user = User.find(params[:id])
+      unless @user == current_user
+        redirect_to user_path(current_user)
+      end
     end
-  end
+
+    def ensure_guest_user
+      @user = User.find(params[:id])
+      if @user.guest_user?
+        redirect_to user_path(current_user), notice: "ゲストユーザーはプロフィール編集画面へ遷移できません。"
+      end
+    end
 end

@@ -1,7 +1,7 @@
 class Admin::CommentsController < ApplicationController
   def index
     @posts = Post.all.includes(:comments)
-    @posts = @posts.left_outer_joins(:comments).group(:id).having('COUNT(comments.id) > 0').order('COUNT(comments.id) DESC')
+    @posts = @posts.left_outer_joins(:comments).group(:id).having("COUNT(comments.id) > 0").order("COUNT(comments.id) DESC")
     # .joinsのみでは、コメントが１つしか表示されないため、全て取得後コメント０のものを除外してコメント数の多い順に表示。
   end
 

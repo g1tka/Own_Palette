@@ -18,7 +18,11 @@ class Admin::SessionsController < Devise::SessionsController
   # def destroy
   #   super
   # end
-
+  def guest_sign_in
+    admin = Admin.find(2)
+    sign_in admin
+    redirect_to admin_posts_path, notice: "ゲストアドミンでログインしました。"
+  end
   # protected
 
   # If you have extra params to permit, append them to the sanitizer.

@@ -9,6 +9,9 @@ Rails.application.routes.draw do
   devise_scope :user do
     post "users/guest_sign_in", to: "user/sessions#guest_sign_in"
   end
+  devise_scope :admin do
+    post "admins/guest_sign_in", to: "admin/sessions#guest_sign_in"
+  end
 
   root to: "homes#top"
   get "/about" => "homes#about"
@@ -27,7 +30,7 @@ Rails.application.routes.draw do
         end
       end
     end
-    
+
     resources :users, only: [:show, :edit, :update] do
       member do
         get "unsubscribe"

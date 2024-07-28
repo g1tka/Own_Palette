@@ -73,7 +73,6 @@ class User < ApplicationRecord
   end
 
   private
-
     def check_consecutive_characters
       if name.match?(/(.)\1{4,}/)
         errors.add(:name, "に同じ文字が5文字以上連続して使用されています。")

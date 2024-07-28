@@ -6,18 +6,18 @@
 <div class="container">
   <div class="row justify-content-center">
     <%= form_with model: @admin, url: admin_session_path, local: true do |f| %>
-        <div class="row mt-3">
-          <div class="col-sm-5"><%= f.label :email %></div>
-          <div class="col-sm-5"><%= f.text_field :email, size: 30, autofocus: true %></div>
-        </div>
-        <div class="row mt-3">
-          <div class="col-sm-5"><%= f.label :password %></div>
-          <div class="col-sm-5"><%= f.password_field :password, size: 30, autocomplete: "new-password" %></div>
-        </div>
+      <div class="row mt-3">
+        <div class="col-sm-5"><%= f.label :email %></div>
+        <div class="col-sm-5"><%= f.text_field :email, size: 30, autofocus: true %></div>
+      </div>
+      <div class="row mt-3">
+        <div class="col-sm-5"><%= f.label :password %></div>
+        <div class="col-sm-5"><%= f.password_field :password, size: 30, autocomplete: "new-password" %></div>
+      </div>
       <div class="col mt-2 text-center">
         <%= f.submit "Log in", class: "btn btn-outline-secondary" %>
       </div>
-      <div class="col-auto mt-2">
+      <div class="col-auto mt-3">
         <button type="button" class="btn btn-warning" data-toggle='modal' data-target="#adminInfomation">
           <i class="fa-solid fa-user-lock"></i>
           ※ guest admin
@@ -38,12 +38,17 @@
           </button>
         </div>
         <div class="modal-body">
-          admin画面の検証用に以下アカウントをご利用ください。<br/>
-          Email : admin_guest@example.com<br/>
-          password : guestpassword
+          admin画面の閲覧用にゲストアカウントをご利用ください。<br/>
+          なお以下の動作はできません。<br/>
+          ・投稿の削除、ステータス（公開/非公開）の変更<br/>
+          ・ユーザーのステータス（有効/退会済み）の変更<br/>
+          ・コメントの削除<br/>
+
         </div>
         <div class="modal-footer pr-5">
-          <button type="button" class="btn btn-success" data-dismiss="modal">OK</button>
+          <%= link_to admins_guest_sign_in_path, class: "btn btn-success mb-3 sign_in", method: :post do %>
+            ログイン（閲覧用）
+          <% end %>
         </div>
       </div>
     </div>

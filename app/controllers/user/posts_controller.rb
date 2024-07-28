@@ -22,6 +22,9 @@ class User::PostsController < ApplicationController
 
   def show
     @post = Post.find(params[:id])
+    unless @post.user == current_user
+      @posts = Post.where(is_open: true)
+    end
     @comments = @post.comments
     if user_signed_in?
       @comment = current_user.comments.new
@@ -37,9 +40,11 @@ class User::PostsController < ApplicationController
       else
         @posts = Post.where(color: params[:color])
       end
-    else # 予期せぬ値が来た時のため記述
+    else # リロードして非選択が生じた場合用
       @posts = Post.all
     end
+
+    @posts = Post.where(is_open: true)
 
     if user_signed_in?
       blocked_user_ids = current_user.blockings.pluck(:id)

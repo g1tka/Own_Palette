@@ -34,6 +34,8 @@ class User::PostsController < ApplicationController
   end
 
   def index
+    @posts = Post.where(is_open: true)
+    
     if params[:color].present?
       if params[:color] == "7"
         @posts = Post.all
@@ -43,8 +45,6 @@ class User::PostsController < ApplicationController
     else # リロードして非選択が生じた場合用
       @posts = Post.all
     end
-
-    @posts = Post.where(is_open: true)
 
     if user_signed_in?
       blocked_user_ids = current_user.blockings.pluck(:id)

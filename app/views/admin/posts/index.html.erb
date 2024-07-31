@@ -52,9 +52,9 @@
               <% end %>
             <% else %>
               <% if post.is_open %>
-                <span class="text-success">公開</span>
+                <span id="toggle-<%= post.id %>" class="text text-success">公開</span>
               <% else %>
-                <span class="text-secondary">非公開</span>
+                <span id="toggle-<%= post.id %>" class="text text-secondary">非公開</span>
               <% end %>
             <% end %>
           </td>

@@ -28,7 +28,11 @@ class User::CommentsController < ApplicationController
   def filter
     @post = Post.find(params[:post_id])
     @comment = Comment.new
-    @comments = @post.comments.where(stance: params[:comment][:stance])
+    if params[:comment].present? && params[:comment][:stance].present? && params[:comment][:stance] != "clear"
+      @comments = @post.comments.where(stance: params[:comment][:stance])
+    else
+      @comments = @post.comments
+    end
     render "user/posts/show"
   end
 

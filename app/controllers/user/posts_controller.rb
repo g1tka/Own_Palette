@@ -36,6 +36,7 @@ class User::PostsController < ApplicationController
   def index
     @posts = Post.where(is_open: true)
     
+    # 色タグでの分類をenumで設定した数字で行う。
     if params[:color].present?
       if params[:color] == "7"
         @posts = Post.all

@@ -13,8 +13,12 @@ class User::PostsController < ApplicationController
     ng_words = load_ng_words("#{Rails.root}/ng_words.txt")
     @post.body = filter_ng_words(params[:post][:body].downcase, ng_words)
     @post.user_id = current_user.id
-
+    # vision APIを実装するためtagsに関する記述を追加。
+    tags = Vision.get_image_data(post_params[:image])
     if @post.save
+      tags.each do |tag|
+        @post.tags.create(name: tag)
+      end
       redirect_to post_path(@post)
     else
       render :new

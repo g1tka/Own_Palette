@@ -202,3 +202,16 @@ footer {
   font-family: "游ゴシック", Courier, "Segoe Print", sans-serif;
   text-align: center;
 }
+
+.label {
+  background-color: #fff8dc;
+  display: inline;
+  padding: .2em .6em .3em;
+  font-size: 75%;
+  line-height: 1;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: baseline;
+  border-radius: .25em;
+  border: 1px solid #dcdcdc;
+}

@@ -13,6 +13,7 @@ class User::PostsController < ApplicationController
     ng_words = load_ng_words("#{Rails.root}/ng_words.txt")
     @post.body = filter_ng_words(params[:post][:body].downcase, ng_words)
     @post.user_id = current_user.id
+
     if @post.save
       redirect_to post_path(@post)
     else

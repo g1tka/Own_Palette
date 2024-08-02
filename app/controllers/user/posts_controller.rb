@@ -36,6 +36,17 @@ class User::PostsController < ApplicationController
     else
       @comment = Comment.new
     end
+    
+    @filter = params[:filter]
+    case @filter
+    # where メソッドには SQL の条件を文字列で渡す必要がある。@comment.score
+    when "positive"
+      @comments = Comment.where("score > ?", 0.1)
+    when "negative"
+      @comments = Comment.where("score < ?", 0)
+    else
+      @comments = @post.comments
+    end
   end
 
   def index

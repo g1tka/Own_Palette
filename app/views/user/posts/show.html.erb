@@ -44,25 +44,24 @@
             </div>
           <% end %>
           <div class="row mt-3 justify-content-center">
-            <strong>コメントフィルター機能</strong>
+            <div class="col-12">
+              <strong>コメントフィルター機能</strong>
+            </div>
             <%= form_with(model:[@post, @comment], url: filter_post_comments_path(@post), method: :post, id: "filter-form", class: "row justify-content-center" ) do |f| %>
-            <div class="col-3 px-0">
+            <div class="col-4 px-1">
               <%= f.radio_button :stance, :agree, id: 'stance_agree', checked: true %>
               <%= f.label :stance_agree, Comment.stances_i18n[:agree] %>
             </div>
-            <div class="col-3 px-0">
+            <div class="col-4 px-1">
               <%= f.radio_button :stance, :neutral, id: 'stance_neutral' %>
               <%= f.label :stance_neutral, Comment.stances_i18n[:neutral] %>
             </div>
-            <div class="col-3 px-0">
+            <div class="col-4 px-1">
               <%= f.radio_button :stance, :disagree, id: 'stance_disagree' %>
               <%= f.label :stance_disagree, Comment.stances_i18n[:disagree] %>
             </div>
             <div>
               <%= f.hidden_field :post_id, value: @post.id %>
-            </div>
-            <div class="col-3">
-              <%= link_to "Clear", filter_post_comments_path(@post, comment: { stance: "clear" }), method: :post , class: "no-underline"%>
             </div>
           </div>
           <div class="row justify-content-center">
@@ -72,14 +71,24 @@
             </button>
             <% end %>
           </div>
+          <div class="row justify-content-center my-2">
+            <div class="col-12">
+              フィルター解除はこちら
+              <%= link_to filter_post_comments_path(@post, comment: { stance: "clear" }), method: :post, class: "btn btn-dark mx-2 my-1" do %>
+                <strong>Clear Filter</strong>
+              <% end %>
+            </div>
+          </div>
           <div class="row mt-3 justify-content-center">
-            <i class="fa-solid fa-robot pt-1"></i>&nbsp;<strong>AIフィルター機能</strong>
-              <%= link_to post_path(@post, filter: "positive"), class: "btn btn-sm btn-outline-success mx-2 my-1" do %>
-                ポジティブコメント
-              <% end %>
-              <%= link_to post_path(@post, filter: "negative"), class: "btn btn-sm btn-outline-danger mx-2 my-1" do %>
-                ネガティブコメント
-              <% end %>
+            <div class="col-12">
+              <i class="fa-solid fa-robot pt-1"></i>&nbsp;<strong>AIフィルター機能</strong>
+            </div>
+            <%= link_to post_path(@post, filter: "positive"), class: "btn btn-sm btn-outline-success mx-2 my-1" do %>
+              ポジティブコメント
+            <% end %>
+            <%= link_to post_path(@post, filter: "negative"), class: "btn btn-sm btn-outline-danger mx-2 my-1" do %>
+              ネガティブコメント
+            <% end %>
           </div>
         </div>
         

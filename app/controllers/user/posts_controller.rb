@@ -59,6 +59,7 @@ class User::PostsController < ApplicationController
   end
 
   def index
+    # 公開のもののみ
     @posts = Post.where(is_open: true)
     
     # 色タグでの分類をenumで設定した数字で行う。

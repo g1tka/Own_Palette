@@ -6,6 +6,9 @@ class User::CommentsController < ApplicationController
     unless @post.user.blocking?(current_user)
       ng_words = load_ng_words("#{Rails.root}/ng_words.txt")
       @comment = current_user.comments.new(comment_params)
+      # API language導入。
+      @comment.score = Language.get_data(comment_params[:body])
+      
       @comment.body = filter_ng_words(params[:comment][:body].downcase, ng_words)
       if @comment.save
         redirect_back(fallback_location: post_path(params[:post_id]))
@@ -26,6 +29,7 @@ class User::CommentsController < ApplicationController
   end
 
   def filter
+    # filterアクションとして選択されたスタンスごとに表示
     @post = Post.find(params[:post_id])
     @comment = Comment.new
     if params[:comment].present? && params[:comment][:stance].present? && params[:comment][:stance] != "clear"

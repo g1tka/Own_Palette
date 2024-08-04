@@ -10,11 +10,24 @@ class User::PostsController < ApplicationController
 
   def create
     @post = Post.new(post_params)
+    # NGワードあれば変換
     ng_words = load_ng_words("#{Rails.root}/ng_words.txt")
     @post.body = filter_ng_words(params[:post][:body].downcase, ng_words)
+    
     @post.user_id = current_user.id
-
+    # API用の変換
+    base64_image = Vision.get_base64_image(post_params[:image])
+    # vision APIを実装するためtagsに関する定義。Tagモデルは多の関係。
+    tags = Vision.get_image_data(base64_image)
+    # vision APIのimage_properties用の記述を追加。Hueモデルは多の関係。
+    hues = Vision.analyze_image(base64_image)
     if @post.save
+      # Tag用の指示
+      tags.each do |tag|
+        @post.tags.create(name: tag)
+      end
+      # Hue解析用の指示
+      @post.hues.create(hues)
       redirect_to post_path(@post)
     else
       render :new
@@ -31,6 +44,17 @@ class User::PostsController < ApplicationController
       @comment = current_user.comments.new
     else
       @comment = Comment.new
+    end
+    
+    @filter = params[:filter]
+    case @filter
+    # where メソッドには SQL の条件を文字列で渡す必要がある。@comment.score
+    when "positive"
+      @comments = Comment.where("score > ?", 0.1)
+    when "negative"
+      @comments = Comment.where("score < ?", 0)
+    else
+      @comments = @post.comments
     end
   end
 

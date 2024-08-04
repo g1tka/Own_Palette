@@ -76,5 +76,5 @@ end
 gem "net-smtp"
 gem "net-pop"
 gem "net-imap"
-# API導入のため
+# AI機能追加でvisionのimage_propertiesを使用するため
 gem 'google-cloud-vision'

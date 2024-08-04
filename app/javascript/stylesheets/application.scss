@@ -202,3 +202,37 @@ footer {
   font-family: "游ゴシック", Courier, "Segoe Print", sans-serif;
   text-align: center;
 }
+
+.label {
+  background-color: #fffacd;
+  color: #2f4f4f;
+  display: inline-block;
+  margin: 0 .1em .6em 0;
+  padding: .6em;
+  font-size: 90%;
+  line-height: 1;
+  text-decoration: none;
+  vertical-align: baseline;
+  border: 1px solid #dcdcdc;
+  border-left: 5px solid #bdb76b;
+  border-radius: 0px 3px 3px 0px;
+  box-shadow: 3px 3px 3px #c0c0c0;
+}
+
+.sentiment-score {
+  font-size: 12px;
+  color: #666;
+}
+
+.colorBox {
+  width: 100px;
+  height: 20px;
+  border: 1px solid #000;
+  display: inline-block;
+  margin: 3px;
+  box-sizing: border-box;
+}
+
+.RGB {
+  font-family: "游ゴシック", Courier, "Segoe Print", sans-serif;
+}

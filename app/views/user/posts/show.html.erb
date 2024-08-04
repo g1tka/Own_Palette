@@ -28,8 +28,13 @@
               </div>
             </div>
           </div>
+          <div class="tag-box mt-2">
+            <% @post.tags.each do |tag| %>
+              <span class="label"><strong><%= tag.name %></strong></span>
+            <% end %>
+          </div>
           <% if @post.user == current_user %>
-            <div class="row mx-auto justify-content-center">
+            <div class="row mx-auto justify-content-center mt-3">
               <div class="px-3 mt-2">
                 <%= link_to '編集する', edit_post_path(@post), class:"btn btn-success"%>
               </div>
@@ -39,24 +44,24 @@
             </div>
           <% end %>
           <div class="row mt-3 justify-content-center">
+            <div class="col-12">
+              <strong>コメントフィルター機能</strong>
+            </div>
             <%= form_with(model:[@post, @comment], url: filter_post_comments_path(@post), method: :post, id: "filter-form", class: "row justify-content-center" ) do |f| %>
-            <div class="col-3 px-0">
+            <div class="col-4 px-1">
               <%= f.radio_button :stance, :agree, id: 'stance_agree', checked: true %>
               <%= f.label :stance_agree, Comment.stances_i18n[:agree] %>
             </div>
-            <div class="col-3 px-0">
+            <div class="col-4 px-1">
               <%= f.radio_button :stance, :neutral, id: 'stance_neutral' %>
               <%= f.label :stance_neutral, Comment.stances_i18n[:neutral] %>
             </div>
-            <div class="col-3 px-0">
+            <div class="col-4 px-1">
               <%= f.radio_button :stance, :disagree, id: 'stance_disagree' %>
               <%= f.label :stance_disagree, Comment.stances_i18n[:disagree] %>
             </div>
             <div>
               <%= f.hidden_field :post_id, value: @post.id %>
-            </div>
-            <div class="col-3">
-              <%= link_to "Clear", filter_post_comments_path(@post, comment: { stance: "clear" }), method: :post , class: "no-underline"%>
             </div>
           </div>
           <div class="row justify-content-center">
@@ -66,6 +71,46 @@
             </button>
             <% end %>
           </div>
+          <div class="row justify-content-center my-2">
+            <div class="col-12">
+              フィルター解除はこちら
+              <%= link_to filter_post_comments_path(@post, comment: { stance: "clear" }), method: :post, class: "btn btn-dark mx-2 my-1" do %>
+                <strong>Clear Filter</strong>
+              <% end %>
+            </div>
+          </div>
+          <div class="row mt-3 justify-content-center">
+            <div class="col-12">
+              <i class="fa-solid fa-robot pt-1"></i>&nbsp;<strong>AIフィルター機能</strong>
+            </div>
+            <%= link_to post_path(@post, filter: "positive"), class: "btn btn-sm btn-outline-success mx-2 my-1" do %>
+              ポジティブコメント
+            <% end %>
+            <%= link_to post_path(@post, filter: "negative"), class: "btn btn-sm btn-outline-danger mx-2 my-1" do %>
+              ネガティブコメント
+            <% end %>
+          </div>
+          
+          <% if @post.hues.present? %>
+          <div class="row mt-3 justify-content-center">
+            <div class="col-12">
+              <i class="fa-solid fa-robot pt-1"></i>&nbsp;<strong>ドミナントカラー解析</strong><br/>
+              <h6>※表示されない場合はリロードしてください。</h6>
+            </div>
+            <div class="col">
+              <!--each_with_index method by Ruby。indexは配列内の要素位置を示す0~の番号。-->
+              <% @post.hues.each_with_index do |color, index| %>
+                <div class="RGB">RGB: (<%= color.red %>, <%= color.green %>, <%= color.blue %>)</div>
+                <!--<div>Score: <%#= color.score %></div>-->
+                <div class="colorBox" 
+                     data-red="<%= color.red %>" 
+                     data-green="<%= color.green %>" 
+                     data-blue="<%= color.blue %>"></div>
+              <% end %>
+              <script src="/js/script.js"></script>
+            </div>
+          </div>
+          <% end %>
         </div>
         
         <!--画面右側の要素-->
@@ -98,6 +143,7 @@
               <div class="<%= comment_stance %>">
                 <%= comment.body %>
               </div>
+              <span class="sentiment-score">コメントの感情分析スコア<%= comment.score %></span>
             </div>
             <div class="col-3 mx-0 px-0">
               by 

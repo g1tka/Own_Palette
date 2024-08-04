@@ -3,6 +3,8 @@ class Post < ApplicationRecord
   has_many :favorites, dependent: :destroy
   has_many :favorited_by, through: :favorites, source: :user
   has_many :comments, dependent: :destroy
+  has_many :tags, dependent: :destroy
+  has_many :hues, dependent: :destroy
   has_one_attached :image
 
   enum color: { red: 0, orange: 1, yellow: 2, green: 3, blue: 4, purple: 5, monochrome: 6, other: 7 }

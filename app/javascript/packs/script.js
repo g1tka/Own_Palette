@@ -1,4 +1,5 @@
-document.addEventListener('DOMContentLoaded', () => {
+// document.addEventListener('DOMContentLoaded', () => {
+$(document).on('turbolinks:load', function() {
   // 全ての colorBox 要素を取得
   const colorBoxes = document.querySelectorAll('.colorBox');
 
@@ -15,4 +16,5 @@ document.addEventListener('DOMContentLoaded', () => {
     // 色見本に背景色を設定
     colorBox.style.backgroundColor = rgbColor;
   });
+// });
 });

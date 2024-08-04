@@ -1,4 +1,5 @@
 @use '~bootstrap/scss/bootstrap';
+@import url('https://fonts.googleapis.com/css2?family=Edu+AU+VIC+WA+NT+Hand:wght@400..700&family=Yomogi&display=swap');
 
 * {
   margin: 0;
@@ -9,7 +10,7 @@
 body{
   background-image: url(../../assets/images/background.png);
   background-size: cover;
-  font-family: Chalkduster, "Ink free", "Bradley Hand", "游ゴシック", Courier, "Segoe Print", sans-serif;
+  font-family: "Edu AU VIC WA NT Hand", "Yomogi", Chalkduster, "Ink free", "Bradley Hand", "游ゴシック", Courier, "Segoe Print", sans-serif;
 }
 
 header {

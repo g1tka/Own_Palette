@@ -204,19 +204,31 @@ footer {
 }
 
 .label {
-  background-color: #fff8dc;
-  display: inline;
-  padding: .2em .6em .3em;
-  font-size: 75%;
+  background-color: #fffacd;
+  color: #2f4f4f;
+  display: inline-block;
+  margin: 0 .1em .6em 0;
+  padding: .6em;
+  font-size: 90%;
   line-height: 1;
-  text-align: center;
-  white-space: nowrap;
+  text-decoration: none;
   vertical-align: baseline;
-  border-radius: .25em;
   border: 1px solid #dcdcdc;
+  border-left: 5px solid #bdb76b;
+  border-radius: 0px 3px 3px 0px;
+  box-shadow: 3px 3px 3px #2f4f4f;
 }
 
 .sentiment-score {
   font-size: 12px;
   color: #666;
+}
+
+.colorBox {
+  width: 100px;
+  height: 20px;
+  border: 1px solid #000;
+  display: inline-block;
+  margin: 10px;
+  box-sizing: border-box;
 }

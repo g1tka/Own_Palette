@@ -28,9 +28,9 @@
               </div>
             </div>
           </div>
-          <div class="tag-box mt-1">
+          <div class="tag-box mt-2">
             <% @post.tags.each do |tag| %>
-              <span class="label"><%= tag.name %></span>
+              <span class="label"><strong><%= tag.name %></strong></span>
             <% end %>
           </div>
           <% if @post.user == current_user %>
@@ -90,6 +90,27 @@
               ネガティブコメント
             <% end %>
           </div>
+          
+          <% if @post.hues.present? %>
+          <div class="row mt-3 justify-content-center">
+            <div class="col-12">
+              <i class="fa-solid fa-robot pt-1"></i>&nbsp;<strong>ドミナントカラー解析</strong><br/>
+              <h6>※表示されない場合はリロードしてください。</h6>
+            </div>
+            <div class="col">
+              <!--each_with_index method by Ruby。indexは配列内の要素位置を示す0~の番号。-->
+              <% @post.hues.each_with_index do |color, index| %>
+                <div>RGB: <%= color.red %>, <%= color.green %>, <%= color.blue %></div>
+                <div>Score: <%= color.score %></div>
+                <div class="colorBox" 
+                     data-red="<%= color.red %>" 
+                     data-green="<%= color.green %>" 
+                     data-blue="<%= color.blue %>"></div>
+              <% end %>
+              <script src="/js/script.js"></script>
+            </div>
+          </div>
+          <% end %>
         </div>
         
         <!--画面右側の要素-->

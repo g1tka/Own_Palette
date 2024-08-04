@@ -100,8 +100,8 @@
             <div class="col">
               <!--each_with_index method by Ruby。indexは配列内の要素位置を示す0~の番号。-->
               <% @post.hues.each_with_index do |color, index| %>
-                <div>RGB: <%= color.red %>, <%= color.green %>, <%= color.blue %></div>
-                <div>Score: <%= color.score %></div>
+                <div class="RGB">RGB: (<%= color.red %>, <%= color.green %>, <%= color.blue %>)</div>
+                <!--<div>Score: <%#= color.score %></div>-->
                 <div class="colorBox" 
                      data-red="<%= color.red %>" 
                      data-green="<%= color.green %>" 

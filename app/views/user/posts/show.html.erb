@@ -95,11 +95,9 @@
           <div class="row mt-3 justify-content-center">
             <div class="col-12">
               <i class="fa-solid fa-robot pt-1"></i>&nbsp;<strong>ドミナントカラー解析</strong><br/>
-              <h6>※表示されない場合はリロードしてください。</h6>
             </div>
             <div class="col">
-              <!--each_with_index method by Ruby。indexは配列内の要素位置を示す0~の番号。-->
-              <% @post.hues.each_with_index do |color, index| %>
+              <% @post.hues.each do |color| %>
                 <div class="RGB">RGB: (<%= color.red %>, <%= color.green %>, <%= color.blue %>)</div>
                 <!--<div>Score: <%#= color.score %></div>-->
                 <div class="colorBox" 
@@ -107,7 +105,6 @@
                      data-green="<%= color.green %>" 
                      data-blue="<%= color.blue %>"></div>
               <% end %>
-              <!--<script src="/js/script.js"></script>-->
             </div>
           </div>
           <% end %>

@@ -4,20 +4,20 @@
   <div class="row justify-content-center mt-3">
     <%= form_with model: @post, url: posts_path do |f| %>
     <%= render 'layouts/error_messages', resource: @post %>
-    <div class="col mt-3">
+    <div class="col-12 mt-3">
       <%= f.file_field :image, accept: "image/*" %>
     </div>
-    <div class="col mt-3">
+    <div class="col-12 mt-3">
       <div class="row mt-3">
-        <div class="col pl-4 pt-3">
+        <div class="col-12 pl-4 pt-3">
           <%= f.label :post_body, "本文"%>
         </div>
-        <div class="col">
+        <div class="col-12">
           <%= f.text_area :body, rows: 2, cols: 30 %>
         </div>
       </div>
       <div class="row mt-2">
-        <div class="col">
+        <div class="col-12">
           <%= f.radio_button :color, Post.colors.key(0) %>
           <%= f.label :color_red, Post.colors_i18n[:red] %>
           <%= f.radio_button :color, Post.colors.key(1) %>
@@ -37,7 +37,7 @@
         </div>
       </div>
       <div class="row mt-2">
-        <div class="col">
+        <div class="col-12">
           <%= f.radio_button :is_open, "true", checked: true %>
           <%= f.label :is_open_true, "公開" %>
           <%= f.radio_button :is_open, "false" %>
@@ -45,7 +45,7 @@
         </div>
       </div>
       <div class="row mt-3 justify-content-center">
-        <div class="col">
+        <div class="col-12">
           <%= f.submit "投稿する", class: "btn btn-secondary" %>
         </div>
       </div>

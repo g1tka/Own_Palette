@@ -4,24 +4,22 @@
   <div class="row justify-content-center">
     <%= form_with model: @user, url: user_path(@user), method: :patch, local: true do |f| %>
     <%= render 'layouts/error_messages', resource: @user %>
-      <table class="user_form">
-        <tr>
-          <th><%= f.label :name, "User name" %></th>
-          <td><%= f.text_field :name, autofocus: true %></td>
-        </tr>
-        <tr>
-          <th><%= f.label :email %></th>
-          <td><%= f.text_field :email%></td>
-        </tr>
-        <tr>
-          <th><%= f.label :password %></th>
-          <td><%= f.password_field :password, autocomplete: "new-password", :placeholder => "既存or新しいパスワード"%></td>
-        </tr>
-        <tr>
-          <th><%= f.label :password_confirmation, "Password Confirmation"  %></th>
-          <td><%= f.password_field :password_confirmation, autocomplete: "new-password", :placeholder => "(確認用)"%></td>
-        </tr>
-      </table>
+        <div class="row justify-content-center mt-3">
+          <div class="col-sm-5"><%= f.label :name, "User name" %></div>
+          <div class="col-sm-5"><%= f.text_field :name, autofocus: true %></div>
+        </div>
+        <div class="row justify-content-center mt-3">
+          <div class="col-sm-5"><%= f.label :email %></div>
+          <div class="col-sm-5"><%= f.text_field :email%></div>
+        </div>
+        <div class="row justify-content-center mt-3">
+          <div class="col-sm-5"><%= f.label :password %></div>
+          <div class="col-sm-5"><%= f.password_field :password, autocomplete: "new-password", :placeholder => "既存or新しいパスワード"%></div>
+        </div>
+        <div class="row justify-content-center mt-3">
+          <div class="col-sm-5"><%= f.label :password_confirmation, "Password Confirmation"  %></div>
+          <div class="col-sm-5"><%= f.password_field :password_confirmation, autocomplete: "new-password", :placeholder => "(確認用)"%></div>
+        </div>
       <div class="col mt-3">
         <%= f.submit "更新する", class: "btn btn-success" %>
       </div>

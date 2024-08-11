@@ -16,3 +16,4 @@ $(document).on('turbolinks:load', function() {
     colorBox.style.backgroundColor = rgbColor;
   });
 });
+

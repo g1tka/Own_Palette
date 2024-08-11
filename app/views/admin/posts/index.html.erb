@@ -1,6 +1,14 @@
 投稿一覧ページ
+<div class="row my-3">
+  <div class="col-xl-6 col-xs">
+    <%= link_to "新しい順", admin_posts_path(sort_by: 'newest'), class: "no-underline" %>&nbsp;|&nbsp;
+    <%= link_to "古い順", admin_posts_path(sort_by: 'oldest'), class: "no-underline" %>&nbsp;|&nbsp;
+    <%= link_to "コメント順", admin_posts_path(sort_by: 'comments'), class: "no-underline" %>
+  </div>
+</div>
 <% if @posts.any? %>
   <table class="table mt-3">
+    
     <thead class="table-warning">
       <tr>
         <th>画像</th>

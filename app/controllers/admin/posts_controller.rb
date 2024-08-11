@@ -1,6 +1,18 @@
 class Admin::PostsController < ApplicationController
+  before_action :authenticate_admin!
   def index
     @posts = Post.all
+
+    case params[:sort_by]
+    when "newest"
+      @posts = @posts.order(created_at: :desc)
+    when "oldest"
+      @posts = @posts.order(created_at: :asc)
+    when "comments"
+      @posts = @posts.left_outer_joins(:comments).group(:id).order("COUNT(comments.id) DESC")
+    else
+      @posts = @posts.order(created_at: :desc)
+    end
   end
 
   def toggle_status

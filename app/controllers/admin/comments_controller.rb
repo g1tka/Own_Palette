@@ -1,4 +1,5 @@
 class Admin::CommentsController < ApplicationController
+  before_action :authenticate_admin!
   def index
     @posts = Post.all.includes(:comments)
     @posts = @posts.left_outer_joins(:comments).group(:id).having("COUNT(comments.id) > 0").order("COUNT(comments.id) DESC")

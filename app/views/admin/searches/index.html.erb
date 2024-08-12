@@ -1,0 +1,138 @@
+<div class="container">
+  <div class="row mt-3 justify-content-start ml-3">
+    <div class="col-md-7">
+      <% if params[:word].blank? %>
+        <div class="col-12 mt-3">
+          ▽検索対象 を選択し、検索バーに入力してください。
+        </div>
+      <% else %>
+        <div class="row mt-3">
+          <div class="col">
+            <!--検索対象：Post-->
+            <% if @category == "Post" %>
+              <% if @posts.any? %>
+                <div>Posts search for "<%= @word %>"</div>
+                <table class="table mt-3">
+                  <thead class="table-warning">
+                    <tr>
+                      <th>image</th>
+                      <th>body</th>
+                      <th>creator</th>
+                      <th>comments</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <% @posts.each do |post| %>
+                      <tr>
+                        <td>
+                          <%= link_to post_path(post) do %>
+                            <%= image_tag post.get_image, width: 50, height: 50 %>
+                          <% end %>
+                          </td>
+                        <td>
+                          <%= link_to post_path(post) do %>
+                            <%= post.body %>
+                          <% end %>
+                        </td>
+                        <td>
+                          <%= link_to user_path(post.user_id) do %>
+                            <%= post.user.name %>
+                          <% end %>
+                        </td>
+                        <td>
+                          <%= link_to post_path(post) do %>
+                            コメント数：<%= post.comments.count %>
+                          <% end %>
+                        </td>
+                      </tr>
+                    <% end %>
+                  </tbody>
+                </table>
+              <% elsif %>
+                <% if params[:word].present? %>
+                  該当する投稿はありません。
+                <% end %>
+              <% end %>
+            <!--検索対象：User-->
+            <% elsif @category == "User" %>
+              <% if @users.any? %>
+                <div>Users search for "<%= @word %>"</div>
+                <table class="table mt-3">
+                  <thead class="table-success">
+                    <tr>
+                      <th>name</th>
+                      <th>投稿数</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <% @users.each do |user| %>
+                      <tr>
+                        <td>
+                          <%= link_to user_path(user) do %>
+                            <%= user.name %>
+                          <% end %>
+                          </td>
+                        <td><%= user.posts.count %></td>
+                      </tr>
+                    <% end %>
+                  </tbody>
+                </table>
+                <% else %>
+                  <% if params[:word].present? %>
+                    該当するユーザーはいません。
+                  <% end %>
+                <% end %>
+              <!--検索対象：Comment-->
+              <% else %>
+                <% if @comments.any? %>
+                  <div>Comments search for "<%= @word %>"</div>
+                  <table class="table mt-3">
+                    <thead class="table-light">
+                      <tr>
+                        <th>コメント</th>
+                        <th></th>
+                        <th>立場</th>
+                        <th>Post</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <% @comments.each do |comment| %>
+                        <tr>
+                          <td><%= comment.body %></td>
+                          <td>by
+                            <%= link_to admin_user_path(comment.user) do %>
+                              <%= comment.user.name %>
+                            <% end %>
+                          </td>
+                          <td>
+                            <% case comment.stance %>
+                            <% when 'agree' %>
+                              <span class='text-success'><%= comment.stance_i18n %></span>
+                            <% when 'neutral' %>
+                              <span class='text-secondary'><%= comment.stance_i18n %></span>
+                            <% when 'disagree' %>
+                              <span class='text-danger'><%= comment.stance_i18n %></span>
+                            <% end %>
+                          </td>
+                          <td>
+                            <%= link_to admin_post_path(comment.post) do %>
+                              <%= image_tag comment.post.get_image, width: 50, height: 50 %>
+                            <% end %>
+                          </td>
+                        </tr>
+                      <% end %>
+                    </tbody>
+                  </table>
+                <% else %>
+                  <% if params[:word].present? %>
+                    該当するコメントはありません。
+                  <% end %>
+                <% end %>
+              <% end %>
+            
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>

@@ -68,11 +68,19 @@
   <% end %>
 </div>
 <!--要件：ログイン時のみheader下部に検索フォームを表示-->
-<% if user_signed_in? %>
+<% if user_signed_in? && !admin_signed_in? %>
   <div class="row mt-2 ml-4">
     <%= form_with url: search_path, local: true, method: :get do |f| %>
       <%= f.text_field :word %>
       <%= f.select :category, options_for_select([['Post'],['User']]) %>
+      <%= f.submit "Search", class: "btn btn-sm btn-warning my-auto" %>
+    <% end %>
+  </div>
+<% elsif admin_signed_in? %>
+  <div class="row mt-2 ml-4">
+    <%= form_with url: admin_search_path, local: true, method: :get do |f| %>
+      <%= f.text_field :word %>
+      <%= f.select :category, options_for_select([['Post'],['User'],['Comment']]) %>
       <%= f.submit "Search", class: "btn btn-sm btn-warning my-auto" %>
     <% end %>
   </div>

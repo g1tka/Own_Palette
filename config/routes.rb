@@ -18,11 +18,7 @@ Rails.application.routes.draw do
 
   scope module: :user do
     get "/search" => "searches#index"
-    get "/search" => "searches#search"
     resources :posts do
-      collection do
-        get "search", to: "posts#search", as: "search"
-      end
       resource :favorites, only: [:create, :destroy]
       resources :comments, only: [:create, :destroy] do
         collection do
@@ -47,6 +43,7 @@ Rails.application.routes.draw do
   end
 
   namespace :admin do
+    get "/search" => "searches#index"
     resources :posts, only: [:index, :show, :update, :destroy] do
       member do
         patch "toggle_status"

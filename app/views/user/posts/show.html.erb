@@ -1,9 +1,13 @@
 投稿詳細ページ
 <div class="container">
   <div class="row d-flex justify-content-center">
-    <% if @post.is_open || @post.user == current_user %>
+    <% unless @post.is_open || @post.user == current_user %>
+      <div class="col mt-5">
+        <!--URLを入力して表示しようとした場合-->
+        この投稿は非公開です。
+      </div>
+    <% else %>
       <%= link_to post_path(@post) do %>
-      
         <!--画面左側の要素-->
         <div class="col-lg-4">
           <div class="flame ml-lg-5 text-center mb-4 mb-md-0">
@@ -116,14 +120,7 @@
             本文：<%= @post.body %>
           </div>
       <% end %>
-      
-    <% else %>
-        <div class="col-lg-6">
-          <div class="row mt-5">
-            <!--URLを入力して表示しようとした場合-->
-            この投稿は非公開です。
-          </div>
-    <% end %>
+      <!--@postの情報終わり-->
         
         <% if @comments.any? %>
           <% @comments.each do |comment| %>
@@ -136,18 +133,20 @@
                                   "comment-disagree"
                                 end %>
           <div class="row mt-2">
-            <div class="col-md-6 mb-2 offset-1">
+            <div class="col-md-9 mb-2 offset-1">
               <div class="<%= comment_stance %>">
                 <%= comment.body %>
               </div>
-              <span class="sentiment-score">コメントの感情分析スコア<%= comment.score %></span>
-            </div>
-            <div class="col-3 mx-0 px-0">
-              by 
-              <%= link_to user_path(comment.user) do %>
-                <%= comment.user.name %>
+              <% if comment.score.present? %>
+                <span class="sentiment-score">コメントの感情分析スコア<%= comment.score %></span>
               <% end %>
             </div>
+
+              <!--by -->
+              <%#= link_to user_path(comment.user) do %>
+                <%#= comment.user.name %>
+              <%# end %>
+
             <% if comment.user == current_user %>
               <div class="col-2 mb-2 mx-0 px-0">
                 <%= link_to '削除', post_comment_path(@post, comment), method: :delete, class:"btn btn-sm btn-danger" %>
@@ -192,5 +191,7 @@
             <% end %>
             </div>
         </div>
+        
+    <% end %>
   </div>
 </div>

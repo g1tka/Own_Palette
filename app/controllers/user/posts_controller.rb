@@ -35,7 +35,12 @@ class User::PostsController < ApplicationController
   end
 
   def show
-    @post = Post.find(params[:id])
+    @post = Post.find_by(id: params[:id])
+    unless @post.present?
+      redirect_to posts_path, alert: "その投稿は表示できません。"
+      return
+    end
+    # 非公開の場合、作成者以外は表示しない。
     unless @post.user == current_user
       @posts = Post.where(is_open: true)
     end

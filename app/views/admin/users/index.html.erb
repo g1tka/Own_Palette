@@ -1,4 +1,11 @@
 ユーザー一覧ページ
+<div class="row my-3">
+  <div class="col-xl-6 col-xs">
+    <%= link_to "id順", admin_users_path(sort_by: 'ids'), class: "no-underline" %>&nbsp;|&nbsp;
+    <%= link_to "名前順", admin_users_path(sort_by: 'names'), class: "no-underline" %>&nbsp;|&nbsp;
+    <%= link_to "投稿数順", admin_users_path(sort_by: 'posts'), class: "no-underline" %>
+  </div>
+</div>
 <% if @users.any? %>
   <table class="table mt-3">
     <thead class="table-success">

@@ -3,36 +3,20 @@
   <div class="row justify-content-center">
     <%= form_with model: @user, url: user_registration_path, local: true do |f| %>
       <div class="row mt-2">
-        <div class="col-sm-5">
-          <%= f.label :name, "User name" %>
-        </div>
-        <div class="col-sm-5">
-          <%= f.text_field :name, autofocus: true, size: 25, :placeholder => " 1 ｶﾗ 20 文字" %></td>
-        </div>
+        <div class="col-sm-6"><%= f.label :name %></div>
+        <div class="col-sm-5"><%= f.text_field :name, autofocus: true, size: 25, :placeholder => " 1 ｶﾗ 20 文字" %></div>
       </div>
       <div class="row mt-2">
-        <div class="col-sm-5">
-          <%= f.label :email, "Email" %>
-        </div>
-        <div class="col-sm-5">
-          <%= f.text_field :email, size: 25 %>
-        </div>
+        <div class="col-sm-6"><%= f.label :email %></div>
+        <div class="col-sm-5"><%= f.text_field :email, size: 25 %></div>
       </div>
       <div class="row mt-2">
-        <div class="col-sm-5">
-          <%= f.label :password, "Password" %>
-        </div>
-        <div class="col-sm-5">
-          <%= f.password_field :password, autocomplete: "new-password", size: 25, :placeholder => " 6 文字 以上" %>
-        </div>
+        <div class="col-sm-6"><%= f.label :password %></div>
+        <div class="col-sm-5"><%= f.password_field :password, autocomplete: "new-password", size: 25, :placeholder => " 6 文字 以上" %></div>
       </div>
       <div class="row mt-2">
-        <div class="col-sm-5">
-          <%= f.label :password_confirmation, "Password Confirmation"  %>
-        </div>
-        <div class="col-sm-5">
-          <%= f.password_field :password_confirmation, size: 25, autocomplete: "new-password" %>
-        </div>
+        <div class="col-sm-6"><%= f.label :password_confirmation %></div>
+        <div class="col-sm-5"><%= f.password_field :password_confirmation, size: 25, autocomplete: "new-password" %></div>
       </div>
       <div class="col mt-3">
         <%= f.submit "Sign in", class: "btn btn-success" %>

@@ -11,20 +11,12 @@
         <%#= f.label :name, "User name" %>
         <%#= f.text_field :name, autofocus: true %>
       <div class="row mt-2">
-        <div class="col-sm-5">
-          <%= f.label :email %>
-        </div>
-        <div class="col-sm-5">
-          <%= f.text_field :email, size: 30, autofocus: true %>
-        </div>
+        <div class="col-sm-5"><%= f.label :email %></div>
+        <div class="col-sm-5"><%= f.text_field :email, size: 30, autofocus: true %></div>
       </div>
       <div class="row mt-2">
-        <div class="col-sm-5">
-          <%= f.label :password %>
-        </div>
-        <div class="col-sm-5">
-          <%= f.password_field :password, size: 30, autocomplete: "new-password" %>
-        </div>
+        <div class="col-sm-5"><%= f.label :password %></div>
+        <div class="col-sm-5"><%= f.password_field :password, size: 30, autocomplete: "new-password" %></div>
       </div>
       <div class="col mt-3">
         <%= f.submit "Log in", class: "btn btn-success" %>

@@ -35,7 +35,7 @@
     <% elsif user_signed_in? %>
       <div class="col d-flex align-items-center justify-content-center">
         <li class='mx-3'><%= link_to 'About', about_path, class: "no-underline" %></li>
-        <li class='mx-3'><%= link_to new_post_path, class: "no-underline" do %><strong>P</strong>ost<% end %></li>
+        <li class='mx-3'><%= link_to new_post_path, class: "no-underline" do %>Post&nbsp;<i class="fa-solid fa-pen-to-square"></i><% end %></li>
         <li class='mx-3'><%= link_to 'My Page', user_path(current_user), class: "no-underline" %></li>
         <li class='mx-3'><%= link_to 'Log out', destroy_user_session_path, method: :delete, class: "no-underline" %></li>
       </div>
@@ -73,7 +73,9 @@
     <%= form_with url: search_path, local: true, method: :get do |f| %>
       <%= f.text_field :word %>
       <%= f.select :category, options_for_select([['Post'],['User']]) %>
-      <%= f.submit "Search", class: "btn btn-sm btn-warning my-auto" %>
+      <button type="submit" class="btn btn-sm btn-warning my-auto">
+        <i class="fas fa-search"></i>
+      </button>
     <% end %>
   </div>
 <% elsif admin_signed_in? %>
@@ -81,7 +83,9 @@
     <%= form_with url: admin_search_path, local: true, method: :get do |f| %>
       <%= f.text_field :word %>
       <%= f.select :category, options_for_select([['Post'],['User'],['Comment']]) %>
-      <%= f.submit "Search", class: "btn btn-sm btn-warning my-auto" %>
+      <button type="submit" class="btn btn-sm btn-warning my-auto">
+        <i class="fas fa-search"></i>
+      </button>
     <% end %>
   </div>
 <% end %>

@@ -27,23 +27,23 @@
   <ul class="col-sm-7 col-xs-10 d-flex list-unstyled justify-content-center my-auto">
     <% if admin_signed_in? %>
       <div class="col d-flex align-items-center justify-content-center">
-        <li class='mx-3'><%= link_to 'Post List', admin_posts_path, class: "no-underline" %></li>
-        <li class='mx-3'><%= link_to 'User List', admin_users_path, class: "no-underline" %></li>
-        <li class='mx-3'><%= link_to 'Comment List', admin_comments_path, class: "no-underline" %></li>
-        <li class='mx-3'><%= link_to 'Log out', destroy_admin_session_path, method: :delete, class: "no-underline" %></li>
+        <li class='mx-3'><%= link_to admin_posts_path, class: "no-underline" do %><strong>Post List</strong><% end %></li>
+        <li class='mx-3'><%= link_to admin_users_path, class: "no-underline" do %><strong>User List</strong><% end %></li>
+        <li class='mx-3'><%= link_to admin_comments_path, class: "no-underline" do %><strong>Comment List</strong><% end %></li>
+        <li class='mx-3'><%= link_to destroy_admin_session_path, method: :delete, class: "no-underline" do %><strong>Log out</strong><% end %></li>
       </div>
     <% elsif user_signed_in? %>
       <div class="col d-flex align-items-center justify-content-center">
-        <li class='mx-3'><%= link_to 'About', about_path, class: "no-underline" %></li>
-        <li class='mx-3'><%= link_to new_post_path, class: "no-underline" do %>Post&nbsp;<i class="fa-solid fa-pen-to-square"></i><% end %></li>
-        <li class='mx-3'><%= link_to 'My Page', user_path(current_user), class: "no-underline" %></li>
-        <li class='mx-3'><%= link_to 'Log out', destroy_user_session_path, method: :delete, class: "no-underline" %></li>
+        <li class='mx-3'><%= link_to about_path, class: "no-underline" do %><strong>About</strong><% end %></li>
+        <li class='mx-3'><%= link_to new_post_path, class: "no-underline" do %><strong>Post</strong>&nbsp;<i class="fa-solid fa-pen-to-square"></i><% end %></li>
+        <li class='mx-3'><%= link_to user_path(current_user), class: "no-underline" do %><strong>My Page</strong><% end %></li>
+        <li class='mx-3'><%= link_to destroy_user_session_path, method: :delete, class: "no-underline" do %><strong>Log out</strong><% end %></li>
       </div>
     <% else %>
       <div class="col d-flex align-items-center justify-content-center">
-        <li class='mx-3'><%= link_to 'About', about_path, class: "no-underline" %></li>
-        <li class='mx-3'><%= link_to 'Sign up', new_user_registration_path, class: "no-underline" %></li>
-        <li class='mx-3'><%= link_to 'Log in', new_user_session_path, class: "no-underline" %></li>
+        <li class='mx-3'><%= link_to about_path, class: "no-underline" do %><strong>About</strong><% end %></li>
+        <li class='mx-3'><%= link_to new_user_registration_path, class: "no-underline" do %><strong>Sign up</strong><% end %></li>
+        <li class='mx-3'><%= link_to new_user_session_path, class: "no-underline" do %><strong>Log in</strong><% end %></li>
       </div>
     <% end %>
   </ul>

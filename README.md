@@ -39,7 +39,7 @@ https://docs.google.com/spreadsheets/d/1-Gm2Wbad5EgjisYPRucKPPoXr05X2yCqZJOcKDi6
 https://docs.google.com/spreadsheets/d/143rrTYQL3zW7wuEdRWgOTbdPCHr4fUCcSHdAanyx3TI/edit?usp=drive_link
 
 ## 開発環境
-- OS：Linux(CentOS)
+- OS：Amazon Linux2
 - 言語：HTML,CSS,JavaScript,Ruby,SQL
 - フレームワーク：Ruby on Rails
 - JSライブラリ：jQuery

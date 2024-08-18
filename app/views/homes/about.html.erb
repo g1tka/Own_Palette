@@ -1,41 +1,50 @@
 <div class="contrainer">
   
   <div class="row mb-0">
-    <div class="col-lg-3 col-md-3 col-xs-6 offset-md-1 col-xs-12">
+    <div class="col-lg-2 col-md-3 col-xs-6 mx-md-4 col-xs-12">
       <div class="flame text-center mb-md-0">
         <div class="image m-3">
           <%= image_tag("red1.jpg", src: "/assets/images/red1.png", width: 200, hight: 200 ) %>
         </div>
         <div class="row d-flex justify-content-end mr-1">
           <div classs="badge bg-primary text-wrap", style="width: 12em;">
-            <!--全角２０文字折り返し対応/半角２０文字は一行で表示-->
             user_name
           </div>
         </div>
       </div>
+      <div class="row m-4">
+        <div class="col-12">
+          コメント/投稿/いいねをする</br>
+          にはログインが必要です。
+        </div>
+      </div>
     </div>
-    <div class="col-lg-3 col-md-7 offset-md-1 col-sm-6 col-xs-12 pr-md-5">
+    <div class="col-lg-4 col-md-7 offset-md-1 col-sm-6 col-xs-12 pr-md-5">
       <div class="about-flame mt-5">
-        <strong>About</strong><br/><br/>
-        <p>Own Paletteは好きな色のタグをつけて<br/>
-        画像を投稿・閲覧できるSNSです。<br/><br/>
-        右上のカラーパレットが<br/>
-        投稿一覧ページへのリンクとなっています。<br/>
+        <strong>About this site . . .</strong><br/><br/>
+        <p><strong>Own Palette</strong>は好きな色のタグをつけて<br/>
+        画像を投稿・閲覧できるSNSサイトです。<br/><br/>
+        右上のカラーパレット<br/>
+        <i class="fa-solid fa-square", style="color: lightcoral;"></i>
+        <i class="fa-solid fa-square", style="color: orange;"></i>
+        <i class="fa-solid fa-square", style="color: yellow;"></i>
+        <i class="fa-solid fa-square", style="color: limegreen;"></i>
+        <br/>
+        <i class="fa-solid fa-square", style="color: deepskyblue;"></i>
+        <i class="fa-solid fa-square", style="color: mediumpurple;"></i>
+        <i class="fa-solid fa-square", style="color: black;"></i>
+        <i class="fa-solid fa-square", style="color: whitesmoke;"></i><br/>
+        が投稿一覧ページへのリンクです。<br/>
         その色タグのついた画像が表示されます。<br/><br/>
-        コメント/投稿にはログインが必要です。</p>
+        画像そのもの を <i class="fa-solid fa-arrow-pointer"></i>クリックすると、画像詳細画面へ移動します。<br/>
+        <button class="btn btn-sm btn-link mx-2">名前</button>を <i class="fa-solid fa-arrow-pointer"></i>選択すると、ユーザー詳細画面へ移動します。<br/><br/>
+        <strong style="color: dodgerblue;">My page</strong>ではあなたのコレクションを見ることができます。
+        </p>
       </div>
     </div>
 
-    <div class="col-lg-3 col-sm-12 mb-1 pt-5 mt-3 mr-3">
-      <p>画像を<i class="fa-solid fa-arrow-pointer"></i>クリックすると、画像詳細画面へ移動します。<br/>
-      名前を<i class="fa-solid fa-arrow-pointer"></i>選択すると、ユーザー詳細画面へ移動します。<br/><br/>
-      My pageではあなたのコレクションを見ることができます。</p>
-    </div>
-  </div>
-
-  <div class="row mb-0">
-    <div class="col-5 offset-md-1 mt-4">
-      <strong>my page</strong> の説明
+    <div class="col-lg-4 col-sm-12 mb-1 pt-5 mt-3 mr-3">
+      <strong>my page</strong> の説明<br/><br/>
       <div class="row my-1">
         <button class="btn btn-sm btn-outline-success mx-2"><i class="fa-regular fa-clock"></i>タイムライン</button>
         → フォローしたユーザーの投稿が表示されます。
@@ -52,7 +61,48 @@
         <button class="btn btn-sm btn-outline-secondary mx-2"><i class="fa-regular fa-images"></i>すべてのコレクション</button>
         → 自分の投稿といいねした投稿が表示されます。
       </div>
+      <div class="row my-1">
+        <button class="btn btn-sm btn-link mx-2">フォロワー</button><button class="btn btn-sm btn-link mx-2">フォロー</button>
+        → フォロワー・フォローしたユーザー・ブロックしたユーザーの一覧を確認できます。
+      </div>
+      <div class="row mt-4 justify-content-center">
+        <strong>ブロック？</strong>
+      </div>
+      <div class="row mt-4">
+        ブロックしたユーザーの投稿は投稿一覧に表示されません。<br/>
+        また、ブロックされたユーザーはあなたにコメントを残すことができなくなります。
+      </div>
     </div>
+  </div>
+
+  <div class="row mb-0 mt-4">
+    <div class="col-5 offset-md-1 mt-4">
+      <strong>投稿する！</strong><br/><br/>
+      <strong style="color: dodgerblue;">Post</strong>&nbsp;<i class="fa-solid fa-pen-to-square", style="color: dodgerblue;"></i> より投稿できます。<br/>
+      投稿したい画像ファイル(png/jpg)を用意してください。<br/>
+        赤  橙  黄  緑  青  紫  白黒  その他<br/>
+      のいずれかから、画像をイメージする色を選択してください。<br/>
+      画像の公開 <i class="fa-solid fa-lock-open"></i>・非公開 <i class="fa-solid fa-lock"></i> も決められます。<br/><br/>
+      AI <i class="fa-solid fa-robot pt-1"></i> の画像認識機能を導入しました。<br/>
+      1.画像に合うタグを３つお付けします。<br/>
+      2.画像内のメインとなる色を３つ表示します。<br/><br/>
+      間違えて投稿してしまったら、遷移先の投稿詳細ページで変更できます。<br/>
+    </div>
+    <div class="col-5 offset-md-1 mt-4">
+      <strong>コメントを残す</strong><br/><br/>
+      <button class="btn btn-sm btn-info">コメントする</button>
+      → 投稿にコメントを残すことができます。<br/>
+      相手もまた人間であることを忘れないでください。<br/>
+      コメントした内容について、<br/>
+      <button class="btn btn-sm btn-outline-success mx-2">肯定</button><button class="btn btn-sm btn-outline-secondary mx-2">中立</button><button class="btn btn-sm btn-outline-danger mx-2">否定</button><br/>
+      のいずれかのスタンス <i class="fa-regular fa-flag"></i> を選択してください。<br/>
+      コメントが色分けされます。<br/><br/>
+      間違えてコメントをしてしまったら、投稿詳細ページで消去することができます。<br/>
+      <br/>
+      投稿詳細ページでは、コメントをスタンス <i class="fa-regular fa-flag"></i> によって<br/>
+      フィルターすることができます。<br/>
+      AI <i class="fa-solid fa-robot pt-1"></i> の感情分析によるフィルターも用意しました。<br/>
+      めやすとしてお使いください。<br/>
   </div>
 
 </div>

@@ -13,7 +13,12 @@ class User::PostsController < ApplicationController
     # NGワードあれば変換
     ng_words = load_ng_words("#{Rails.root}/ng_words.txt")
     @post.body = filter_ng_words(params[:post][:body].downcase, ng_words)
-    
+
+    unless post_params[:image].present?
+      flash.now[:alert] = "画像をアップロードしてください。"
+      return render :new
+    end
+
     @post.user_id = current_user.id
     # API用の変換
     base64_image = Vision.get_base64_image(post_params[:image])

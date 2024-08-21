@@ -32,6 +32,10 @@ class User::CommentsController < ApplicationController
     # filterアクションとして選択されたスタンスごとに表示
     @post = Post.find(params[:post_id])
     @comment = Comment.new
+
+    # フィルター条件を保持
+    @selected_stance = params[:comment][:stance] if params[:comment].present?
+
     if params[:comment].present? && params[:comment][:stance].present? && params[:comment][:stance] != "clear"
       @comments = @post.comments.where(stance: params[:comment][:stance])
     else

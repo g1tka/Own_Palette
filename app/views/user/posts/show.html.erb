@@ -53,15 +53,15 @@
             </div>
             <%= form_with(model:[@post, @comment], url: filter_post_comments_path(@post), method: :post, id: "filter-form", class: "row justify-content-center" ) do |f| %>
             <div class="col-4 px-1">
-              <%= f.radio_button :stance, :agree, id: 'stance_agree', checked: true %>
+              <%= f.radio_button :stance, :agree, id: 'stance_agree', checked: @selected_stance == 'agree' %>
               <%= f.label :stance_agree, Comment.stances_i18n[:agree] %>
             </div>
             <div class="col-4 px-1">
-              <%= f.radio_button :stance, :neutral, id: 'stance_neutral' %>
+              <%= f.radio_button :stance, :neutral, id: 'stance_neutral', checked: @selected_stance == 'neutral' %>
               <%= f.label :stance_neutral, Comment.stances_i18n[:neutral] %>
             </div>
             <div class="col-4 px-1">
-              <%= f.radio_button :stance, :disagree, id: 'stance_disagree' %>
+              <%= f.radio_button :stance, :disagree, id: 'stance_disagree', checked: @selected_stance == 'disagree' %>
               <%= f.label :stance_disagree, Comment.stances_i18n[:disagree] %>
             </div>
             <div>
@@ -75,14 +75,7 @@
             </button>
             <% end %>
           </div>
-          <div class="row justify-content-center my-2">
-            <div class="col-12">
-              フィルター解除はこちら
-              <%= link_to filter_post_comments_path(@post, comment: { stance: "clear" }), method: :post, class: "btn btn-dark mx-2 my-1" do %>
-                <strong>Clear Filter</strong>
-              <% end %>
-            </div>
-          </div>
+          
           <div class="row mt-3 justify-content-center">
             <div class="col-12">
               <i class="fa-solid fa-robot pt-1"></i>&nbsp;<strong>AIフィルター機能</strong>
@@ -93,6 +86,13 @@
             <%= link_to post_path(@post, filter: "negative"), class: "btn btn-sm btn-outline-danger mx-2 my-1" do %>
               ネガティブコメント
             <% end %>
+          </div>
+          <div class="row justify-content-center my-2">
+            <div class="col-12">
+              <%= link_to filter_post_comments_path(@post, comment: { stance: "clear" }), method: :post, class: "btn btn-dark mx-2 my-1" do %>
+                <strong>Clear Filter</strong>
+              <% end %>
+            </div>
           </div>
           
           <% if @post.hues.present? %>
@@ -151,7 +151,7 @@
 
             <% if comment.user == current_user %>
               <div class="col-2 mb-2 mx-0 px-0">
-                <%= link_to '削除', post_comment_path(@post, comment), method: :delete, class:"btn btn-sm btn-danger" %>
+                <%= link_to '削除', post_comment_path(@post, comment), method: :delete, data: {confirm: "コメントを削除します"}, class:"btn btn-sm btn-danger" %>
               </div>
             <% end %>
           </div>

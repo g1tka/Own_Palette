@@ -23,6 +23,7 @@ Rails.application.routes.draw do
       resources :comments, only: [:create, :destroy] do
         collection do
           post "filter"
+          get "filter"
         end
       end
     end
